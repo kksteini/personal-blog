@@ -1,0 +1,17 @@
+@font-face {
+  font-family: uiua,
+  src: url("/fonts/Uiua386.ttf")
+}
+
+.hljs {
+  background-color: #333333;
+  padding: 10px;
+  font-family: uiua;
+  color: #ccc;
+}
+.hljs-white {
+  color: #ffffff;
+}
+.hljs-yellow {
+  color: #f1c40f;
+}
