@@ -1,17 +1,34 @@
 @font-face {
-  font-family: uiua,
-  src: url("/fonts/Uiua386.ttf")
+  font-family: "Code Font";
+  src: url(/fonts/Uiua386.ttf) format("truetype");
 }
+
 
 .hljs {
   background-color: #333333;
   padding: 10px;
-  font-family: uiua;
+  font-family: "Code Font", monospace;
+  font-weight: 500;
+  font-size: 1.6em;
   color: #ccc;
 }
-.hljs-white {
-  color: #ffffff;
+
+/* For glyphs to look like the website */
+/* reference: https://github.com/uiua-lang/uiua/blob/main/site/styles.css */
+/* May have to change this and the keywrds in the definition later in case colours drift */
+.hljs-arguments {
+  color: #f0c36f;
 }
-.hljs-yellow {
-  color: #f1c40f;
+.hljs-dyadic-pervasive {
+  color: #54b0fc;
 }
+
+.hljs-iterating-modifier {
+  color: #f0c36f;
+}
+
+.hljs-literal {
+  color: #f08050;
+}
+
+
