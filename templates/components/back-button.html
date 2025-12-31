@@ -1,0 +1,7 @@
+{% if page.ancestors %}
+  {% set parent = get_section(path=page.ancestors | last) %}
+  <a href="{{ parent.permalink }}">&larr; Back to {{ parent.title }}</a>
+{% else %}
+  <a href="{{ config.base_url }}">&larr; Back Home</a>
+{% endif %}
+ 

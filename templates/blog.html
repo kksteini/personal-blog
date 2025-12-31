@@ -1,13 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-  {{ section.title }}
-</h1>
+<div class="blog-page-header">
+  {% include "components/back-button.html" %}
+  <h1 class="title">
+    {{ section.title }}
+  </h1>
+</div>
 <ul>
   <!-- If you are using pagination, section.pages will be empty.
        You need to use the paginator object -->  
-  {% for page in section.pages %}
+  {% for page in section.pages | reverse %}
   <li><a href="{{ page.permalink | safe }}">{{ page.title }}</a></li>
   {% endfor %}
 </ul>

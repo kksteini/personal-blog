@@ -1,3 +1,36 @@
+:root {
+  --palette-brightest: #ffcc00;
+  --palette-brighter: #febf00;
+  --palette-bright: #eb5b00;
+  --palette-dark: #b12c00;
+  --palette-darkest: #121212;
+  --palette-anchors: #ffc07f;
+}
+
+h1 {
+  color: var(--palette-bright);
+}
+
+p {
+  color: var(--palette-brighter);
+}
+
+a {
+  color: var(--palette-anchors);
+}
+
 body {
-  background-color: #121212
+  background-color: var(--palette-darkest);
+}
+
+section {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 80ch; 
+  padding: 1rem; 
+  line-height: 1.4;
 }
