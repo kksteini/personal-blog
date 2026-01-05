@@ -3,13 +3,13 @@
   src: url(/fonts/Uiua386.ttf) format("truetype");
 }
 
-
-.hljs {
+pre, .hljs {
+  overflow-x: auto;
   background-color: #333333;
   padding: 10px;
   font-family: "Code Font", monospace;
   font-weight: 500;
-  font-size: 1.6em;
+  font-size: 1.3em;
   color: #ccc;
 }
 

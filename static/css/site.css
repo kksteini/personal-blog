@@ -2,6 +2,8 @@
   font-family: "Code Font";
   src: url(/fonts/Uiua386.ttf) format("truetype");
 }
+
+/*
 :root {
   --palette-brightest: #ffcc00;
   --palette-brighter: #febf00;
@@ -9,6 +11,16 @@
   --palette-dark: #b12c00;
   --palette-darkest: #121212;
   --palette-anchors: #ffc07f;
+}
+*/
+
+:root {
+  --palette-brightest: #fefefe;
+  --palette-brighter: #eee;
+  --palette-bright: #999;
+  --palette-dark: #800080;
+  --palette-darkest: #121212;
+  --palette-anchors: #fef0ff;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -30,7 +42,7 @@ a {
 
 body {
   background-color: var(--palette-darkest);
-  font-size: 1.2em;
+  font-size: 1.15em;
 }
 
 section {

@@ -17,6 +17,7 @@ hljs.registerLanguage('uiua', function () {
       },
       hljs.COMMENT(
         '#', // begin
+        '\n'
       )
     ]
   }

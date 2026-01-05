@@ -1,16 +1,16 @@
 <div class="pagination-footer">
     <div class="prev-post">
-        {% if page.higher %}
-            <a href="{{ page.higher.permalink }}">
-                <span class="title">&larr;{{ page.higher.title }}</span>
+        {% if page.lower %}
+            <a href="{{ page.lower.permalink }}">
+                <span class="title">&larr;{{ page.lower.title }}</span>
             </a>
         {% endif %}
     </div>
 
     <div class="next-post">
-        {% if page.lower %}
-            <a href="{{ page.lower.permalink }}">
-                <span class="title">{{ page.lower.title }} &rarr;</span>
+        {% if page.higher %}
+            <a href="{{ page.higher.permalink }}">
+                <span class="title">{{ page.higher.title }} &rarr;</span>
             </a>
         {% endif %}
     </div>
