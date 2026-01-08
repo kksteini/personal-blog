@@ -5,20 +5,22 @@ weight = 1
 
 [extra]
 doclink = "https://www.uiua.org/tutorial/Basic%20Data%20Manipulation%20and%20Formatting"
+showtoc = true
 +++
 
 ## Preamble
 
-In many mentions and external resources on uiua you will read about a
-stack or see uiua itself being described as stack based.
+In many mentions and external resources on Uiua you will read about a
+stack or see Uiua itself being described as stack based.
 
-In the beginning I liked thinking of uiua as stack based to
+In the beginning I liked thinking of Uiua as stack based to
 help me grapple with the language.
-I would think of it like this:
+I would think of it like this
 
 ```uiua
 + 1 2 3
 
+# A number is a function that pushes itself onto the stack
 # 3 gets pushed onto the stack
 # 2 gets pushed onto the stack
 # 1 gets pushed onto the stack
@@ -30,16 +32,12 @@ I would think of it like this:
 # The stack becomes 3 3
 ```
 
-The current vision for uiua, to my knowledge as of writing, is that the
+The current vision for Uiua, to my knowledge, is that the
 stack is to be de-emphasized in favour of arguments and modifiers for
 argument manipulation.
 
 We still read the order of operations from right to left.
-
-A point from the documentation that is easy to gloss over:
-Operations, such as **add**, have their arguments appear to their left.
-
-Therefore:
+Paraphrased from the documentation: *Operations, such as **add**, have their arguments appear to their left.*
 
 ```uiua
 + 1 2 3
@@ -52,34 +50,22 @@ Therefore:
 # We output 3 3
 ```
 
-Maybe you already have a better sense of challenge 1?
+Maybe now you already have a better sense of challenge 1?
 If we end with a list of arguments, what can we add to consume those arguments?
-
-#### Note on challenge inputs
-
-When interacting with the challenges on the website, suppose
-you have the input `1 2 3`.
-Whatever solution you write consumes this input.
-
-```uiua
-<your solution> 1 2 3
-```
-
-This is how a test case with inputs `1 2 3` would be run on your solution.
 
 ## Challenge 1
 
 **Write a program that adds 3 numbers**.
 
-### Solution
+### C1 Solution
 
 ```uiua
 ++
 ```
 
-#### Why?
+**Why?**
 
-Look back on the preamble. If after
+Take the example from the preamble. If after
 
 ```uiua
 + 1 2 3
@@ -92,7 +78,7 @@ we end up with
 3
 ```
 
-then we should add one more function to consume and operate on this list
+then we should add one more function to consume and operate on that list
 of arguments.
 
 ```uiua
@@ -103,3 +89,172 @@ of arguments.
 
 # final output: 6
 ```
+
+## Challenge 2
+
+**Write a program that divides the first number by the second**.
+
+### C2 Solution
+
+```uiua
+˜÷
+```
+
+**Why?**
+
+Looking at `div a b`, it divides `b` by `a`.
+Take for example
+
+```uiua
+÷ 5 50
+# outputs: 10
+```
+
+Normally, if wanted to divide 5 by 50 instead, we would just write
+
+```uiua
+÷ 50 5
+# outputs: 0.1
+```
+
+However, we have no control over the argument list in the tests so this is not
+an option. What we do control is our function. Let's control it with the function
+modifier `backward` which swaps arguments.
+Remember, a modifier to a function is to its left.
+
+To explain this visually, let's bind the function `backward add` to `F`.
+Don't worry, binding will be explained later but for now you can
+try `F = backward add`.
+
+```uiua
+F ← ˜÷
+ 
+# Now imagine these are the test cases
+# You have no control over the order of inputs here
+# But your back modifier takes care of that for div
+F 5 50
+F 50 5
+F 91 13
+
+# Outputs:
+# 0.1
+# 10
+# 7
+```
+
+## Challenge 3
+
+**Write a program that subtracts the second number from the first then squares
+the result**.
+
+### C3 Solution
+
+There are multiple ways to achieve this. I'll show how I solved this originally.
+My first instinct was to raise the result to the power of 2,
+`pow 2 back sub`
+
+```uiua
+ⁿ2˜-
+```
+
+Here is the intended solution, `self mul back sub`
+
+```uiua
+˙×˜-
+```
+
+**Why?**
+
+The first part of both solutions is to swap the order of arguments to the `sub` function.
+Similarly to challenge 2, this uses the `back` modifier. Squaring comes after.
+
+Let's look at `pow 2 backward sub` first.
+The power function has not been introduced but when asked to square a number
+I went to the documentation and looked for `square` and `power`. I found the latter.
+
+Let's imagine we have the inputs `8 2`
+
+Remember reading from right to left.
+The chain of evaluation is as follows
+
+```uiua
+ⁿ2˜- 8 2
+
+# ˜- 8 2 evaluates to 6
+ⁿ2 6
+
+# 6² = 36 
+# ⁿ2 6 evaluates to 36
+# outputs 36
+```
+
+The intended solution is interesting and for me it was an early indicator to
+some of the cool ways Uiua functions. So what does `self` do?
+
+```uiua
+˙ⁿ 3
+˙+ 5
+˙× 9
+
+# outputs
+# 27
+# 10
+# 81
+```
+
+According to the Uiua documentation, self makes it so a function is called
+with the same array as all arguments. But hold on, is a number an array?
+**Yes!** If you skip ahead to the [Types](https://www.uiua.org/tutorial/Types)
+section of the documentation, then the first line states:
+**Every value in Uiua is an array**.
+
+So, to square a number you can do `self mul <num>`
+
+```uiua
+˙× 5
+# outputs 25
+
+˙× 10
+# outputs 100
+```
+
+## Challenge 4
+
+**Write a program that adds the first number to the square root of the second**.
+
+### C4 Solution
+
+```uiua
++⊙√
+```
+
+**Why?**
+
+Let's look at `dip`. It's a function modifier that makes a function skip
+the first argument. For example
+
+```uiua
+⊙+ 1 2 3
+# skips 1, adds 2 and 3
+#outputs 1 5
+
+⊙˙× 2 4
+# We dip so 2 is skipped
+# We self so 4 is used for all arguments to mul
+# We've essentially done 2 4x4
+# outputs: 2 16
+```
+
+So, for an input `a, b` we want to take the square root of `b`
+and then we want to add together `a + sqrt(b)`.
+The `add` function consumes both `a` and `b` so we can't start with `add a b`.
+Then, `sqrt a b` targets `a` which is not what we want either.
+However, observe what happens when we do `dip sqrt a b`
+
+```uiua
+⊙√ 16 25
+# outputs: 16 5
+```
+
+So at that point we have `a + sqrt(b)` which is exactly what we want to `add`.
+Therefore the whole solution becomes `add dip sqrt`.

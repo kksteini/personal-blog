@@ -27,6 +27,13 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--palette-bright);
 }
 
+/*
+h2, h3, h4, h5, h6 {
+  margin-top: 40px;
+  margin-bottom: -15px;
+}
+*/
+
 code {
   background-color: #333333;
   padding: 2px;
@@ -56,3 +63,8 @@ section {
   padding: 1rem; 
   line-height: 1.4;
 }
+
+ul {
+  list-style-type: none;
+}
+

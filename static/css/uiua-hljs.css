@@ -15,20 +15,21 @@ pre, .hljs {
 
 /* For glyphs to look like the website */
 /* reference: https://github.com/uiua-lang/uiua/blob/main/site/styles.css */
-/* May have to change this and the keywrds in the definition later in case colours drift */
-.hljs-arguments {
-  color: #f0c36f;
-}
-.hljs-dyadic-pervasive {
+/* May have to change this and the keywords in the definition later in case colours drift */
+.hljs-dyadic-pervasive, .hljs-dyadic-function {
   color: #54b0fc;
 }
 
-.hljs-iterating-modifier {
+.hljs-iterating-modifier, .hljs-monadic-modifier, .hljs-arguments {
   color: #f0c36f;
 }
 
-.hljs-literal {
+.hljs-literal, .hljs-bound-function {
   color: #f08050;
+}
+
+.hljs-monadic-function {
+  color: #95d16a;
 }
 
 

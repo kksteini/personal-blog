@@ -10,6 +10,14 @@
     <a href={{page.extra.doclink}}>Relevant uiua documentation<a/>
   {% endif %}
 </div>
+{% if page.extra.showtoc %}
+  <h2>Challenge list</h2>
+  <ul>
+  {% for h1 in page.toc %}
+    <li><a href="{{ h1.permalink | safe }}">{{ h1.title }}</a></li>
+  {% endfor %}
+  </ul>
+{% endif %}
 {{ page.content | safe }}
 <hr/>
 <p class="subtitle"><strong>{{ page.date }}</strong></p>

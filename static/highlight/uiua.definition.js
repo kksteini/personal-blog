@@ -6,8 +6,12 @@ hljs.registerLanguage('uiua', function () {
       // Remember to check: https://github.com/uiua-lang/uiua/blob/main/site/primitives.json
       $pattern: /[a-zA-Z]\w*|[^\s]/,
       arguments: ["∘", "◡", "∩"],
+      'monadic-modifier': ["˜", "˙", "⊙"],
+      'monadic-function': ["√"],
       'iterating-modifier': ["⍥"],
       'dyadic-pervasive': ["+"],
+      'dyadic-function': ["÷", "ⁿ", "×", "-"],
+      'bound-function': ["F", "G"],
       'literal': ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     },
     contains: [
