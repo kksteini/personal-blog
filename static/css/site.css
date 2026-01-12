@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Code Font";
-  src: url(/fonts/Uiua386.ttf) format("truetype");
+  font-family: "Uiua Code Font";
+  src: url('../fonts/Uiua386.ttf') format("truetype");
 }
 
 /*
@@ -64,12 +64,15 @@ ul {
   color: var(--palette-brighter);
 }
 
-pre.z-code {
+pre:has(> code) {
   overflow-x: auto;
   background-color: #333333;
   padding: 10px;
-  font-family: "Code Font", monospace;
-  font-weight: 500;
-  font-size: 1.5em;
+  font-size: 1.30em;
   color: #ccc;
+}
+
+code {
+  font-family: "Uiua Code Font", monospace;
+  font-weight: 500;
 }
