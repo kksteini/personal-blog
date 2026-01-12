@@ -7,10 +7,21 @@ compile_sass = true
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = false
 
-[markdown]
-# Whether to do syntax highlighting
-# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
-highlight_code = false
+[markdown.highlighting]
+# When set to "true", missing highlight languages are treated as errors. Defaults to false but recommended to set to true.
+error_on_missing_language = false
+
+# Whether to use inline hex colours (`inline`) or CSS classes (`class`) 
+style = "class"
+
+
+# A list of files for additional JSON TextMate grammars
+extra_grammars = ["uiua-syntax-highlighting/uiua.grammar.json"]
+
+# A list of files for additional JSON TextMate themes
+extra_themes = ["uiua-syntax-highlighting/uiua.theme.json"]
+
+theme = "uiua"
 
 [extra]
 # Put all your custom variables here

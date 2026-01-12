@@ -1,0 +1,43 @@
+{
+  "name": "uiua",
+  "displayName": "Uiua",
+  "scopeName": "uiualang",
+  "patterns": [
+    {
+      "name": "comment",
+      "match": "#.*$"
+    },
+    {
+      "name": "monadic-modifier",
+      "match": "[˜˙⊙]"
+    },
+    {
+      "name": "monadic-function",
+      "match": "[√]"
+    },
+    {
+      "name": "iterating-modifier",
+      "match": "[⍥]"
+    },
+    {
+      "name": "dyadic-pervasive",
+      "match": "[+]"
+    },
+    {
+      "name": "dyadic-function",
+      "match": "[÷ⁿ×-]"
+    },
+    {
+      "name": "dyadic-modifier",
+      "match": "[⍜]"
+    },
+    {
+      "name": "bound-function",
+      "match": "[FG]"
+    },
+    {
+      "name": "literal",
+      "match": "[0123456789]"
+    }
+  ]
+}

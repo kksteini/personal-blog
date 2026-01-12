@@ -34,11 +34,6 @@ h2, h3, h4, h5, h6 {
 }
 */
 
-code {
-  background-color: #333333;
-  padding: 2px;
-}
-
 p {
   color: var(--palette-brighter);
 }
@@ -69,3 +64,12 @@ ul {
   color: var(--palette-brighter);
 }
 
+pre.z-code {
+  overflow-x: auto;
+  background-color: #333333;
+  padding: 10px;
+  font-family: "Code Font", monospace;
+  font-weight: 500;
+  font-size: 1.5em;
+  color: #ccc;
+}
