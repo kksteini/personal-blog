@@ -66,5 +66,6 @@ section {
 
 ul {
   list-style-type: none;
+  color: var(--palette-brighter);
 }
 

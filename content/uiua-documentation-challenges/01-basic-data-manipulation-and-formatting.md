@@ -37,7 +37,8 @@ stack is to be de-emphasized in favour of arguments and modifiers for
 argument manipulation.
 
 We still read the order of operations from right to left.
-Paraphrased from the documentation: *Operations, such as **add**, have their arguments appear to their left.*
+Paraphrased from the documentation: *Operations, such as **add**, have their
+arguments appear to their right.*
 
 ```uiua
 + 1 2 3
@@ -65,21 +66,15 @@ If we end with a list of arguments, what can we add to consume those arguments?
 
 **Why?**
 
-Take the example from the preamble. If after
+Take for example
 
 ```uiua
 + 1 2 3
+# output: 3 3
 ```
 
-we end up with
-
-```text
-3
-3
-```
-
-then we should add one more function to consume and operate on that list
-of arguments.
+Since the output is a list of arguments, we should add one more function to
+consume those.
 
 ```uiua
 + + 1 2 3
@@ -107,14 +102,14 @@ Take for example
 
 ```uiua
 ÷ 5 50
-# outputs: 10
+# output: 10
 ```
 
 Normally, if wanted to divide 5 by 50 instead, we would just write
 
 ```uiua
 ÷ 50 5
-# outputs: 0.1
+# output: 0.1
 ```
 
 However, we have no control over the argument list in the tests so this is not
@@ -166,11 +161,11 @@ Here is the intended solution, `self mul back sub`
 **Why?**
 
 The first part of both solutions is to swap the order of arguments to the `sub` function.
-Similarly to challenge 2, this uses the `back` modifier. Squaring comes after.
+Similarly to challenge 2, this uses the `back` modifier.
 
 Let's look at `pow 2 backward sub` first.
 The power function has not been introduced but when asked to square a number
-I went to the documentation and looked for `square` and `power`. I found the latter.
+I went to the documentation and searched for `square` and `power`. I found the latter.
 
 Let's imagine we have the inputs `8 2`
 
@@ -183,12 +178,11 @@ The chain of evaluation is as follows
 # ˜- 8 2 evaluates to 6
 ⁿ2 6
 
-# 6² = 36 
-# ⁿ2 6 evaluates to 36
-# outputs 36
+# 6² = 36
+# output: 36
 ```
 
-The intended solution is interesting and for me it was an early indicator to
+Now, the intended solution is interesting and for me it was an early indicator to
 some of the cool ways Uiua functions. So what does `self` do?
 
 ```uiua
@@ -196,26 +190,27 @@ some of the cool ways Uiua functions. So what does `self` do?
 ˙+ 5
 ˙× 9
 
-# outputs
+# Outputs:
 # 27
 # 10
 # 81
 ```
 
 According to the Uiua documentation, self makes it so a function is called
-with the same array as all arguments. But hold on, is a number an array?
+with the same array as all arguments to a function. But hold on, is a number an array?
 **Yes!** If you skip ahead to the [Types](https://www.uiua.org/tutorial/Types)
 section of the documentation, then the first line states:
-**Every value in Uiua is an array**.
+
+>Every value in Uiua is an array
 
 So, to square a number you can do `self mul <num>`
 
 ```uiua
 ˙× 5
-# outputs 25
+# output: 25
 
 ˙× 10
-# outputs 100
+# output: 100
 ```
 
 ## Challenge 4
@@ -236,25 +231,25 @@ the first argument. For example
 ```uiua
 ⊙+ 1 2 3
 # skips 1, adds 2 and 3
-#outputs 1 5
+#output: 1 5
 
 ⊙˙× 2 4
 # We dip so 2 is skipped
 # We self so 4 is used for all arguments to mul
 # We've essentially done 2 4x4
-# outputs: 2 16
+# output: 2 16
 ```
 
-So, for an input `a, b` we want to take the square root of `b`
-and then we want to add together `a + sqrt(b)`.
+Regarding the solution, for an input `a b` we want to take the square root of `b`
+and then we want to add together `a` and `sqrt(b)`.
 The `add` function consumes both `a` and `b` so we can't start with `add a b`.
 Then, `sqrt a b` targets `a` which is not what we want either.
 However, observe what happens when we do `dip sqrt a b`
 
 ```uiua
 ⊙√ 16 25
-# outputs: 16 5
+# output: 16 5
 ```
 
-So at that point we have `a + sqrt(b)` which is exactly what we want to `add`.
+So at that point we have `a sqrt(b)` which is exactly what we want to `add`.
 Therefore the whole solution becomes `add dip sqrt`.

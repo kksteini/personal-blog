@@ -11,6 +11,7 @@ hljs.registerLanguage('uiua', function () {
       'iterating-modifier': ["⍥"],
       'dyadic-pervasive': ["+"],
       'dyadic-function': ["÷", "ⁿ", "×", "-"],
+      'dyadic-modifier': ["⍜"],
       'bound-function': ["F", "G"],
       'literal': ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     },

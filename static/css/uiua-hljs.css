@@ -9,7 +9,7 @@ pre, .hljs {
   padding: 10px;
   font-family: "Code Font", monospace;
   font-weight: 500;
-  font-size: 1.3em;
+  font-size: 1.15em;
   color: #ccc;
 }
 
@@ -30,6 +30,10 @@ pre, .hljs {
 
 .hljs-monadic-function {
   color: #95d16a;
+}
+
+.hljs-dyadic-modifier {
+  color: #cc6be9;
 }
 
 
