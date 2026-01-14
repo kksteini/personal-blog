@@ -2,7 +2,7 @@
   "name": "uiua",
   "type": "dark",
   "colors": {
-    "editor.background": "#1e1e1e",
+    "editor.background": "#2A2A2A",
     "editor.foreground": "#d4d4d4"
   },
   "tokenColors": [
