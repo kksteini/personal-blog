@@ -77,6 +77,10 @@ code {
   background-color: #2A2A2A;
 }
 
+code:not([data-lang="uiua"]) {
+  white-space:nowrap;
+}
+
 .pagination-footer {
   display: flex;
   justify-content: space-between;

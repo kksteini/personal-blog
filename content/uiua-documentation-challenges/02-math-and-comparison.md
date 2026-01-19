@@ -29,15 +29,15 @@ Let's set `A B C` to `1 2 3`.
 # We see + with its arguments 1 2
 # We have (+ 1 2) 3
 # or (+ A B) C
-# output 3 3
+# output: 3 3
 # or
-# output (A+B) C
+# output: (A+B) C
 ```
 
 So, putting an `add` at the front results in `D C` where `D = A + B`.
 We now just have to use a `mul` function, or `mul D C`.
-Remember that we read from right to left and therefore we start with `add` on
-the front and then `mul` behind it.
+Remember that we read from right to left and therefore we consider `add` to be on
+the front with `mul` behind it.
 
 ## Challenge 2
 
@@ -65,15 +65,15 @@ Let's see how we would work backwards. Let's use `3 16` for `A B`.
 
 ```uiua
 ˙× 3 16
-# Outputs 9 16
+# output: 9 16
 # We now have A² B as arguments 
 
 + 9 16
-# Outputs 25
+# output: 25
 # We now have the argument C, where C = A²+B
 
 √ 25 
-# Outputs 5
+# output: 5
 # We now have sqrt(C)
 ```
 

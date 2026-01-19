@@ -48,7 +48,7 @@ arguments appear to their right.*
 #   that is to say (+ 1 2) 3
 # We operate
 # Now the list of arguments is 3 3
-# We output 3 3
+# output: 3 3
 ```
 
 Maybe now you already have a better sense of challenge 1?
@@ -81,8 +81,7 @@ consume those.
 
 # after + 1 2 runs
 + 3 3
-
-# final output: 6
+# output: 6
 ```
 
 ## Challenge 2
@@ -131,7 +130,7 @@ F 5 50
 F 50 5
 F 91 13
 
-# Outputs:
+# outputs:
 # 0.1
 # 10
 # 7
@@ -190,7 +189,7 @@ some of the cool ways Uiua functions. So what does `self` do?
 ˙+ 5
 ˙× 9
 
-# Outputs:
+# outputs:
 # 27
 # 10
 # 81
