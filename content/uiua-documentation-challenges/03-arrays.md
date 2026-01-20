@@ -114,7 +114,9 @@ Let's start by taking a look at `reshape`
 
 Here we have seem to have `reshape x_y fill_value`.
 What we ask for with `reshape 2_5 9` is an array with two rows
-and five columns, all filled with the value 9.
+and five columns, all filled with the value 9. *Note: This is technically
+not true but serves as a gentle introduction to reshape. More on reshape
+later*.
 
 However, our test input is two arguments, not a `rows_columns` array.
 So let's look at `couple` next. According to the documentation it
