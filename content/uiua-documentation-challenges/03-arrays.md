@@ -213,7 +213,8 @@ give you a better idea. Supply the shape, and Uiua provides. For example
 ╷ 0 1 2 3  
           ╯
 
-# Wasn't that just an array? What about [4]?
+# Shouldn't that have been a one dimensional array? 
+# What about [4]?
     °△ [4]
 [0 1 2 3]
 
