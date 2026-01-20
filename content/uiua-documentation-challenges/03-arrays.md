@@ -283,7 +283,7 @@ input of `[20 40]`
 [1 2]
 
 # So, putting that together, can we end up with
-# The correct arguments to reshape?
+# the correct arguments to reshape?
     ⊂ 1 ⊸△ [20 40]
 [20 40]
 [1 2]

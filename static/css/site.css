@@ -67,7 +67,6 @@ ul {
 pre:has(> code) {
   overflow-x: auto;
   padding: 10px;
-  font-size: 1.30em;
   color: #ccc;
 }
 
