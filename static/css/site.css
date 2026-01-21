@@ -82,48 +82,11 @@ code {
   background-color: #2A2A2A;
 }
 
-code:not([data-lang="uiua"]) {
-  white-space:nowrap;
-}
-code:not([data-lang="ruby"]) {
-  white-space:nowrap;
-}
-code:not([data-lang="rust"]) {
-  white-space:nowrap;
-}
-code:not([data-lang="typescript"]) {
+code:not([data-lang]) {
   white-space:nowrap;
 }
 .pagination-footer {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-}
-
-@media (max-width: 700px) {
-  pre:has(> code) {
-    overflow-x: hidden;
-  }
-
-  pre > code {
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-
-  code:not([data-lang="uiua"]) {
-    white-space: normal;
-    word-break: break-word;
-  }
-  code:not([data-lang="ruby"]) {
-    white-space: normal;
-    word-break: break-word;
-  }
-  code:not([data-lang="rust"]) {
-    white-space: normal;
-    word-break: break-word;
-  }
-  code:not([data-lang="typescript"]) {
-    white-space: normal;
-    word-break: break-word;
-  }
 }

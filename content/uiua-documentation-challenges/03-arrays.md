@@ -394,7 +394,7 @@ Let's use `[1 2 3 4 5]` as an example. We want to end up with
 ### C6 Solution
 
 ```uiua
-  ⊂□
+⊂□
 ```
 
 **Why?**
@@ -419,19 +419,16 @@ What is your intuition on string arrays. Let's pick some languages at random
 
 ```ruby
 # Ruby, this is fine
-
 some_array = ["bingo", "buddies"]
 ```
 
 ```typescript
 // Typescript, this is fine
-
 const someArray = ["bingo", "buddies"];
 ```
 
 ```rust
 // Rust, this is fine
-
 let some_array = vec!["bingo", "buddies"];
 ```
 
@@ -455,4 +452,22 @@ Error: Cannot combine arrays with shapes [5] and [7]
 # can be put into an array
     [□ "bingo" □ "buddies"]
 ["bingo"│"buddies"]
+```
+
+The challenge wants us to prepend whatever we receive to a list of boxed arrays.
+Our first argument is the thing to prepend and our second argument is the list.
+We simply `box` our first argument and then call `join`. Because we read right to left
+we end up with `join box` instead of `box join`. This will be the last right to left
+reminder.
+
+Assume input `1_2 [□ 1 □ 2]`
+
+```uiua
+# First we box
+    □ 1_2
+□[1 2]
+
+# Then we join
+    ⊂ □[1_2] [□ 1 □ 2]
+[1 2│∙1│∙2]
 ```
