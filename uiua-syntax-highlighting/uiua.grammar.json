@@ -17,7 +17,7 @@
     },
     {
       "name": "monadic-function",
-      "match": "[√⇌⇡△¤]"
+      "match": "[√⇌⇡△¤□]"
     },
     {
       "name": "iterating-modifier",
@@ -29,7 +29,7 @@
     },
     {
       "name": "dyadic-function",
-      "match": "[÷ⁿ×-↯⊟⊂⊏]"
+      "match": "[÷ⁿ×-↯⊟⊂⊏↘]"
     },
     {
       "name": "dyadic-modifier",
@@ -41,7 +41,7 @@
     },
     {
       "name": "literal",
-      "match": "[0123456789]"
+      "match": "[0123456789¯]"
     }
   ]
 }

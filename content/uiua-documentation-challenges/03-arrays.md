@@ -92,7 +92,8 @@ We can reason about `by add rev` in the same manner
 
 ## Challenge 2
 
-**Write a program that creates a matrix of 0's with as many rows as the first argument and as many columns as the second argument**.
+**Write a program that creates a matrix of 0's with as many rows as the first
+argument and as many columns as the second argument**.
 
 ### C2 Solution
 
@@ -174,6 +175,11 @@ or the idiomatic solution
 **Why?**
 
 I had a hard time even understanding what this challenge wanted.
+That's not the author's fault. I had to look at the answer first and then
+work backwards. After that, it clicked. I go into a lot of
+detail here and dumb it down quite a bit, but that's what I would've needed at
+the time.
+
 Let's start by understanding `shape`. The `shape` function gives us the
 dimensions of an array.
 
@@ -294,4 +300,159 @@ input of `[20 40]`
 ╭─       
 ╷ 20 40  
         ╯
+```
+
+## Challenge 4
+
+**Write a program that prepends the first row of the first argument to the
+second argument**.
+
+### C4 Solution
+
+My initial solution
+
+```uiua
+⊂⊏0
+```
+
+Intended solution
+
+```uiua
+⊂⊢
+```
+
+**Why?**
+
+Let's experiment towards a solution
+
+```uiua
+    ⊏ 0 [1 2 3]
+1
+
+# What about a shape [3 2] array?
+    ⊏ 0 [5_6 7_8 9_0]
+[5 6]
+
+# Ok, so is join the command we want?
+    ⊂ 5_6 1_2_3
+[5 6 1 2 3]
+
+# Can't we then just put them together?
+    ⊂ ⊏ 0 [1 2 3] 4_5_6
+[1 4 5 6]
+```
+
+Note, that you can instead of `select 0` just write `first`.
+I show my initial solution here as a reminder that
+even if you manage to solve the problems, you should always
+look at the intended solution (and even the idiomatic solution).
+I managed to gloss over `first` while still figuring out a way
+around it.
+
+## Challenge 5
+
+**Write a program that removes the first and last rows from an array**.
+
+### C5 Solution
+
+```uiua
+↘1↘¯1
+```
+
+**Why?**
+
+Let's use `[1 2 3 4 5]` as an example. We want to end up with
+`[2 3 4]`. Let's experiment with drop and take
+
+```uiua
+# Our input looks like this
+    1_2_3_4_5
+[1 2 3 4 5]
+
+# What if we take 1?
+    ↙ 1 1_2_3_4_5
+[1]
+
+
+# That wasn't it. What about drop?
+    ↘ 1 1_2_3_4_5
+[2 3 4 5]
+
+# We can use ``1` for a negative drop?
+    ↘ ¯1 1_2_3_4_5
+[1 2 3 4]
+
+# Putting it together
+    ↘ 1 ↘ ¯1 1_2_3_4_5
+[2 3 4]
+```
+
+## Challenge 6
+
+**Write a program that prepends an array as an item to a list of boxed arrays**.
+
+### C6 Solution
+
+```uiua
+  ⊂□
+```
+
+**Why?**
+
+Let's discuss briefly what `box` and something being boxed means.
+What does boxing solve?
+
+> *□ box creates a box element that contains the array. All boxes, no matter
+> the type of shape of their contents, are considered the same type and can be
+> put into arrays together.*
+>
+> From [Uiua.org/docs/box](https://uiua.org/docs/box)
+
+```uiua
+# Example from the documentation
+    [□ @a □ 3 □ 7_8_9]
+[@a│∙3│7 8 9]
+```
+
+Another thing worth mentioning is string arrays in Uiua.
+What is your intuition on string arrays. Let's pick some languages at random
+
+```ruby
+# Ruby, this is fine
+
+some_array = ["bingo", "buddies"]
+```
+
+```typescript
+// Typescript, this is fine
+
+const someArray = ["bingo", "buddies"];
+```
+
+```rust
+// Rust, this is fine
+
+let some_array = vec!["bingo", "buddies"];
+```
+
+But then we come to Uiua.
+
+```uiua
+    ["bingo" "buddies"]
+Error: Cannot combine arrays with shapes [5] and [7]
+
+# So strings have shapes
+    △ "bingo"
+[5]
+
+# But what is the shape of a box?
+    △ □ "bingo"
+[]
+    △ □ "buddies"
+[]
+
+# Alright, so having the same shape they
+# can be put into an array
+    [□ "bingo" □ "buddies"]
+["bingo"│"buddies"]
 ```

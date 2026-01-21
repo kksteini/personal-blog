@@ -14,14 +14,16 @@ error_on_missing_language = false
 # Whether to use inline hex colours (`inline`) or CSS classes (`class`) 
 style = "inline"
 
+theme = "github-dark-with-uiua"
 
 # A list of files for additional JSON TextMate grammars
 extra_grammars = ["uiua-syntax-highlighting/uiua.grammar.json"]
 
 # A list of files for additional JSON TextMate themes
-extra_themes = ["uiua-syntax-highlighting/uiua.theme.json"]
-
-theme = "uiua"
+extra_themes = [
+  "uiua-syntax-highlighting/uiua.theme.json",
+  "other_highlights/themes/github-dark.json",
+]
 
 [extra]
 # Put all your custom variables here

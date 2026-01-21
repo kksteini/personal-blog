@@ -5,12 +5,12 @@
 
 /*
 :root {
-  --palette-brightest: #ffcc00;
-  --palette-brighter: #febf00;
-  --palette-bright: #eb5b00;
-  --palette-dark: #b12c00;
-  --palette-darkest: #121212;
-  --palette-anchors: #ffc07f;
+--palette-brightest: #ffcc00;
+--palette-brighter: #febf00;
+--palette-bright: #eb5b00;
+--palette-dark: #b12c00;
+--palette-darkest: #121212;
+--palette-anchors: #ffc07f;
 }
 */
 
@@ -29,8 +29,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /*
 h2, h3, h4, h5, h6 {
-  margin-top: 40px;
-  margin-bottom: -15px;
+margin-top: 40px;
+margin-bottom: -15px;
 }
 */
 
@@ -45,6 +45,12 @@ a {
 body {
   background-color: var(--palette-darkest);
   font-size: 1.15em;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 section {
@@ -79,9 +85,45 @@ code {
 code:not([data-lang="uiua"]) {
   white-space:nowrap;
 }
-
+code:not([data-lang="ruby"]) {
+  white-space:nowrap;
+}
+code:not([data-lang="rust"]) {
+  white-space:nowrap;
+}
+code:not([data-lang="typescript"]) {
+  white-space:nowrap;
+}
 .pagination-footer {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+@media (max-width: 700px) {
+  pre:has(> code) {
+    overflow-x: hidden;
+  }
+
+  pre > code {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  code:not([data-lang="uiua"]) {
+    white-space: normal;
+    word-break: break-word;
+  }
+  code:not([data-lang="ruby"]) {
+    white-space: normal;
+    word-break: break-word;
+  }
+  code:not([data-lang="rust"]) {
+    white-space: normal;
+    word-break: break-word;
+  }
+  code:not([data-lang="typescript"]) {
+    white-space: normal;
+    word-break: break-word;
+  }
 }
