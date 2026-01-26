@@ -1,7 +1,7 @@
 +++
 title = "Arrays"
 date = 2026-01-20
-weight = 2
+weight = 3
 
 [extra]
 doclink = "https://www.uiua.org/tutorial/Arrays"
