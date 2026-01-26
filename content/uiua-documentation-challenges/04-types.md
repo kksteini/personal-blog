@@ -5,8 +5,7 @@ weight = 4
 
 [extra]
 doclink = "https://www.uiua.org/tutorial/Types"
-showtoc = true
-
+showtoc = false
 +++
 
 ## Challenge 1
