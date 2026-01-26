@@ -35,7 +35,7 @@ back join dip(add 1) dip first by drop 1
 ˜⊂ ⊙(+ 1) ⊙⊢ ⊸↘ 1
 ```
 
-But let's look at what we're trying to accomplish, step by step
+But let's look at what we're trying to accomplish, step by step.
 Let's assume we want to turn `bingo` into `cingo`.
 
 ```uiua
