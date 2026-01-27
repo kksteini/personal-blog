@@ -12,10 +12,11 @@ showtoc = true
 
 We'll be using `reduce`.
 If you're familiar with reduce from other languages, be careful about the specifics,
-especially with non-commutative functions like `sub`.
+especially with functions like `sub` and `div`. Their order of operation might
+go against your intuition from other programming languages..
+
 With prior experience, your mental model of a reduce might be something
 like this
-
 > *For an array, `reduce <function>` will
 > apply the function on all elements of the array, pairwise left to right,
 > while keeping a running score.*
@@ -26,56 +27,32 @@ And is that right?
     reduce + [5 10 15]
     /+ [5 10 15]
 30
-```
 
-That *looks* right. What might we intuit about `reduce sub` from other languages?
-Let's look at Ruby as an example
-
-```ruby
-[1,2,3,4,5].reduce(:-)
-=> -13
-
-1 - 2 - 3 - 4 - 5
-=> -13
-```
-
-So, is Uiua the same?
-
-```uiua
+# Huh, shouldn't this be -13?
     reduce sub [1 2 3 4 5]
     /- [1 2 3 4 5]
 3
 ```
 
-Not the same then.
-What *sort of* happens with `sub` in Uiua is comparable to
+We can quickly examine the consequences of the order in which Uiua
+operates with functions such as `sub` and `div` with the following
+typescript example:
 
-```ruby
-5 - (4 - (3 - (2 - 1)))
-=> 3
+```typescript
+> [1,2,3,4,5].reduce((a,b) => a-b)
+-13
+
+> [1,2,3,4,5].reduce((a,b) => b-a)
+3
 ```
 
-Let's work through the non-commutative consequences of Uiua, step by step.
+If you really want the former you can simply use the back modifier
 
 ```uiua
-    - 1 2
-1
+    reduce back sub [1 2 3 4 5]
+    /˜- [1 2 3 4 5]
+```
 
-# Elements 1 and 2 have been used
-# Next up, element 3 
-# With previous output 1
-    - 1 3
-2
-
-# Element 4
-# Previous output 2
-    sub 2 4
-    - 2 4
-2
-
-# Element 5, previous out 2
-    - 2 5
-3
 ```
 
 ## Challenge 1
@@ -157,10 +134,11 @@ that explains what happens.
 
 **Why?**
 
-You might be comfortable with reduce by now but you can read the preamble and problem 1
-for a refresher.
+You might be comfortable with reduce by now but you can read the preamble and
+problem 1 for a refresher.
 
-I think it is helpful to look at two examples with reverse to see visually what rows does.
+I think it is helpful to look at two examples with reverse to see visually what
+rows does.
 
 ```uiua
 # Reverses each row. 1_2_3 → 3_2_1
