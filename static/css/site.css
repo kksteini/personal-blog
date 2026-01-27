@@ -85,7 +85,7 @@ pre:has(> code) {
 code {
   font-family: "Uiua Code Font", monospace;
   font-weight: 500;
-  background-color: #2A2A2A;
+  background-color: #24292E;
 }
 
 code:not([data-lang]) {
