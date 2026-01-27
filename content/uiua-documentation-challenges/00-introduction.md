@@ -51,8 +51,8 @@ nonsense, this will become readable once you engage with it enough.
 
 ### But what about typing these glyphs?
 
-When writing Uiua you don't have to remember unicode sequences set up a
-keyboard layer for all these glyphs. Nobody is stopping you though.
+When writing Uiua you don't have to remember unicode sequences or set up a
+keyboard layer for all these glyphs. *Nobody is stopping you though.*
 
 Instead, when using the Uiua repl or the pad, certain keywords will be formatted
 into their corresponding glyphs. I recommend the [uiua pad](https://www.uiua.org/pad).
@@ -81,7 +81,7 @@ which outputs
 
 ## What's next?
 
-I recommend you go to the next chapter.
+Go to the next chapter.
 On the top of every page I link to the relevant Uiua documentation.
 Read that first, try the challenges. Then come back
 to check your understanding, if necessary.

@@ -20,10 +20,7 @@ theme = "github-dark-with-uiua"
 extra_grammars = ["uiua-syntax-highlighting/uiua.grammar.json"]
 
 # A list of files for additional JSON TextMate themes
-extra_themes = [
-  "uiua-syntax-highlighting/uiua.theme.json",
-  "other_highlights/themes/github-dark.json",
-]
+extra_themes = ["other_highlights/themes/github-dark.json"]
 
 [extra]
 # Put all your custom variables here

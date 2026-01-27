@@ -13,7 +13,7 @@
     },
     {
       "name": "monadic-modifier",
-      "match": "[˜˙⊙⊸°]"
+      "match": "[˜˙⊙⊸°≡]"
     },
     {
       "name": "monadic-function",
@@ -21,7 +21,7 @@
     },
     {
       "name": "iterating-modifier",
-      "match": "[⍥]"
+      "match": "[⍥/]"
     },
     {
       "name": "dyadic-pervasive",
@@ -29,7 +29,7 @@
     },
     {
       "name": "dyadic-function",
-      "match": "[÷ⁿ×-↯⊟⊂⊏↘]"
+      "match": "[-÷ⁿ×↯⊟⊂⊏↘]"
     },
     {
       "name": "dyadic-modifier",
@@ -42,6 +42,10 @@
     {
       "name": "literal",
       "match": "[0123456789¯]"
+    },
+    {
+      "name": "subscripted",
+      "match": "[₁₂₃₄₅₆₇₈₉]"
     }
   ]
 }

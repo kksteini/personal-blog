@@ -588,6 +588,13 @@
       }
     },
     {
+      "name": "Subscripted",
+      "scope": "subscripted",
+      "settings": {
+        "foreground": "#f0d090"
+      }
+    },
+    {
       "name": "Bound function",
       "scope": "bound-function",
       "settings": {
