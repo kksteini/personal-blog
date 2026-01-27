@@ -53,8 +53,6 @@ If you really want the former you can simply use the back modifier
     /˜- [1 2 3 4 5]
 ```
 
-```
-
 ## Challenge 1
 
 **Write a program that calculates the product of the first n positive integers**.
