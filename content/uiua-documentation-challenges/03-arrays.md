@@ -179,7 +179,7 @@ or the idiomatic solution
 
 It may be sufficient for you to understand that
 *1-row leading axis to an array* just means *put the entire thing you have into
-a new array as its first element*. That is to say, a function `f(x) -> [x]`.
+a new array as its first element*.
 
 This means there is an alternate solution to the problem that looks like this
 
@@ -187,6 +187,9 @@ This means there is an alternate solution to the problem that looks like this
     [id]
     [∘]
 ```
+
+*`id` has not been introduced but should be fairly easy to understand in this context.
+`[id]` is equivalent to `f(x) -> [x]`. Then `f(2)` is equivalent to `[id] 2`*
 
 **Why? Original wall of text**.
 

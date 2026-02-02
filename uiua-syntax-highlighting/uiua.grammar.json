@@ -46,6 +46,10 @@
     {
       "name": "subscripted",
       "match": "[₁₂₃₄₅₆₇₈₉]"
+    },
+    {
+      "name": "stack-function",
+      "match": "[∘]"
     }
   ]
 }
