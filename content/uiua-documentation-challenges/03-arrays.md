@@ -111,6 +111,7 @@ Let's start by taking a look at `reshape`
 ╭─           
 ╷ 9 9 9 9 9  
   9 9 9 9 9
+            ╯
 ```
 
 Here we have seem to have `reshape x_y fill_value`.
@@ -172,11 +173,26 @@ or the idiomatic solution
 ¤
 ```
 
-**Why?**
+**Why? Short edition**.
+
+*Thank you Tyz for the feedback!*
+
+It may be sufficient for you to understand that
+*1-row leading axis to an array* just means *put the entire thing you have into
+a new array as its first element*. That is to say, a function `f(x) -> [x]`.
+
+This means there is an alternate solution to the problem that looks like this
+
+```uiua
+    [id]
+    [∘]
+```
+
+**Why? Original wall of text**.
 
 I had a hard time even understanding what this challenge wanted.
 That's not the author's fault. I had to look at the answer first and then
-work backwards. After that, it clicked. I go into a lot of
+work backwards. After that, it clicked. I will go into a lot of
 detail here and dumb it down quite a bit, but that's what I would've needed at
 the time.
 
@@ -207,10 +223,10 @@ dimensions of an array.
 
 That should give you some idea of shapes.
 
-You should however play around with this yourself.
-I'm not going to explain inverses right now but you can
-try out `un shape` to generate arrays based on the shape you supply. This may
-give you a better idea. Supply the shape, and Uiua provides. For example
+You can however play around with this yourself.
+I'm not going to explain inverses right now but
+try out `un shape` to generate arrays based on the shape you supply.
+For example
 
 ```uiua
 # I want an array of shape [1 4] 
@@ -232,14 +248,14 @@ give you a better idea. Supply the shape, and Uiua provides. For example
   4 5 6 7  
           ╯
 
-# So a matrix has three lines on the side, right?
+# So a 3D matrix has three lines on the side, right?
     °△ [3 2 1]
 ╭─        
 ╷ 0  2  4  
 ╷ 1  3  5  
           ╯
 
-# What about a 7-dimensional monster, just because I can?
+# What about a 7D monster, just because?
     °△ [1 1 1 1 1 1 1]
 ╭─   
 ╷    
@@ -412,15 +428,14 @@ What does boxing solve?
 # Example from the documentation
     [□ @a □ 3 □ 7_8_9]
 [@a│∙3│7 8 9]
+
+# Note: You can use { } as a box shorthand
+    {@a 3 7_8_9}
+[@a│∙3│7 8 9]
 ```
 
 Another thing worth mentioning is string arrays in Uiua.
 What is your intuition on string arrays. Let's pick some languages at random
-
-```ruby
-# Ruby, this is fine
-some_array = ["bingo", "buddies"]
-```
 
 ```typescript
 // Typescript, this is fine
@@ -450,15 +465,15 @@ Error: Cannot combine arrays with shapes [5] and [7]
 
 # Alright, so having the same shape they
 # can be put into an array
-    [□ "bingo" □ "buddies"]
+    {"bingo" "buddies"}
 ["bingo"│"buddies"]
 ```
 
 The challenge wants us to prepend whatever we receive to a list of boxed arrays.
 Our first argument is the thing to prepend and our second argument is the list.
-We simply `box` our first argument and then call `join`. Because we read right to left
-we end up with `join box` instead of `box join`. This will be the last right to left
-reminder.
+We simply `box` our first argument and then call `join`.
+Because we read right to left we end up with `join box` instead of `box join`.
+This will be the last right to left reminder.
 
 Assume input `1_2 [□ 1 □ 2]`
 
