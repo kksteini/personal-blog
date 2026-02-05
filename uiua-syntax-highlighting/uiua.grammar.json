@@ -13,7 +13,7 @@
     },
     {
       "name": "monadic-modifier",
-      "match": "[˜˙⊙⊸°≡⟜]"
+      "match": "[˜˙⊙⊸°≡⟜⤙]"
     },
     {
       "name": "monadic-function",
@@ -33,7 +33,7 @@
     },
     {
       "name": "dyadic-modifier",
-      "match": "[⍜]"
+      "match": "[⍜⊃]"
     },
     {
       "name": "bound-function",
@@ -49,7 +49,7 @@
     },
     {
       "name": "stack-function",
-      "match": "[∘]"
+      "match": "[∘◌]"
     }
   ]
 }
