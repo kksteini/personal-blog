@@ -10,22 +10,103 @@ showtoc = true
 
 ## Preamble
 
+There is a lot of noise here. Feel free to look at the challenges and then refer
+back to my preamble sections if they seem relevant.
+
+### Array compaction
+
+I often compact argument output by wrapping the problem in an array
+`[dip add 1 2 3]` vs `dip add 1 2 3` for example:
+
+```uiua
+    [⊙+ 1 2 3]
+[1 5]
+    ⊙+ 1 2 3
+5
+1
+```
+
+You can surround a Uiua program, or commands, in brackets. Any output generated
+by the program will then be put into the array. Another example:
+
+```uiua
+    [+ 1 2 - 3 4 × 5 6 ÷ 7 8]
+[3 1 30 1.1428571428571428]
+```
+
+### A short fork reminder
+
+A `fork` takes two functions an runs them on the same input.
+Consider two functions, `reduce add` and `reduce back sub`.
+
+```uiua
+# First 'reduce add' runs on the input and gives back 6
+# Then 'reduce back add' runs on the input and gives back 0
+    ⊃/+/˜- [3 2 1]
+0
+6
+
+# Function boundaries will become second nature once you
+# get familiar enough with Uiua. 
+# You can use parentheses to
+# visualize the boundaries better.
+
+    ⊃(/+)(/˜-) [3 2 1]
+0
+6
+
+```
+
+### Function boundary
+
+I use the term *function boundary* somewhat.
+This is not an official term but I like to use it when I reason about
+functions as inputs.
+
+In very simplified terms, the Uiua parser parses functions with its modifiers
+and those together make a function boundary or just simply a function.
+
+For example, if a function takes two functions as input, then the next two
+function boundaries will serve as input to that function.
+
+```uiua
+# Following fork is 4 symbols and 1 argument
+# However, self(˙) is a modifier and is therefore a part of a function boundaries
+# when followed by non-modifier symbol
+    [⊃˙×˙+ 5]
+[25 10]
+
+# Function boundaries highlighted with parentheses
+    [⊃(˙×)(˙+) 5]
+[25 10]
+```
+
+Parentheses, of course, make a function boundary even if there are multiple
+functions within. In those cases, parentheses serve an actual functional purpose,
+instead of just highlighting as above. As an example:
+
+```uiua
+# Add n and then multiply by itself
+# This is two functions
+# Doing this twice would be four functions
+# This is where parentheses represent a function boundary of 
+# two functions
+    [fork (self mul add 1) (self mul add 3) 1]
+    [⊃(˙× + 1) (˙× + 3) 1]
+[4 16]
+```
+
 ### Planet notation
 
-I urge you to read and reread the planet notation section in the documentation
-for this chapter.
-
-*Note: I recommend focusing on `dip`, `gap` and `id` first.
-Pop is easy to understand once you get those three down.*
+I urge you to read the planet notation section in the documentation
+for this chapter while focusing on `dip`, `gap` and `id`.
+The `pop` function is easy to understand once you get those three down.
 
 It took me some time to understand `dip`, `gap` and `id`.
-It helps to consider strongly that `dip` and `gap` need a function and then
-some arguments, whereas `id` simply returns whatever argument is next/selected.
+It helps to remember that `dip` and `gap` take a function, and then
+some arguments, whereas `id` simply returns whatever argument is next.
 
 **Let's consider the difference between `dip` and `gap`.**
-
-*Reminder: I sometimes compact argument output by wrapping the problem in an array*
-`[gap add 1 2 3]`*vs* `gap add 1 2 3` *in the repl. Try the difference for yourself.*
 
 ```uiua
 # dip (and gap) needs a function 
@@ -43,10 +124,10 @@ some arguments, whereas `id` simply returns whatever argument is next/selected.
 # So step by step:
 #   dip modifies the add function
 #   dip skips and 'banks' the first argument, 1
-#   dip feeds add the arguments 2 3
+#   add receives the arguments 2 3
 #   add computes 5
 #   dip puts down the banked 1 
-#   dip puts down the the computation.
+#   then comes the computation, 5.
 # End result, [1 5].
 
 # The difference with gap is that it doesn't 
@@ -72,18 +153,20 @@ OK, but where does `id` come in? Why is it considered a planet?
 # That's not right.
 # What is actually happening is the following:
 
-# gap 1     2 3
-#     |     \ /
-#  'func'  arguments
+# gap 1          2 3
+#     |          \ /
+#  'func'  next arguments
 
-# 1 'sort of' is a function.
-# Gap then skips the first argument, 2.
+# 1 'kinda' is a  zero argument function that returns 1. 
+# Even if 1 takes no arguments,
+# gap skips the next argument in the argument list, 2.
 # Gap 'applies' the function 1.
 # The rest of the program, 3, runs.
 # End result is [1 3].
 
-# So how do we fix it?
-# Make sure 1 is not in a 'func' position.
+# So how do we fix this?
+# Make sure 1 is not in gap's 'func' position.
+# Put an id in there
 
 # gap id   1 2 3
 #      |   | | |
@@ -112,26 +195,10 @@ OK, but where does `id` come in? Why is it considered a planet?
     dgp 1 2 3
     ⊙⋅◌ 1 2 3
 1
-```
 
-### A short fork intro
-
-A `fork` takes two functions an runs them on the same input/s.
-Consider two functions, `reduce add` and `reduce back sub`.
-
-```uiua
-# First 'reduce add' runs on the input and gives back 6
-# Then 'reduce back add' runs on the input and gives back 0
-    ⊃/+/˜- [3 2 1]
-0
-6
-
-# Function boundaries will become second nature once you
-# get familiar enough with Uiua. 
-# But I found it clearer in the beginning to function pack
-    ⊃(/+|/˜-) [3 2 1]
-0
-6
+# Though you need more than one
+    g 1 2 3
+Error: Unknown identifier `g`
 ```
 
 ## Challenge 1
@@ -141,10 +208,10 @@ Consider two functions, `reduce add` and `reduce back sub`.
 ### C1 Solution
 
 ```uiua
-⊃(⋅⋅⋅∘|⊙⊙∘)
+⊃(⋅⋅⋅∘)(⊙⊙∘)
 ```
 
-or without function packing
+or without parentheses
 
 ```uiua
 ⊃⋅⋅⋅∘⊙⊙∘
@@ -170,8 +237,8 @@ Let's start by isolating the 4th argument.
 
 # Surely we can then gap the first 3 arguments
 # and id the last, right?
-    [⋅⋅⋅∘ 1 2 3 4]
-[4]
+    ⋅⋅⋅∘ 1 2 3 4
+4
 ```
 
 Indeed we can. But what about the first three?
@@ -209,12 +276,16 @@ Let's examine `dip dip id` with this knowledge in mind
 # and then use something that takes no arguments:
 #   →just the number 0
 
-# So the maximum of arguments is 3
 # If 'dip dip id' *returns* 1 2 3 4 as in *confusion 1*
 # then we'd expect to see [1 2 3 4 0]
-# However:
-    [⊃(⊙⊙∘|0) 1 2 3 4]
+# Because the inputs captures would be 1 2 3 4 and then 0
+    [⊃(⊙⊙∘)(0) 1 2 3 4]
 [1 2 3 0 4]
+
+# This proves that dip dip id only runs on arguments 1 2 3
+# Dip dip id returns 1 2 3, the first capture of the array
+# Then the 0 in the fork, the second capture
+# Then finally 4 is leftover and is the third and final capture
 ```
 
 **Putting it together**.
@@ -225,8 +296,8 @@ Knowing what we know, let's fork together.
 ```uiua
 # First part is 'gggi'
 # Second part is 'ddi'
-    fork(gggi|ddi) 1 2 3 4
-    ⊃(⋅⋅⋅∘|⊙⊙∘) 1 2 3 4
+    fork(gggi)(ddi) 1 2 3 4
+    ⊃(⋅⋅⋅∘)(⊙⊙∘) 1 2 3 4
 3
 2
 1
@@ -292,36 +363,19 @@ and then the triple dip outputs `1 2 3`
 
 ### C2 Solution
 
-My initial naive approach
-
-```uiua
-⊃/+ /× ⊟₃
-```
-
-and the intended solution
+The intended solution
 
 ```uiua
 ⊃(++|××)
 ```
 
-**Why?**
-
-I show you the naive approach to emphasize function packing.
-If there was no function packing then this solution, or a solution like it,
-would be necessary.
-
-The `add` and `mul` functions by themselves create a function boundary.
-Since `reduce add` and `reduce mul` are their own boundaries, they could work
-with an input `[1 2 3]`. We may remember that `couple,3` will do that.
+and an equivalent solution with boundaries instead of packing
 
 ```uiua
-    ⊟₃1 2 3
-[1 2 3]
-
-    ⊃/+ /× ⊟₃1 2 3
-6
-6
+⊃(++)(××)
 ```
+
+**Why?**
 
 The intended solution uses function packing to create a clear boundary for fork.
 Trying the idiomatic solution without packing comes with problems.
@@ -331,11 +385,117 @@ Trying the idiomatic solution without packing comes with problems.
 Error: Missing argument
 ```
 
-There are 4 functions there, not 2.
-By packing them into `(program1|program2)` we *essentially* give fork two functions.
+Again, there are 4 functions there, not 2.
+By packing them into `(program1|program2)` we give fork two functions.
 
 ```uiua
     ⊃(++|××) 3 4 5
 60
 12
+```
+
+**How is packing different from creating boundaries?**
+
+In this particular challenge, not very different.
+However, observe the following:
+
+```uiua
+# We fork three functions instead of 2
+    ⊃(++|×+|××) 1 2 3
+6
+9
+6
+
+# Can we just supply three functions to fork?
+    ⊃(++)(×+)(××) 1 2 3
+Error: Missing argument 2
+  at 1:1
+
+# No. Not at all
+```
+
+With fork, function packing is a way to control how many functions are
+forked on the same input. They can be 2 or more.
+They can also be singular or none.
+
+```uiua
+    ⊃(++|) 1 2 3
+6
+
+    [⊃(|) 1 2 3]
+[1 2 3]
+```
+
+## Challenge 3
+
+**Write a program that collects 9 values from the stack evenly into 3 arrays**.
+
+### C3 Solution
+
+```uiua
+∩₃⊟₃
+```
+
+**Why?**
+
+I would recommend reading over the [both docs](https://www.uiua.org/docs/both).
+
+Now, from the doc, consider the following:
+> For a function that takes n arguments, ∩ (both) calls the function on the
+> 2 sets of n arguments.
+
+What does this mean?
+
+```uiua
+# We know that (++) requires 3 arguments
+#   so n = 3
+# This means that if we supply (++) to both,
+# then the modified function should consume 2*n = 6 args.
+    ∩(++) 1 2 3 4 5 6
+15
+6
+```
+
+Then consider:
+> Subscripted ∩ (both) calls its function on N sets of arguments.
+
+```uiua
+# (++) requires 3 args, n = 3
+# subscript is 3, so N = 3
+# N sets of n args = N * n = 9 args
+    ∩₃(++) 1 2 3 4 5 6 7 8 9
+24
+15
+6
+```
+
+Now remember `couple`.
+It similarly has a subscript that tells it how many arguments it should collect.
+
+```uiua
+# Let's couple 4 and then 3 with input 1 2 3 4
+
+# All four are coupled 
+    ⊟₄1 2 3 4
+[1 2 3 4]
+
+# First three are coupled 
+    ⊟₃1 2 3 4
+4
+[1 2 3]
+```
+
+OK, so subscripted couple is fairly straightforward.
+
+Now, the challenge!
+We want to collect 9 values evenly into 3 arrays.
+So that would be 3 values per array, 3 times.
+We collect 3 at a time, `couple,3`.
+The input length is 9 so we run 3 sets of `couple,3` using `both,3`.
+
+```uiua
+    ∩₃⊟₃1 2 3 4 5 6 7 8 9
+[7 8 9]
+[4 5 6]
+[1 2 3]
 ```

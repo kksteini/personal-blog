@@ -13,7 +13,7 @@
     },
     {
       "name": "monadic-modifier",
-      "match": "[˜˙⊙⊸°≡⟜⤙]"
+      "match": "[˜˙⊙⊸°≡⟜⤙∩]"
     },
     {
       "name": "monadic-function",
@@ -21,7 +21,7 @@
     },
     {
       "name": "iterating-modifier",
-      "match": "[⍥/]"
+      "match": "[⍥/∩]"
     },
     {
       "name": "dyadic-pervasive",
