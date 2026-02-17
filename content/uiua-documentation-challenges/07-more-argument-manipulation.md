@@ -499,3 +499,98 @@ The input length is 9 so we run 3 sets of `couple,3` using `both,3`.
 [4 5 6]
 [1 2 3]
 ```
+
+## Challenge 4
+
+**Write a program that for numbers A, B, C, and D calculates (A+C)×(B+D)**.
+
+### C4 Solution
+
+Mine:
+
+```uiua
+×∩+⊃(⊙⋅∘|⋅⊙⋅∘) 1 2 3 4
+```
+
+Intended:
+
+```uiua
+×⊃(+⊙⋅∘|+⋅⊙⋅∘)
+```
+
+Idiomatic:
+
+```uiua
+×˜∩+
+```
+
+**Why?**
+
+Breaking down my solution first:
+
+```uiua
+# Let's reason about this with A,B,C,D as 1,2,3,4
+# We expect (A+C)x(B+D): 4x6 = 24
+    [1 2 3 4]
+[1 2 3 4]
+
+# Let's see if we can create two groups, 1 3 and 2 4
+# Selecting one element, skippin and then selecting the third
+# is doable with `dip gap id`.
+# That should select `1 3` from 1 2 3 4
+# To get the 2 4, we can stagger it with a gap
+# So, `gap` followed again with `dip gap id`
+    [fork(dgi|gdgi) 1 2 3 4]
+    [⊃(⊙⋅∘|⋅⊙⋅∘) 1 2 3 4]
+[1 3 2 4]
+
+# Here fork captures (1 3) and (2 4) and puts them in this array
+
+# Now we can add both groups with `both add`.
+# Remember that `both`, when modifying a function,
+# runs that modified function twice, requiring four arguments in this case.
+# We then expect `add 1 3` and `add 2 4` to run
+    [both add ⊃(⊙⋅∘|⋅⊙⋅∘) 1 2 3 4]
+    [∩+ ⊃(⊙⋅∘|⋅⊙⋅∘) 1 2 3 4]
+[4 6]
+
+# At this stage we have an a
+    [mul ∩+ ⊃(⊙⋅∘|⋅⊙⋅∘) 1 2 3 4]
+    [×∩+⊃(⊙⋅∘|⋅⊙⋅∘) 1 2 3 4]
+[24]
+```
+
+The intended solution is not very different but it's tidier.
+The addition is moved into the function pack instead of happening outside of it.
+The selection process is the same.
+
+**What about the idiomatic solution?**
+
+Take a look at the [documentation for backward](https://www.uiua.org/docs/backward).
+> *If the function takes 4 arguments, the second two arguments are swapped.*
+
+The example given makes this fairly easy to understand
+
+```uiua
+# The second argument is 2
+# The third argument is 3
+# Swapping them makes the arguments go 1 3 2 4
+# In the case of A,B,C,D this is A,C,B,D
+    backward couple,4 1 2 3 4
+    ˜⊟₄1 2 3 4
+[1 3 2 4]
+
+# Notice how `both add` takes 4 arguments 
+# That means we can use the `backward` modifier to swap the arguments
+# The input goes from `A B C D` to `A C B D`
+# and `both add` will consume it in the following way:
+#   `add A C add B D`
+
+    [˜∩+ 1 2 1 2]
+[2 4]
+
+# That's why the idiomatic solution is
+# mul backward both add
+    ×˜∩+ 1 2 3 4
+24
+```
