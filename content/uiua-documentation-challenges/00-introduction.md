@@ -16,7 +16,7 @@ I will be going through the official documentation, chapter by chapter,
 solving and explaining the challenges as best as I can.
 
 If you spot any errors, mistakes or misconceptions then don't hesitate to send
-in corrections to [<uiuachallenges@kurte.is>](uiuachallenges@kurte.is). They are
+in corrections to [<uiuachallenges@anub.is>](uiuachallenges@anub.is). They are
 very welcome. Feel free to email improvements as well.
 
 ### Who is this for?

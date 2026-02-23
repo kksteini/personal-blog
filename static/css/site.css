@@ -65,6 +65,10 @@ section {
   line-height: 1.4;
 }
 
+img {
+  max-width: 80ch;
+}
+
 ul {
   list-style-type: none;
   color: var(--palette-brighter);
