@@ -118,20 +118,27 @@ See [preamble section on under](#under-especially).
     ⍜⊏+ 1_3 100 [1 2 3 4 5]
 Error: Index 1 is out of bounds of length 1
 
-# Ah, so `select 1_3` tries to operate on `100`.
-# Well, after parsing `select 1_3`, 
-# the arguments at this point are 100 [1 2 3 4 5].
-# Of course we have to skip over the 100
-
-# But isn't this then a symptom of test cases
-# The dip is there to deal with the test input appearing last, innit?
-# So what if that weren't the case
-    ⍜⊏ + 1_3 [1 2 3 4 5] 100
+# Ah, because `select 1_3` tries to operate on 100.
+# But isn't this then a symptom of dynamic inputs and test cases?
+# The dip is there to deal with the test input appearing last.
+# If that weren't the case we could just write
+    ⍜⊏+ 1_3 [1 2 3 4 5] 100
 [1 102 3 104 5]
 
-# So, in a pure sense we can write
-# `under F G <args for F> <args for G>`
-    ⍜⊏ + (1_3 [1 2 3 4 5]) (100)
+# Ok. But hang on, both functions, `F` and `G` need inputs.
+# How does that work with `under`?
+# Well, the inputs simply just follow.
+# Here's a parenthesized version to clarify the one above
+# `under(F|G) (<args for F>) (<args for G>)`
+    ⍜(⊏|+) (1_3 [1 2 3 4 5]) (100)
+[1 102 3 104 5]
+
+# Well, but `[1 2 3 4 5]` is destined to appear last in the input.
+# The dip is then more accurately there to deal with
+# the fact that `1_3 [1 2 3 4 5]` is the sequence that `select` needs
+# to see. It is easy to conjure this sequence with `100 1_3`,
+# and dipping out the 100, which is then given back to the add.
+    ⍜⊙⊏+ 100 1_3 [1 2 3 4 5]
 [1 102 3 104 5]
 ```
 
