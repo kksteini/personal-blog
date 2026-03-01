@@ -162,5 +162,5 @@ rows does.
 
 #### Exercise C2-1
 
-What is the difference between `reduce add [1_2_3 4_5_6 7_8_9]` and
-`rows reduce add [1_2_3 4_5_6 7_8_9]`?
+What is the difference between `reduce add [1_2 3_4 5_6]` and
+`rows reduce add [1_2 3_4 5_6]`?

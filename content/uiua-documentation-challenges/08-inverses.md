@@ -362,9 +362,9 @@ Here's an example where we square each element in the first column of a matrix.
 
 Let's do the following:
 
-* For every row (`rows`)
-* * Get the first element (`first`)
-* * multiply by itself (`self mul`)
+* \- For every row (`rows`)
+* * \+ Get the first element (`first`)
+* * \+ multiply by itself (`self mul`)
 
 ```uiua
     rows first self mul F
@@ -377,10 +377,10 @@ This is fine, but we want to give the items back
 This is what under is for, isn't it?
 So let's change the recipe
 
-* For every row (`rows`)
-* * Do the following and then reverse (`under`)
-* * * Get the first element (`first`)
-* * * multiply by itself (`self mul`)
+* \- For every row (`rows`)
+* * \+ Do the following and then reverse (`under`)
+* * * \* Get the first element (`first`)
+* * * \* multiply by itself (`self mul`)
 
 ```uiua
     ≡⍜⊢˙× F
