@@ -4,7 +4,7 @@ date = 2026-02-23
 weight = 8
 
 [extra]
-doclink = "https://www.uiua.org/tutorial/More%20Argument%20Manipulation"
+doclink = "https://www.uiua.org/tutorial/Inverses"
 showtoc = true
 +++
 
