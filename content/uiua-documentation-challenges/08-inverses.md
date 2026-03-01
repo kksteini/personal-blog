@@ -49,14 +49,16 @@ The **context** in this case is the array. Let's examine
     ⍜(⊏ 1_3|+ 100) [1 2 3 4 5]
 [1 102 3 104 5]
 
-# So tracing the steps very informally:
-# [2 4] is selected. 
-#   Context is [1 HERE 3 ALSO_HERE 5]
-# [2 4] has +100 applied → [102 104]
-# Now under, keeping the context,
-# knows to replace HERE with 102 and ALSO_HERE with 104
-# Hence output: [1 102 3 104 5]
 ```
+
+So tracing the steps very informally:
+
+* [2 4] is selected.
+* Context is [1 HERE 3 ALSO_HERE 5]
+* [2 4] has +100 applied → [102 104]
+
+Now under, keeping the context, knows to replace HERE with 102 and ALSO_HERE with
+104, hence output: `[1 102 3 104 5]`.
 
 ## Challenge 1
 
@@ -90,21 +92,24 @@ See [preamble section on under](#under-especially).
 # G: Then operating on those
     + 100 [90 70]
 [190 170]
+```
 
-# Under however keeps the context,
-# the original array [100 90 80 70 60] selected from,
-# and returns the altered elements to their previous
-# places: 
+However, `under` keeps the context,
+the original array `[100 90 80 70 60]` selected from,
+and returns the altered elements to their previous places.
 
-# After selecting, [90, 70] you can imagine the context 
-# to be [100 PREV 80 PREV_2 60].
+After selecting, `[90, 70]` you can imagine the context
+to be `[100 PREV 80 PREV_2 60]`.
 
-# PREV was originally 90, PREV_2 was originally 70.
-# G is applied, resulting in [190 170]
-# In undoing F:
-# - 190 is slotted into PREV
-# - then 170 is slotted into PREV_2
+PREV was originally 90, PREV_2 was originally 70.
+G is applied, resulting in `[190 170]`.
 
+In undoing F
+
+* 190 is slotted into PREV
+* then 170 is slotted into PREV_2
+
+```uiua
     ⍜(⊏ 1_3|+ 100) [100 90 80 70 60]
 [100 190 80 170 60]
 ```
@@ -115,7 +120,7 @@ See [preamble section on under](#under-especially).
 ⍜⊙⊏+ 100 1_3
 ```
 
-Looking at this function in isolation is perhaps confusing
+Looking at this function in isolation is perhaps confusing.
 Why do we need dip there? Why can't we just omit the dip
 and reverse the inputs? Let's try it with [1 2 3 4 5]
 
@@ -202,12 +207,14 @@ Take the following with a grain of salt.*
 # the first element loops back to the end
     △ ⍉ F
 [3 4 2]
+```
 
-# Wouldn't then untransform "rotate" the other way?
-# The last element loops back to the beginning?
-# The problem statement wants 'the last axis to become the first'
-# So this seems like a good candidate
+Wouldn't then `un trans` "rotate" the other way?
+The last element loops back to the beginning?
+The problem statement wants 'the last axis to become the first',
+so this seems like a good candidate.
 
+```uiua
 # The solution, untransform,
 # what does that look like?
     °⍉ F
@@ -216,7 +223,6 @@ Take the following with a grain of salt.*
 ╷ 12 16 20  13 17 21  14 18 22  15 19 23
                                          ╯
 # Does it "rotate" the shape like we want? 
-# Looks like it does
     △ °⍉ F
 [4 2 3]
 
@@ -270,10 +276,13 @@ and finally the idiomatic solution
 **Why? My initial solution.**
 
 This is not an ideal solution. So why show this solution then?
+
 Firstly, it passes the challenge tests despite being different from
 the intended solutions. If this happens to you, try examining why.
 Here, the action of transforming an array does more work than is needed,
 that is to say, it affects more than just the first column.
+
+Secondly, seeing more examples of `under` is good for you :)
 
 Anyway, here was my thought process.
 
@@ -321,15 +330,16 @@ Anyway, here was my thought process.
 ╷ 10 2
   30 4
        ╯
-# Indeed!
-# `under (first trans|mul 10)` passes on
-# `[1 3]` to the `mul 10` function and then
-# undoes the `first trans` transformation.
 ```
 
-**Why? Intended solutions.**
+Indeed!
+`under (first trans|mul 10)` passes on
+`[1 3]` to the `mul 10` function and then
+undoes the `first trans` transformation.
 
-Trans is costly, how could we only target the numbers we want?
+**Why? Intended solution.**
+
+For this problem, `trans` is costly, how could we only target the numbers we want?
 You may recall the `rows` modifier. We can use it to target each row of a matrix.
 After that we can use the `first` modifier to target the first item of each row.
 This boils down to selecting the first column of a matrix.
@@ -348,21 +358,31 @@ Here's an example where we square each element in the first column of a matrix.
   5 6
       ╯
 
-# Let's do the following:
-#   - For every row (rows)
-#     - Get the first element (first)
-#     - multiply by itself (self mul)
+```
+
+Let's do the following:
+
+* For every row (`rows`)
+* * Get the first element (`first`)
+* * multiply by itself (`self mul`)
+
+```uiua
     rows first self mul F
     ≡⊢ ˙× F
 [1 9 25]
 
-# This is fine, but we want to give the items back
-# This is what under is for, isn't it?
-# So let's change the recipe
-#   - For every row (rows)
-#     - Do the following and then reverse (under)
-#       - Get the first element (first)
-#       - multiply by itself (self mul)
+```
+
+This is fine, but we want to give the items back
+This is what under is for, isn't it?
+So let's change the recipe
+
+* For every row (`rows`)
+* * Do the following and then reverse (`under`)
+* * * Get the first element (`first`)
+* * * multiply by itself (`self mul`)
+
+```uiua
     ≡⍜⊢˙× F
 ╭─
 ╷  1 2
@@ -379,14 +399,18 @@ Here's an example where we square each element in the first column of a matrix.
   50 60
         ╯
 
-# Well, heck.
-# What happened? 
-# `under` takes two functions, some G and H.
-# The two functions that `under` sees is `first` and `mul`.
-# Since `under first mul` applies `mul` the function signature
-# is the same as mul: '2.1'. That is, 2 inputs 1 output.
-# `rows` is therefore modifying a function that takes two arguments
-# Let's debug `?` what `under first mul` does at each step
+```
+
+Well, heck. What happened?
+
+`under` takes two functions, some G and H.
+The two functions that `under` sees is `first` and `mul`.
+Since `under first mul` applies `mul` the function signature
+is the same as mul's, '2.1'. That is, 2 inputs 1 output.
+`rows` is therefore modifying a function that takes two arguments
+Let's debug `?` what `under first mul` does at each step
+
+```uiua
     ≡(⍜⊢ × ?) 10 F
 ┌╴? 1:8
 │╴╴╴╶╶╶
@@ -419,21 +443,26 @@ Here's an example where we square each element in the first column of a matrix.
   50 60
         ╯
 
-# Wowee. Let's unwind this tangent. We now see we need to 
-# make sure that `mul 10` is used wholesale by `under`
-# We can surround it with parentheses (mul 10),
-# which is what the intended solution does,
-# or we can use the subscripted version. mul,10.
+```
+
+Wowee. Let's unwind this tangent. We now see we need to
+make sure that `mul 10` is used wholesale by `under`.
+We can surround it with parentheses `(mul 10)`,
+which is what the intended solution does,
+or we can use the subscripted version. `mul,10`.
+
+```uiua
     ≡⍜⊢×₁₀ F
 ╭─
 ╷ 10 2
   30 4
   50 6
        ╯
-# The subscripted `mul,10` works without parentheses
-# because it acts as a single 1 input 1 output function.
-# Whereas `mul 10` is `mul` with its first argument (out of two).
 ```
+
+The subscripted `mul,10` works without parentheses
+because it acts as a single 1 input 1 output function.
+Whereas `mul 10` is `mul` with its first argument (out of two).
 
 **And the idiomatic?**
 
@@ -453,7 +482,6 @@ First do `G`, then apply `H` then "undo" `G`.
   30 4
   50 6
        ╯
-
 ```
 
 **Rows under vs under rows?**
