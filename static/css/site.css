@@ -76,6 +76,10 @@ ul {
 }
 
 @media (max-width: 480px) {
+  .is-comment {
+    width: 100%;
+    text-wrap: balance;
+  }
   .container {
     padding: 0rem;
   }
