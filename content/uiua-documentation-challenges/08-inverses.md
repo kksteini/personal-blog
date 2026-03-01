@@ -213,11 +213,243 @@ Take the following with a grain of salt.*
 **But what does a transform mean? What is it?**
 
 I am not too sure myself. I would appreciate some correspondence here from
-people more knowledgable. Feel free to mail to: <uiuachallenges@anub.is>.
-I feel like "drawing" a cube of numbers for a 3D matrix helps me
-understand it a little in the context of the transformation.
+people more knowledgable. *Feel free to mail to: <uiuachallenges@anub.is>.*
+In the case of a 3D matrix I *think* it is similar to re-orienting a cube.
 
-**I present to you, in all its glory, an image drawn by the hand of someone who
-holds a pen once every 6 months.**
+At lest, I feel like "drawing" a cube of numbers for a 3D matrix helps me
+understand it a little in the context of the transformation. We construct
+the cube from the `x y z` axes and fill in the corresponding numbers.
+Enjoy, *or not*, these mad scribbles below.
 
 <img alt="Cubes" src="/images/chapter08-challenge2.png"/>
+
+## Challenge 3
+
+My solution
+
+```uiua
+⍜(⊢ ⍉|× 10) F
+```
+
+then the intended solution
+
+```uiua
+≡⍜⊢(×10)
+```
+
+and finally the idiomatic solution
+
+```uiua
+⍜≡⊢×₁₀
+```
+
+### C3 Solution
+
+**Why? My initial solution.**
+
+This is not an ideal solution. So why show this solution then?
+Firstly, it passes the challenge tests despite being different from
+the intended solutions. If this happens to you, try examining why.
+Here, the action of transforming an array does more work than is needed,
+that is to say, it affects more than just the first column.
+
+Anyway, here was my thought process.
+
+```uiua
+# Let's declare F as a 2D matrix
+    F = [1_2 3_4]
+
+# What does the repl show?
+    F
+╭─
+╷ 1 2
+  3 4
+      ╯
+
+# Well then. The first column, 1 and 3,
+# is our target for mul 10
+# We want to end up with
+# ╭─
+# ╷ 10 2
+#   30 4
+#       ╯
+
+# Wouldn't it be ideal if we could just
+# `under (first | mul 10)`?
+# But, first doesn't get columns.
+    ⊢ F
+[1 2]
+
+# Didn't we use "rotations" earlier?
+# What does it look like if we transform F?
+    ⍉ F
+╭─
+╷ 1 3
+  2 4
+      ╯
+
+# That looks like the target
+    × 10 ⊢ ⍉ F
+[10 30]
+
+# So, can `under` reverse (or find an inverse)
+# to `first trans`?
+    ⍜(⊢ ⍉|× 10) F
+╭─
+╷ 10 2
+  30 4
+       ╯
+# Indeed!
+# `under (first trans|mul 10)` passes on
+# `[1 3]` to the `mul 10` function and then
+# undoes the `first trans` transformation.
+```
+
+**Why? Intended solutions.**
+
+Trans is costly, how could we only target the numbers we want?
+You may recall the `rows` modifier. We can use it to target each row of a matrix.
+After that we can use the `first` modifier to target the first item of each row.
+This boils down to selecting the first column of a matrix.
+
+Here's an example where we square each element in the first column of a matrix.
+
+```uiua
+# Let's initialize F
+    F ← [1_2 3_4 5_6]
+
+# Notice that the first column is 1 3 5
+    F
+╭─
+╷ 1 2
+  3 4
+  5 6
+      ╯
+
+# Let's do the following:
+#   - For every row (rows)
+#     - Get the first element (first)
+#     - multiply by itself (self mul)
+    rows first self mul F
+    ≡⊢ ˙× F
+[1 9 25]
+
+# This is fine, but we want to give the items back
+# This is what under is for, isn't it?
+# So let's change the recipe
+#   - For every row (rows)
+#     - Do the following and then reverse (under)
+#       - Get the first element (first)
+#       - multiply by itself (self mul)
+    ≡⍜⊢˙× F
+╭─
+╷  1 2
+   9 4
+  25 6
+       ╯
+
+# Wowee, so what if we replace `self mul`
+# with `mul 10`
+    ≡⍜⊢ × 10 F
+╭─
+╷ 10 20
+  30 40
+  50 60
+        ╯
+
+# Well, heck.
+# What happened? 
+# `under` takes two functions, some G and H.
+# The two functions that `under` sees is `first` and `mul`.
+# Since `under first mul` applies `mul` the function signature
+# is the same as mul: '2.1'. That is, 2 inputs 1 output.
+# `rows` is therefore modifying a function that takes two arguments
+# Let's debug `?` what `under first mul` does at each step
+    ≡(⍜⊢ × ?) 10 F
+┌╴? 1:8
+│╴╴╴╶╶╶
+├╴[1 2]  # Multiplies 10 and [1 2] -> [10 20]
+├╴10
+└╴╴╴╴╴╴
+┌╴? 1:8
+│╴╴╴╶╶╶
+├╴[3 4]  # Multiplies 10 and [3 4] -> [30 40]
+├╴10
+└╴╴╴╴╴╴
+┌╴? 1:8
+│╴╴╴╶╶╶
+├╴[5 6]  # Multiplies 10 and [5 6] -> [50 60]
+├╴10
+└╴╴╴╴╴╴  # Rows then collects this into an array
+╭─
+╷ 10 20
+  30 40
+  50 60
+        ╯
+
+# The `first` function just returns 10 (first 10) and this is
+# used as an argument to each row of F. Therefore this is equivalent
+# to:
+     ≡× 10 F
+╭─
+╷ 10 20
+  30 40
+  50 60
+        ╯
+
+# Wowee. Let's unwind this tangent. We now see we need to 
+# make sure that `mul 10` is used wholesale by `under`
+# We can surround it with parentheses (mul 10),
+# which is what the intended solution does,
+# or we can use the subscripted version. mul,10.
+    ≡⍜⊢×₁₀ F
+╭─
+╷ 10 2
+  30 4
+  50 6
+       ╯
+# The subscripted `mul,10` works without parentheses
+# because it acts as a single 1 input 1 output function.
+# Whereas `mul 10` is `mul` with its first argument (out of two).
+```
+
+**And the idiomatic?**
+
+It uses the subscripted trick for `mul,10`.
+Then for `under G H`
+
+* G: `rows first`. Gets the first of each row
+* H: `mul,10`. Multiplies by 10
+
+So, following the mantra of `under`:
+First do `G`, then apply `H` then "undo" `G`.
+
+```uiua
+    ⍜≡⊢×₁₀ F
+╭─
+╷ 10 2
+  30 4
+  50 6
+       ╯
+
+```
+
+**Rows under vs under rows?**
+The intended and idiomatic solutions use either `under rows`
+and `rows under`. What gives?
+
+Let's consider it briefly.
+In the case of `rows under` we apply `under G H` on each row.
+However, `under rows` is not simply swapping the order.
+
+```uiua
+# Let's add redundant parentheses to emphasize
+# what the parser 'tokenizes' for the idiomatic.
+    ⍜(≡⊢)(×₁₀) F
+
+# This in contrast to the intended solution
+    ≡⍜(⊢)(×10) F
+```
+
+There isn't any `under rows`. What we see is `under` with `rows first`
+as its first function and `mul,10` as its second.

@@ -45,7 +45,7 @@
     },
     {
       "name": "subscripted",
-      "match": "[₁₂₃₄₅₆₇₈₉]"
+      "match": "[₁₂₃₄₅₆₇₈₉₀]"
     },
     {
       "name": "stack-function",
