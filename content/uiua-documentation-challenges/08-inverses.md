@@ -53,9 +53,9 @@ The **context** in this case is the array. Let's examine
 
 So tracing the steps very informally:
 
-* [2 4] is selected.
-* Context is [1 HERE 3 ALSO_HERE 5]
-* [2 4] has +100 applied → [102 104]
+* \- [2 4] is selected
+* \- Context is [1 HERE 3 ALSO_HERE 5]
+* \- [2 4] has +100 applied → [102 104]
 
 Now under, keeping the context, knows to replace HERE with 102 and ALSO_HERE with
 104, hence output: `[1 102 3 104 5]`.
@@ -106,8 +106,8 @@ G is applied, resulting in `[190 170]`.
 
 In undoing F
 
-* 190 is slotted into PREV
-* then 170 is slotted into PREV_2
+* \- 190 is slotted into PREV
+* \- then 170 is slotted into PREV_2
 
 ```uiua
     ⍜(⊏ 1_3|+ 100) [100 90 80 70 60]
