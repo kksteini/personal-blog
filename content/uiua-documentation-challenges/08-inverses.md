@@ -22,7 +22,7 @@ I'd like to highlight the following block of the Uiua Inverses doc.
 
 > `under` takes two functions which we will call `F` and `G`.
 > It calls `F`, then calls `G`, then "undoes" `F`.
-> While under sometimes uses `un F` as its undoing function, many functions
+> While `under` sometimes uses `un F` as its undoing function, many functions
 > that do not work with `un` work with `under` because `under` can keep track of
 > **context**. One example of this in action is `under pick`, which allows us to
 > modify an element or row of an array.
@@ -51,7 +51,7 @@ The **context** in this case is the array. Let's examine
 
 # So tracing the steps very informally:
 # [2 4] is selected. 
-#   Context is [1 HERE 2 3 ALSO_HERE 5]
+#   Context is [1 HERE 3 ALSO_HERE 5]
 # [2 4] has +100 applied → [102 104]
 # Now under, keeping the context,
 # knows to replace HERE with 102 and ALSO_HERE with 104
@@ -79,7 +79,7 @@ and the idiomatic solution
 See [preamble section on under](#under-especially).
 
 ```uiua
-# Under does F, applies G and finally undoes F.
+# `under` does F, applies G and finally undoes F.
 # Let's break down the F and G of `under(F|G)`
 
 # F: If we only run select 1_3 on an array
@@ -96,8 +96,10 @@ See [preamble section on under](#under-especially).
 # and returns the altered elements to their previous
 # places: 
 
-# You can imageine [100 PREV 80 PREV_2 60]
-# PREV originally 90, PREV_2 originally 70
+# After selecting, [90, 70] you can imagine the context 
+# to be [100 PREV 80 PREV_2 60].
+
+# PREV was originally 90, PREV_2 was originally 70.
 # G is applied, resulting in [190 170]
 # In undoing F:
 # - 190 is slotted into PREV
@@ -111,33 +113,46 @@ See [preamble section on under](#under-especially).
 
 ```uiua
 ⍜⊙⊏+ 100 1_3
+```
 
-# Looking at this function in isolation is perhaps confusing
-# Why do we need dip there? Why can't we just omit the dip
-# and reverse the inputs? Let's try it with [1 2 3 4 5]
+Looking at this function in isolation is perhaps confusing
+Why do we need dip there? Why can't we just omit the dip
+and reverse the inputs? Let's try it with [1 2 3 4 5]
+
+```uiua
     ⍜⊏+ 1_3 100 [1 2 3 4 5]
 Error: Index 1 is out of bounds of length 1
 
-# Ah, because `select 1_3` tries to operate on 100.
-# But isn't this then a symptom of dynamic inputs and test cases?
-# The dip is there to deal with the test input appearing last.
-# If that weren't the case we could just write
+```
+
+Ah, because `select 1_3` tries to operate on 100.
+But isn't this then a symptom of dynamic inputs and test cases?
+The dip is there to deal with the test input appearing last.
+If that weren't the case we could just write
+
+```uiua
     ⍜⊏+ 1_3 [1 2 3 4 5] 100
 [1 102 3 104 5]
+```
 
-# Ok. But hang on, both functions, `F` and `G` need inputs.
-# How does that work with `under`?
-# Well, the inputs simply just follow.
-# Here's a parenthesized version to clarify the one above
+OK. But hang on, both functions, `F` and `G` need inputs.
+How does that work with `under`?
+Well, the inputs simply just follow.
+Here's a parenthesized version to clarify the one above
+
+```uiua
 # `under(F|G) (<args for F>) (<args for G>)`
     ⍜(⊏|+) (1_3 [1 2 3 4 5]) (100)
 [1 102 3 104 5]
+```
 
-# Well, but `[1 2 3 4 5]` is destined to appear last in the input.
-# The dip is then more accurately there to deal with
-# the fact that `1_3 [1 2 3 4 5]` is the sequence that `select` needs
-# to see. It is easy to conjure this sequence with `100 1_3`,
-# and dipping out the 100, which is then given back to the add.
+Well, but `[1 2 3 4 5]` is destined to appear last in the input.
+The dip is then more accurately there to deal with
+the fact that `1_3 [1 2 3 4 5]` is the sequence that `select` needs
+to see. It is easy to conjure this sequence with `100 1_3`,
+and dipping out the 100, which is then given back to the add.
+
+```uiua
     ⍜⊙⊏+ 100 1_3 [1 2 3 4 5]
 [1 102 3 104 5]
 ```
