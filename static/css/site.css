@@ -67,6 +67,7 @@ section {
 
 img {
   max-width: 80ch;
+  width: 100%;
 }
 
 ul {
