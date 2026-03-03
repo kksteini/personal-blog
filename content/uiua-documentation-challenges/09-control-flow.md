@@ -90,7 +90,7 @@ switch statement. Observe that:
 
 * `[1 1]` sums to 2 for input less than 10
 * `[0 1]` sums to 1 for input less than 100
-* `[0 0]` sum to 0 for input 100 or more
+* `[0 0]` sums to 0 for input 100 or more
 
 So for selection 0, 1, 2 we have "large", "medium" and "small" respectively.
 Let's experiment with `switch`
@@ -134,7 +134,7 @@ from earlier. That should be our solution
 **Write a program that multiplies an array by its reverse until any element is
 greater than 1000.**
 
-### C3 Solution
+### C2 Solution
 
 My solution
 
