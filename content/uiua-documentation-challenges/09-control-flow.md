@@ -207,8 +207,20 @@ reached the threshold. This means that the continuation checker for `do` should
 emit a 1 if all of the places are 0, that is, `reduce add`
 of the comparison is 0.
 
+We've identified the core components.
+Let's consider them in the context of the checking function
+and in the order they run.¹
+
 ```uiua
-# If sum of all comparisons is 0, output 1
+≥ 1000  # Identify all elements thousand or greater
+/+      # Count them
+=0      # Continue if the count is 0
+```
+
+Let's take it for a spin.
+
+```uiua
+# C asks the question, should we continue?
     C ← =0 /+ ≥ 1000
 
 # Checking [15 999 23]
@@ -266,20 +278,15 @@ Putting it together into `G = do(F|C)`
 For `G = do(F|C)` my solution differs in `C`.
 So what's the difference? Did anything go wrong?
 
-There's nothing *wrong* necessarily. Broadly speaking, my checking condition
-asks the question, "how many elements are over 1000" and then asserts
-"the amount should be 0 for this to continue".
+There's nothing very *wrong*, but we can simplify.
 
-But a simpler question of course would be "is any element over 1000"
-and then the assertion "continue if that is not the case".
-
-Now, what should we check?
+Let's focus on what we need.
 Do we care if multiple numbers are over 1000? No, just any of them.
 If one number is 1000 or over, then it is the highest number.
 If multiple numbers are 1000 or over, then it doesn't matter which one of those
 numbers we check for our question "is any element over 1000".
 
-So, let's just check the highest number in the array at each step. Very clean.
+So, let's just check the highest number in the array at each step.
 How do we get the biggest number from an array? With `reduce max`.
 
 ```uiua
@@ -289,6 +296,13 @@ How do we get the biggest number from an array? With `reduce max`.
 ```
 
 We just have to continue if the highest number is `less than` 1000.
+So what are we putting together?
+
+```uiua
+/↥    # Find the biggest number
+<1000 # Continue if it is less than 1000
+```
+
 Our revised solution is therefore:
 
 ```uiua
@@ -298,3 +312,23 @@ Our revised solution is therefore:
     G [10 20 30]
 [90000 160000 90000]
 ```
+
+**More solutions pls**.
+
+Try this² C on for size then
+
+```uiua
+<1000   # Identify numbers smaller than 1000
+/×      # Continue if all of them are smaller
+```
+
+And applying it
+
+```uiua
+    ⍢(× ⊸⇌|/× <1000) [1 2 1]
+[1 65536 1]
+    ⍢(× ⊸⇌|/× <1000) [0 5 0]
+[0 390625 0]
+```
+
+\*¹\*²Thanks for the feedback Tyz.
