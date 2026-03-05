@@ -46,7 +46,7 @@ of `un(join 0)`.
 
 Well, let's try being more specific then
 
-```
+```uiua
     °(⊂ 0) [0 1 2 3]
 [1 2 3]
 ```

@@ -33,7 +33,7 @@
     },
     {
       "name": "dyadic-modifier",
-      "match": "[⍜⊃⍢⨬]"
+      "match": "[⍜⊃⍢⨬⍣]"
     },
     {
       "name": "bound-function",
