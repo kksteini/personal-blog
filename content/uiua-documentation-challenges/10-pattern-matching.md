@@ -177,11 +177,14 @@ Let's cobble something together in Python, quick!!!
 ['Hello', 'Possmosis-Jone', 'Scream Loud Day']
 ```
 
-I'm sure we could do better with Python, this might break. I'm not trying to
-make a Pythonic straw-man here, I just simply programmed with what I'd
-consider similar mental effort to the Uiua unformatter.
+#### Obligatory 'not a python-expert' section
 
-I could use the parse library, work backwards from a `f"..."` template string
-or do something clever with regex, But my point is that the contrast is getting
+*I'm sure we could do better with Python, this might break.
+I could use a parsing library, work backwards from a `f"..."` template string
+or do something clever with regex, but my point is that the contrast is getting
 greater. We can write straightforward un-formatting functions in Uiua that get
-to be non-trivial to do in Python.
+to be non-trivial to do in Python f.x.*
+
+*Feel free to disagree of course, I'm always open to criticism, [uiuachallenges@anub.is](uiuachallenges@anub.is).
+I'm not trying to make a Pythonic straw-man here, I just simply cobbled together
+something with what I'd consider a similar mental effort to the Uiua unformatter.*
