@@ -90,3 +90,5 @@ After the array wrapping changes, we can add `1_2_3` and `[4_5_6 7_8_9]` togethe
   8 10 12
           ╯
 ```
+
+## Challenge 2

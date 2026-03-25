@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RÚV Fréttir</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ui-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+
+    #feed {
+      height: 100dvh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scrollbar-width: none;
+    }
+
+    #feed::-webkit-scrollbar { display: none; }
+
+    /* ── loading / error states ── */
+    #status {
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: var(--ui-font);
+      gap: 16px;
+    }
+
+    .spinner {
+      width: 40px; height: 40px;
+      border: 3px solid rgba(255,255,255,0.2);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── card ── */
+    .card {
+      position: relative;
+      height: 100dvh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      overflow: hidden;
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.04);
+      transition: transform 0.6s ease;
+      will-change: transform;
+    }
+
+    .card.active .card-bg {
+      transform: scale(1);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.25) 0%,
+        rgba(0,0,0,0.05) 35%,
+        rgba(0,0,0,0.55) 65%,
+        rgba(0,0,0,0.88) 100%
+      );
+    }
+
+    .card-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px 28px 40px;
+    }
+
+    /* ── top bar ── */
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .category-badge {
+      font-family: var(--ui-font);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 4px;
+      background: var(--cat-color, #e30613);
+      color: #fff;
+      backdrop-filter: blur(4px);
+      max-width: 160px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .ruv-logo {
+      font-family: var(--ui-font);
+      font-weight: 900;
+      font-size: 20px;
+      color: #fff;
+      letter-spacing: -0.03em;
+      opacity: 0.9;
+    }
+
+    /* ── bottom text ── */
+    .card-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-family: var(--ui-font);
+      font-size: clamp(20px, 4.5vw, 30px);
+      font-weight: 800;
+      line-height: 1.2;
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-subtitle {
+      font-family: var(--ui-font);
+      font-size: clamp(13px, 2.5vw, 16px);
+      font-weight: 400;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.82);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-meta {
+      font-family: var(--ui-font);
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── scroll hint (first card only) ── */
+    .scroll-hint {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.4s;
+      z-index: 100;
+    }
+
+    .scroll-hint.hidden { opacity: 0; }
+
+    .scroll-hint span {
+      font-family: var(--ui-font);
+      font-size: 11px;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .scroll-hint svg {
+      animation: bounce 1.4s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ── no-image fallback ── */
+    .card-bg.no-image {
+      background-image: none;
+      background: #111;
+    }
+  </style>
+</head>
+<body>
+
+<div id="status">
+  <div class="spinner"></div>
+  <span style="font-family:-apple-system,sans-serif;font-size:14px;color:rgba(255,255,255,0.6)">Sæki fréttir…</span>
+</div>
+
+<div id="feed" hidden></div>
+
+<div class="scroll-hint" id="scrollHint">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <path d="M10 4v12M5 11l5 5 5-5" stroke="rgba(255,255,255,0.55)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span>Skrunaðu</span>
+</div>
+
+<script>
+  const API = 'https://erla.nyr.ruv.is/restapi/cached-articles/?format=json';
+
+  function formatDate(iso) {
+    const d = new Date(iso);
+    return d.toLocaleString('is-IS', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+  }
+
+  function buildCard(article) {
+    const a = document.createElement('a');
+    a.className = 'card';
+    a.href = article.url || article.og_url || '#';
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+
+    const renditions = article.main_image?.renditions;
+    const imgSrc = renditions?.medium?.src || renditions?.small?.src || renditions?.large?.src || null;
+    const alt = renditions?.medium?.alt || article.title;
+    const catColor = article.parent?.color || '#e30613';
+    const catTitle = article.parent?.title || '';
+
+    const bg = document.createElement('div');
+    bg.className = 'card-bg' + (imgSrc ? '' : ' no-image');
+    if (imgSrc) {
+      bg.style.backgroundImage = `url(${CSS.escape ? JSON.stringify(imgSrc) : `"${imgSrc}"`})`;
+      bg.style.backgroundImage = `url("${imgSrc}")`;
+    }
+
+    const overlay = document.createElement('div');
+    overlay.className = 'card-overlay';
+
+    const content = document.createElement('div');
+    content.className = 'card-content';
+
+    const top = document.createElement('div');
+    top.className = 'card-top';
+
+    if (catTitle) {
+      const badge = document.createElement('div');
+      badge.className = 'category-badge';
+      badge.style.setProperty('--cat-color', catColor);
+      badge.style.background = catColor;
+      badge.textContent = catTitle;
+      top.appendChild(badge);
+    } else {
+      top.appendChild(document.createElement('div'));
+    }
+
+    const logo = document.createElement('div');
+    logo.className = 'ruv-logo';
+    logo.textContent = 'RÚV';
+    top.appendChild(logo);
+
+    const bottom = document.createElement('div');
+    bottom.className = 'card-bottom';
+
+    const title = document.createElement('div');
+    title.className = 'card-title';
+    title.textContent = article.title || '';
+
+    bottom.appendChild(title);
+
+    if (article.subtitle) {
+      const sub = document.createElement('div');
+      sub.className = 'card-subtitle';
+      sub.textContent = article.subtitle;
+      bottom.appendChild(sub);
+    }
+
+    if (article.first_published_at) {
+      const meta = document.createElement('div');
+      meta.className = 'card-meta';
+      meta.textContent = formatDate(article.first_published_at);
+      bottom.appendChild(meta);
+    }
+
+    content.appendChild(top);
+    content.appendChild(bottom);
+    a.appendChild(bg);
+    a.appendChild(overlay);
+    a.appendChild(content);
+
+    return a;
+  }
+
+  async function init() {
+    let data;
+    try {
+      const res = await fetch(API);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      data = await res.json();
+    } catch (err) {
+      document.getElementById('status').innerHTML =
+        `<div style="font-family:-apple-system,sans-serif;color:rgba(255,255,255,0.7);text-align:center;padding:24px">
+           <div style="font-size:32px;margin-bottom:12px">⚠</div>
+           <div>Tókst ekki að sækja fréttir</div>
+           <div style="font-size:12px;margin-top:8px;color:rgba(255,255,255,0.4)">${err.message}</div>
+         </div>`;
+      return;
+    }
+
+    const articles = (data.articles || []).filter(a => a.title);
+    if (!articles.length) {
+      document.getElementById('status').textContent = 'Engar fréttir fundust.';
+      return;
+    }
+
+    const feed = document.getElementById('feed');
+    articles.forEach(article => feed.appendChild(buildCard(article)));
+
+    document.getElementById('status').remove();
+    feed.hidden = false;
+
+    const cards = feed.querySelectorAll('.card');
+    if (cards[0]) cards[0].classList.add('active');
+
+    const hint = document.getElementById('scrollHint');
+    let hintHidden = false;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          if (!hintHidden) {
+            hintHidden = true;
+            hint.classList.add('hidden');
+          }
+        } else {
+          entry.target.classList.remove('active');
+        }
+      });
+    }, { threshold: 0.6 });
+
+    cards.forEach(c => observer.observe(c));
+  }
+
+  init();
+</script>
+</body>
+</html>
