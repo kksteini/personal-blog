@@ -92,3 +92,17 @@ After the array wrapping changes, we can add `1_2_3` and `[4_5_6 7_8_9]` togethe
 ```
 
 ## Challenge 2
+
+### C2 Solution
+
+My solution
+
+```uiua
+≡₁⊂
+```
+
+Intended solution
+
+```uiua
+≡₁⌞⊂
+```
