@@ -13,11 +13,11 @@
     },
     {
       "name": "monadic-modifier",
-      "match": "[˜˙⊙⊸°≡⟜⤙∩]"
+      "match": "[˜˙⊙⊸°≡⟜⤙∩◡]"
     },
     {
       "name": "monadic-function",
-      "match": "[√⇌⇡△¤□⊢⍉]"
+      "match": "[√⇌⇡△¤□⊢⊣⍉]"
     },
     {
       "name": "iterating-modifier",
