@@ -54,17 +54,15 @@ Two levels down, we have arrays or more specifically, vectors.
 And all the way?
 
 ```uiua
-    first first first X
     ⊢ ⊢ ⊢ X
 0
-    first last first X
     ⊢ ⊣ ⊢ X
 2
 
 ```
 
 But arrays can be any dimensions, can't they?
-Instead of using `first` and `last` and the such, you could chain together rows.
+Instead of using `first` and `last`, you could chain together rows.
 Better yet, `rows` has a subscript such that you can act on **scalar, vectors, 3D
 matrices, etc**. with subscript **0, 1, 2, etc.** respectively.
 
@@ -147,7 +145,7 @@ Error: Shapes [3] and [2 × 3] are not compatible
 ```
 
 If you read the chapter documentation carefully, and the
-[fix doc](https://www.uiua.org/docs/fix), then a rule seems to emerge.
+[fix doc](https://www.uiua.org/docs/fix), then a rule emerges.
 Pay special attention to the following:
 
 > There is an exception to this rule. If one of the arrays has exactly
@@ -170,7 +168,6 @@ operates on all `A` rows of size `B`.
 
 * [Previous chapter on 'pervasive'](https://www.uiua.org/tutorial/Arrays#pervasion)
 * [Previous chapter on 'monadic/dyadic'](https://www.uiua.org/tutorial/Math%20and%20Comparison#adicity)
-
 We had issues with adding together shapes `[3]` and `[2 x 3]` but we just
 learned that we should have no problem with adding `[1 x 3]` and `[2 x 3]`.
 What changes then? To change a shape from `[3]` to `[1 3]` we capture that argument
@@ -185,7 +182,7 @@ into an array (or `fix` it)
 [1 3]
 ```
 
-After the array wrapping changes, we can add `1_2_3` and `[4_5_6 7_8_9]` together.
+After fixing, we can add `1_2_3` and `[4_5_6 7_8_9]` together.
 
 ```uiua
 # Wrap the first argument in an array
@@ -243,7 +240,7 @@ I think this may be considered vague but perhaps we are being asked to join the
 In the test cases, we have two single elements and a list that need to be joined
 and fixing them doesn't change the equation on how they are joined with other lists.
 
-Therefore, we need to consider what happens when the first argument higher dimensional.
+Therefore, we need to consider what happens when the first argument is higher dimensional.
 Take for example, these fine 3D matrix specimens
 
 ```uiua
@@ -260,8 +257,9 @@ Take for example, these fine 3D matrix specimens
                    ╯
 ```
 
-What is the difference between my solution and the intended one?
-When we don't fix `X` then joining together `X Y` on `rows,1` acts
+What is the difference between my solution and the intended one, when
+operating on `X` and `Y`?
+If we don't fix `X` then joining together `X Y` with `rows,1` acts
 pair-wise on the lists within them. The first list of `X` is joined
 with the first list of `Y`, then second to second, third to third and
 finally the last ones are joined together. We end up with a lovely
@@ -279,8 +277,8 @@ finally the last ones are joined together. We end up with a lovely
 [0 1 100 101]
 ```
 
-But fixing the 2D array, `X` before applying it to `Y` is a different beast entirely.
-The shape of that one is `2_2_3_2_2`.
+But fixing the 2D array, `X` before joining to `Y` is a different beast entirely.
+The resulting shape is `2_2_3_2_2`.
 
 ```uiua
     ≡₁⌞⊂ X Y
@@ -344,4 +342,5 @@ And that does make sense. Think of the following line from the
 >If the arrays have a rank difference of 2 or more, then the array with the
 >smaller rank will be repeated as rows to match the rank of the other.
 
-We see that `100_101` is repeated until it can be joined as a 2D array to the list of 2D arrays that is `X`.
+We see that `100_101` is repeated until it can be joined as a 2D array to the
+list of 2D arrays that is `X`.
