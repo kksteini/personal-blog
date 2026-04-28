@@ -17,7 +17,7 @@ tags = ["uiua"]
 We'll be using `reduce`.
 If you're familiar with reduce from other languages, be careful about the specifics,
 especially with functions like `sub` and `div`. Their order of operation might
-go against your intuition from other programming languages..
+go against your intuition from other programming languages.
 
 With prior experience, your mental model of a reduce might be something
 like this

@@ -48,9 +48,8 @@ Let's see some examples:
 
 **What does it mean?**
 Take for example `mod 5 14`. Why does it result in 4?
-Personally, I reason about like so.
-See how close you can get without going over and then calculating
-the remainder and then calculate the difference.
+Personally, I reason about it like so.
+See how close you can get without going over, and then calculate the difference.
 
 ```plain
 Target: 14
@@ -62,7 +61,7 @@ Then: target - closest multiple without going over
 14-10 = 4
 ```
 
-You can also think about it in this way. What does the rational part
+You can also think about it in this way. What does the fractional part
 of a division represent? It represents the remainder, does it not?
 Let's keep with `mod 5 14`, but let's try another programming language:
 
@@ -105,7 +104,7 @@ entry level programmers and considerable literature exists.
 We'll build up the answer from what we know.
 
 We'll check a range of numbers and take their 3 and 5 modulo.
-According to the **key insight**, we want find all numbers whose
+According to the **key insight**, we want to find all numbers whose
 3 or 5 modulo results in 0, meaning that they are a multiple of either.
 
 Let's create a range, starting at 1 (`mod 0 X` is dividing with 0)

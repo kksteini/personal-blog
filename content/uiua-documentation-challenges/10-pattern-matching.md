@@ -84,7 +84,7 @@ In the `un` documentation, f.x., you should see two versions of `un join`.
 
 What you can read from it is this:
 
-* -`unjoin` splits off the first row off, returns the first row and the rest
+* -`unjoin` splits off the first row, returns the first row and the rest
 * -`un(join X)` splits off X, while keeping the rest,
   if and only if that pattern is found as [X Y Z]
 

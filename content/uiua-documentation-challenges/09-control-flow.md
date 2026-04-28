@@ -170,7 +170,7 @@ In broad strokes we want something on the form:
 Let's try to experiment towards C
 
 Let's store two test cases.
-M for an array which the `do` should stop and N where `do` should continue.
+M for an array, for which the `do` should stop, and N where `do` should continue.
 
 ```uiua
     M ← [9 142 1000 5]

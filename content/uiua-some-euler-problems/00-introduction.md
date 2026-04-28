@@ -19,7 +19,7 @@ or Rust solution.
 
 Keep in mind that I'm not an expert.
 I don't really know math and this whole thing is here to trick you into
-disagreeing with and then helping me learn by sending in better answers
+disagreeing with me and then helping me learn by sending in better answers
 at [<eulerproblems@anub.is>](eulerproblems@anub.is). I welcome discussion of course.
 
 ## What should I do?

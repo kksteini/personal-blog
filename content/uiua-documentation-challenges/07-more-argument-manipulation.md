@@ -539,7 +539,7 @@ Breaking down my solution first:
 [1 2 3 4]
 
 # Let's see if we can create two groups, 1 3 and 2 4
-# Selecting one element, skippin and then selecting the third
+# Selecting one element, skipping and then selecting the third
 # is doable with `dip gap id`.
 # That should select `1 3` from 1 2 3 4
 # To get the 2 4, we can stagger it with a gap
@@ -558,7 +558,8 @@ Breaking down my solution first:
     [∩+ ⊃(⊙⋅∘|⋅⊙⋅∘) 1 2 3 4]
 [4 6]
 
-# At this stage we have an a
+# At this stage, we have the sought after 4 and 6
+# which we can turn into 4x6 with mul, expecting 24
     [mul ∩+ ⊃(⊙⋅∘|⋅⊙⋅∘) 1 2 3 4]
     [×∩+⊃(⊙⋅∘|⋅⊙⋅∘) 1 2 3 4]
 [24]

@@ -245,10 +245,10 @@ so this seems like a good candidate.
 **But what does a transform mean? What is it?**
 
 I am not too sure myself. I would appreciate some correspondence here from
-people more knowledgable. *Feel free to mail to: <uiuachallenges@anub.is>.*
+people more knowledgeable. *Feel free to mail to: <uiuachallenges@anub.is>.*
 In the case of a 3D matrix I *think* it is similar to re-orienting a cube.
 
-At lest, I feel like "drawing" a cube of numbers for a 3D matrix helps me
+At least, I feel like "drawing" a cube of numbers for a 3D matrix helps me
 understand it a little in the context of the transformation. We construct
 the cube from the `x y z` axes and fill in the corresponding numbers.
 Enjoy, *or not*, these mad scribbles below.

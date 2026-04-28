@@ -108,7 +108,8 @@ Take for example
 # output: 10
 ```
 
-Normally, if wanted to divide 5 by 50 instead, we would just write
+Normally, if we wanted to divide 5 by 50 instead, 
+we would just write
 
 ```uiua
 ÷ 50 5
