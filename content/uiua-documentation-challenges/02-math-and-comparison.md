@@ -5,7 +5,11 @@ weight = 2
 
 [extra]
 doclink = "https://www.uiua.org/tutorial/Math%20and%20Comparison"
-showtoc = false
+toc = false
+
+[taxonomies]
+categories = ["uiua-challenges"]
+tags = ["uiua"]
 +++
 
 ## Challenge 1

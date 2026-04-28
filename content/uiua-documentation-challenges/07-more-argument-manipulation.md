@@ -5,7 +5,11 @@ weight = 7
 
 [extra]
 doclink = "https://www.uiua.org/tutorial/More%20Argument%20Manipulation"
-showtoc = true
+toc = true
+
+[taxonomies]
+categories = ["uiua-challenges"]
+tags = ["uiua"]
 +++
 
 ## Preamble

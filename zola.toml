@@ -1,0 +1,31 @@
+base_url = "https://anub.is"
+compile_sass = true
+theme = "radion"
+title = "anub.is"
+description = "I am not very smart but I'm trying"
+author = "Steini"
+
+taxonomies = [
+  { name = "categories", feed = true },
+  { name = "tags", feed = true },
+]
+
+[markdown]
+insert_anchor_links = "heading"
+external_links_target_blank = true
+
+[markdown.highlighting]
+style = "inline"
+theme = "github-dark-with-uiua"
+extra_grammars = ["uiua-syntax-highlighting/uiua.grammar.json"]
+extra_themes = ["other_highlights/themes/github-dark.json"]
+
+[extra]
+radion_menu = [
+  { url = "$BASE_URL", name = "Home" },
+  { url = "$BASE_URL/uiua-documentation-challenges", name = "Uiua Challenges" },
+  #    { url = "$BASE_URL/skruv", name = "RÚV Fréttir" },
+]
+codeblock = true
+latex = true
+theme = "dark"

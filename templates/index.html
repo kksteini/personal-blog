@@ -1,11 +1,40 @@
-{% extends "base.html" %}
+{% extends "_base.html" %}
+{% import "macros/index_macros.html" as index_macros %}
+{% import "macros/post_macros.html" as post_macros %}
 
-{% block content %}
-<h1 class="title">
-  Wowee, my blog!
-</h1>
-<p>This is an incomplete mess and work in progress. If you somehow found this, wowee. Feel free to look around I suppose but there is nothing worth looking at just yet.</p>
-<p>
-  <a href="{{ get_url(path='@/uiua-documentation-challenges/_index.md') }}">Uiua documentation challenges</a>.
-</p>
-{% endblock content %}
+{% block header %}
+    {{ index_macros::header(config=config) }}
+{% endblock header %}
+
+{% block main %}
+<section class="home">
+    <header class="home-intro">
+        <h1>{{ config.title }}</h1>
+        {% if config.description %}
+        <p>{{ config.description }}</p>
+        {% endif %}
+    </header>
+
+    <section class="series-cards">
+        {% set root = get_section(path="_index.md") %}
+        {% for subsection_path in root.subsections %}
+            {% set sub = get_section(path=subsection_path) %}
+            {% if sub.pages | length == 0 %}{% continue %}{% endif %}
+            <article class="series-card">
+                <header>
+                    <h2><a href="{{ sub.permalink | safe }}">{{ sub.title }}</a></h2>
+                </header>
+                {% if sub.description %}
+                <p>{{ sub.description }}</p>
+                {% endif %}
+                <footer class="series-card-meta">
+                    <span>{{ sub.pages | length }} post{% if sub.pages | length != 1 %}s{% endif %}</span>
+                    {% if sub.pages | length > 0 %}
+                    <a href="{{ sub.pages | first | get(key="permalink") | safe }}">Start reading &raquo;</a>
+                    {% endif %}
+                </footer>
+            </article>
+        {% endfor %}
+    </section>
+</section>
+{% endblock main %}

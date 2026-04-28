@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+{% import "macros/index_macros.html" as index_macros %}
+
+{% block title %}{{ section.title }}{% endblock title %}
+
+{% block header %}
+    {{ index_macros::header(config=config) }}
+{% endblock header %}
+
+{% block main %}
+<section class="series-index">
+    <header>
+        <h1>{{ section.title }}</h1>
+        {% if section.description %}
+        <p class="series-description">{{ section.description }}</p>
+        {% endif %}
+    </header>
+
+    <ul class="series-list">
+        {% for page in section.pages %}
+        <li class="series-entry">
+            <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+            <span class="muted">{{ page.date | date(format="%B %d, %Y") }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock main %}

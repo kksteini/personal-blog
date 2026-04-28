@@ -5,7 +5,11 @@ weight = 9
 
 [extra]
 doclink = "https://www.uiua.org/tutorial/Control Flow"
-showtoc = true
+toc = true
+
+[taxonomies]
+categories = ["uiua-challenges"]
+tags = ["uiua"]
 +++
 
 ## Preamble

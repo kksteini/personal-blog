@@ -5,7 +5,11 @@ weight = 4
 
 [extra]
 doclink = "https://www.uiua.org/tutorial/Types"
-showtoc = false
+toc = false
+
+[taxonomies]
+categories = ["uiua-challenges"]
+tags = ["uiua"]
 +++
 
 ## Challenge 1

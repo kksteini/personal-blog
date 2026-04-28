@@ -5,7 +5,11 @@ weight = 6
 
 [extra]
 doclink = "https://www.uiua.org/tutorial/Modifiers%20and%20Functions"
-showtoc = true
+toc = true
+
+[taxonomies]
+categories = ["uiua-challenges"]
+tags = ["uiua"]
 +++
 
 ## Preamble

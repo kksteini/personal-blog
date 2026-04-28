@@ -5,7 +5,11 @@ weight = 8
 
 [extra]
 doclink = "https://www.uiua.org/tutorial/Inverses"
-showtoc = true
+toc = true
+
+[taxonomies]
+categories = ["uiua-challenges"]
+tags = ["uiua"]
 +++
 
 ## Preamble
@@ -249,7 +253,7 @@ understand it a little in the context of the transformation. We construct
 the cube from the `x y z` axes and fill in the corresponding numbers.
 Enjoy, *or not*, these mad scribbles below.
 
-<img alt="Cubes" src="/images/chapter08-challenge2.png"/>
+<img alt="Cubes" src="/images/chapter08-challenge2.png" style="max-width: 100%; height: auto;"/>
 
 ## Challenge 3
 

@@ -5,7 +5,11 @@ weight = 5
 
 [extra]
 doclink = "https://www.uiua.org/tutorial/Bindings"
-showtoc = false
+toc = false
+
+[taxonomies]
+categories = ["uiua-challenges"]
+tags = ["uiua"]
 +++
 
 No challenges for this chapter.

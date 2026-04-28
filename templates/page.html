@@ -1,0 +1,66 @@
+{% extends "index.html" %}
+{% import "macros/post_macros.html" as post_macros %}
+
+{% block title %}
+    {% if page.title %}
+    {{ page.title }}
+    {% else %}
+    {{ super() }}
+    {% endif %}
+{% endblock title %}
+
+{% block header %}
+    {{ super() }}
+{% endblock header %}
+
+{% block main %}
+
+<article itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="headline">{{ page.title | safe }}</h1>
+        <data class="muted">{{ post_macros::meta(page=page) }}</data>
+        {% if page.extra.doclink %}
+        <p class="doclink">
+            Official documentation: <a href="{{ page.extra.doclink }}" target="_blank" rel="noopener noreferrer">{{ page.extra.doclink }}</a>
+        </p>
+        {% endif %}
+    </header>
+
+    <article itemprop="articleBody">
+        {% if page.summary and page.summary != page.content %}
+            {{ page.summary | safe }}
+
+            {% if page.extra.toc | default(value=false) and page.toc %}
+              {% include "partials/toc.html" %}
+            {% endif %}
+
+            {{ page.content | replace(from=page.summary, to="") | safe }}
+
+        {% else %}
+            {% if page.extra.toc | default(value=false) and page.toc %}
+              {% include "partials/toc.html" %}
+            {% endif %}
+
+            {{ page.content | safe }}
+        {% endif %}
+    </article>
+
+    {% if page.lower or page.higher %}
+    <nav class="post-pagination">
+        <span>
+            {% if page.lower %}
+            &laquo; <a href="{{ page.lower.permalink | safe }}">{{ page.lower.title }}</a>
+            {% endif %}
+        </span>
+        <span>
+            {% if page.higher %}
+            <a href="{{ page.higher.permalink | safe }}">{{ page.higher.title }}</a> &raquo;
+            {% endif %}
+        </span>
+    </nav>
+    {% endif %}
+
+    {% include "partials/footer.html" %}
+</article>
+
+{% endblock main %}

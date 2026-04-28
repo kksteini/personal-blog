@@ -4,7 +4,11 @@ date = 2025-12-31
 weight = 0
 [extra]
 doclink = "https://www.uiua.org/tutorial/Introduction"
-showtoc = false
+toc = false
+
+[taxonomies]
+categories = ["uiua-challenges"]
+tags = ["uiua"]
 +++
 
 ## What is this?

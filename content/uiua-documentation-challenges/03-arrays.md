@@ -5,7 +5,11 @@ weight = 3
 
 [extra]
 doclink = "https://www.uiua.org/tutorial/Arrays"
-showtoc = true
+toc = true
+
+[taxonomies]
+categories = ["uiua-challenges"]
+tags = ["uiua"]
 +++
 
 ## Preamble

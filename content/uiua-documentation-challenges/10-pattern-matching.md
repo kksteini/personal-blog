@@ -5,7 +5,11 @@ weight = 10
 
 [extra]
 doclink = "https://www.uiua.org/tutorial/Pattern Matching"
-showtoc = true
+toc = true
+
+[taxonomies]
+categories = ["uiua-challenges"]
+tags = ["uiua"]
 +++
 
 ## Challenge 1

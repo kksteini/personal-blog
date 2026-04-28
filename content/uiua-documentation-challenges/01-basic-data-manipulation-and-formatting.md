@@ -5,7 +5,11 @@ weight = 1
 
 [extra]
 doclink = "https://www.uiua.org/tutorial/Basic%20Data%20Manipulation%20and%20Formatting"
-showtoc = true
+toc = true
+
+[taxonomies]
+categories = ["uiua-challenges"]
+tags = ["uiua"]
 +++
 
 ## Preamble

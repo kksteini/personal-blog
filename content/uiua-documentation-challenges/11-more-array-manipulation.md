@@ -5,7 +5,11 @@ weight = 11
 
 [extra]
 doclink = "https://www.uiua.org/tutorial/More Array Manipulation"
-showtoc = true
+toc = true
+
+[taxonomies]
+categories = ["uiua-challenges"]
+tags = ["uiua"]
 +++
 
 ## Preamble
