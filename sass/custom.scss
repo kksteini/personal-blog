@@ -7,6 +7,10 @@ code {
   font-family: "Uiua Code Font", monospace;
 }
 
+code[data-lang="uiua"] {
+  font-size: 1.4rem;
+}
+
 .hack ul > li::after {
   content: ""
 }

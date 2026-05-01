@@ -67,8 +67,8 @@ And all the way?
 
 But arrays can be any dimensions, can't they?
 Instead of using `first` and `last`, you could chain together rows.
-Better yet, `rows` has a subscript such that you can act on **scalars, vectors, 3D
-matrices, etc**. with subscript **0, 1, 2, etc.** respectively.
+Better yet, `rows` has a subscript such that you can act on **scalars,
+vectors, 3D matrices, etc**, with subscript **0, 1, 2, etc.** respectively.
 
 Let's prove it.
 Take a look at the `?` [args function](https://uiua.org/docs/args).

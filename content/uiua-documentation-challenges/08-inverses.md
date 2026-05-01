@@ -30,13 +30,13 @@ I'd like to highlight the following block of the Uiua Inverses doc.
 > that do not work with `un` work with `under` because `under` can keep track of
 > **context**. One example of this in action is `under pick`, which allows us to
 > modify an element or row of an array.
+>
+> *-Uiua docs*
 
 ```uiua
     ⍜(⊡2|×10) [1 2 3 4]
 [1 2 30 4]
 ```
-
-> *-Uiua docs*
 
 The **context** in this case is the array. Let's examine
 

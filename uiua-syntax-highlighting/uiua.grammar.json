@@ -13,19 +13,19 @@
     },
     {
       "name": "monadic-modifier",
-      "match": "[˜˙⊙⊸°≡⟜⤙∩◡]"
+      "match": "[˜˙⊙⊸°≡⟜⤙∩◡⊜]"
     },
     {
       "name": "monadic-function",
-      "match": "[√⇌⇡△¤□⊢⊣⍉]"
+      "match": "[√⇌⇡△¤□⊢⊣⊚⍉]"
     },
     {
       "name": "iterating-modifier",
-      "match": "[⍥/∩]"
+      "match": "[⍥/]"
     },
     {
       "name": "dyadic-pervasive",
-      "match": "[+↥↧<>≥≤=◿]"
+      "match": "[+↥↧<>≥≤=◿≠]"
     },
     {
       "name": "dyadic-function",
