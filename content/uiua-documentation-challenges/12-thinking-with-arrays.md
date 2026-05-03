@@ -148,7 +148,7 @@ Anyway, at this point it seems obvious to get the `last` element.
 
 ```uiua
     ⊣⊜□⊸≠@░X
-□"test
+□"test"
 ```
 
 Almost there, we just need to `unbox` that thing.
@@ -313,10 +313,10 @@ And there we have it.
 
 ## Challenge 4
 
-**Write a program that given a matrix of 0s an 1s, only
+**Write a program that given a matrix of 0s and 1s, only
 keeps the 1s that have even x and y coordinates.**
 
-## C4 Solution
+### C4 Solution
 
 My solution
 
@@ -337,8 +337,8 @@ you through the more Uiua way to do it.
 Feel free to skip ahead to the intended
 solution of course.*
 
-How do we get the indices **where** the elements equal 1?
-We use `where eq 1`. Let's take the example array and
+How do we get the indices **where** the elements equal `k`?
+We use `where eq k`. Let's take the example array and
 store in `m`.
 
 ```uiua
@@ -350,11 +350,11 @@ store in `m`.
         ╯
 ```
 
-So as a different example, let's see where the elements are
+Let's see where the elements are
 equal to 0.
 
 ```uiua
-    ⊚ = 0 m
+    ⊚=0 m
 ╭─
 ╷ 0 2
   1 0
@@ -362,9 +362,9 @@ equal to 0.
       ╯
 ```
 
-Though, the `eq` operator just leaves behind `1`s where the
+Notice, the `eq` operator leaves behind `1`s where the
 condition holds. So to get all the indices where elements
-equal to 1, we can skip this conditional.
+already equal to `1`, we can skip the `eq 1` conditional.
 
 ```uiua
     ⊚ m
@@ -379,10 +379,10 @@ equal to 1, we can skip this conditional.
 ```
 
 So what can we do? It would be great if we could identify all indices where
-the `x` and `y` coordinates are both even. Let's `mod 2`.
+the `x` and `y` coordinates are both even. Let's `by mod 2` on `where m`.
 
 ```uiua
-    ⊸◿2 ⊚ m
+    ⊸◿2 ⊚m
 ╭─
 ╷ 0 0
   0 1
@@ -404,8 +404,8 @@ the `x` and `y` coordinates are both even. Let's `mod 2`.
 OK, the first and last index in the list of indices, `0 0` and `2 2` are
 exclusively even numbered. They get marked as `0 0` on `mod 2`.
 
-What if we add together every row and check where the sum is above 0? Those
-should be instances with either odd `x` or `y` coordinates.
+What if from that we add together every index row and check where the sum is above
+0? Those should be instances with either odd `x` or `y` coordinates.
 Let's do that and also keep around the original 2D matrix
 
 ```uiua
@@ -426,7 +426,8 @@ Let's do that and also keep around the original 2D matrix
 [0 1 1 1 1 0]
 ```
 
-Aha, and now we can apply `keep` since we have an array of `1`s and `0`s
+Aha! The `[0 1 1 1 1 0]` array identifies the `x` or `y` odd indices.
+Now we can apply `keep`.
 
 ```uiua
     ▽ ⊸≡(>0/+◿2) ⊸⊚ m
@@ -443,17 +444,18 @@ Aha, and now we can apply `keep` since we have an array of `1`s and `0`s
       ╯
 ```
 
-Great! And we should know this song and dance by now. We `under sel mul,0` to
-zero out all the relevant indices.
+Now, for each index we want to select (transform), multiply by 0 (mutate) and
+finally roll back the transformation. Sounds like a job for `under`.
+Let's `under sel mul,0` to zero out all the relevant indices.
 
 ```uiua
     ⍜⊏×₀▽⊸≡(>0/+◿2) ⊸⊚ m
 Error: Cannot undo multi-dimensional selection
 ```
 
-`select` is not the way to get elements by indices.
+Whoops. `select` is not the way to get elements by indices.
 What we want here is `pick`.
-I remember making this error a lot when starting out so I include this here.
+*I remember making this error a lot when starting out so I include this here.*
 Let's try again but with pick this time:
 
 ```uiua
@@ -551,6 +553,83 @@ such that we only keep the index `1_1`, like the
 Well, it seems that `under` knows or keeps context about
 the original 3x3 matrix. Going backwards out of the `under`,
 `un where` doesn't emit a 2x2.
+
+This means we are safe to use `unwhere` to manipulate the indices before they
+get "put back".
+
+Doesn't this imply that we can simplify my original solution?
+Instead of targeting some-odd indices want to focus on keeping the
+all-even so that they get "put back" as `1`s
+during the reverse transformation in.
+
+My reworked solution would just need to be passed to `under where` with the logic
+checking for `eq 0` on `rows reduce add` instead of `gt 0`.
+
+```uiua
+    m
+╭─
+╷ 1 1 0
+  0 1 1
+  0 1 1
+        ╯
+    ⍜⊚(▽ =0 ≡/+ ⊸◿2) m
+╭─
+╷ 1 0 0
+  0 0 0
+  0 0 1
+        ╯
+```
+
+Nice. Greatly improved. So what does the intended solution do different?
+It uses `not`. Here, it will change `0`s to `1`s and vice versa.
+
+```uiua
+    ¬⊸◿2 ⊚ m
+╭─
+╷ 0 0
+  0 1
+  1 1
+  1 2
+  2 1
+  2 2
+      ╯
+╭─
+╷ 1 1
+  1 0
+  0 0
+  0 1
+  1 0
+  1 1
+      ╯
+```
+
+We can now see that `reduce mul` will zero out indices where the `mod 2` didn't
+mark out both indices as `0`s.
+
+```uiua
+    ≡/× ¬⊸◿2 ⊚ m
+╭─
+╷ 0 0
+  0 1
+  1 1
+  1 2
+  2 1
+  2 2
+      ╯
+[1 0 0 0 0 1]
+```
+
+Applying `keep` at this point would result in `[0_0 2_2]`, which is what we want
+in the reverse transformation context of `under where` and therefore
+
+```uiua
+    ⍜⊚(▽ ≡/× ¬ ⊸◿2) m
+╭─
+╷ 1 0 0
+  0 0 0
+  0 0 1
+        ╯
+```
 
 **Rest of chapter in progress.**
 
