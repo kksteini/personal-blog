@@ -609,6 +609,13 @@
       }
     },
     {
+      "name": "Monadic Pervasive",
+      "scope": "monadic-pervasive",
+      "settings": {
+        "foreground": "#95d16a"
+      }
+    },
+    {
       "name": "Dyadic modifier",
       "scope": "dyadic-modifier",
       "settings": {

@@ -25,8 +25,8 @@ tags = ["uiua"]
 **Why?**
 
 Let's start with the range 1-9.
-We expect to get at an outcome where all numbers are negative
-except 3, 6 and 9, that is `[-1,-2,3,-4,-5,6,-7,-8,9]`.
+We expect to get an outcome where all numbers are negative
+except 3, 6 and 9; that is `[-1,-2,3,-4,-5,6,-7,-8,9]`.
 
 Let's define that range.
 
@@ -77,7 +77,7 @@ Great! Whatever `keep` kept got negated and then `under` reversed that transform
 ### C2 Solution
 
 ***Note:** I will denote the space character with the ░ character. If you copy
-my solution make sure to replace it with space.*
+my solution make sure to replace it with a space.*
 
 My solution
 
@@ -210,7 +210,7 @@ This is a test
 For that, we just have to reverse the masking array, `scan mul` it, and reverse
 it back. At this point, alarm bells might go off in your head. Whenever you hear
 *transform something, manipulate, reverse the transformation*, `under`
-ought to come to mind. `under rev mul`. Let's tack that on.
+ought to come to mind. `under rev scan mul`. Let's tack that on.
 
 ```uiua
     ⍜⇌\× ⊸≠@░X
@@ -279,7 +279,7 @@ targets, multiply by 10 and then give them back. That's a job for `under`.
 [1 2 3 40 5 6 70]
 ```
 
-It does the thing. But, when we submit it it fails on the `[3 3 3 3]` test.
+It does the thing. But, when we submit it, it fails on the `[3 3 3 3]` test.
 What gives?
 
 ```uiua
@@ -364,7 +364,7 @@ equal to 0.
 
 Notice, the `eq` operator leaves behind `1`s where the
 condition holds. So to get all the indices where elements
-already equal to `1`, we can skip the `eq 1` conditional.
+are already equal to `1`, we can skip the `eq 1` conditional.
 
 ```uiua
     ⊚ m
@@ -631,9 +631,113 @@ in the reverse transformation context of `under where` and therefore
         ╯
 ```
 
-**Rest of chapter in progress.**
+## Challenge 5
 
-## Exercises
+**Write a program that reverses each word in a string but keeps the words in
+the same order.**
+
+### C5 Solution
+
+***Note:** I will denote the space character with the ░ character. If you copy
+my solution make sure to replace it with a space.*
+
+Without under
+
+```uiua
+/$"_ _"▽ ⊙⍚⇌ ⟜⊜□ ⊸≠@░
+```
+
+or the intended
+
+```uiua
+⍜(⊜□|⍚⇌) ⊸≠ @░
+```
+
+or simply
+
+```uiua
+⍜⊜□⍚⇌ ⊸≠ @░
+```
+
+**Why?**
+
+Let's start by looking at how to split a string. The example given in this
+tutorial is
+
+```uiua
+    ⊜□ ⊸≠@░ "Look at that!"
+["Look"│"at"│"that!"]
+```
+
+How might we go about reversing this?
+Well, since we have boxed items, we should use [inventory](https://uiua.org/docs/inventory).
+The first line of the inventory documentation states:
+
+>Apply a function to each unboxed row of an array and re-box the results
+
+Let's try `inv rev` to reverse them
+
+```uiua
+    ⍚⇌ ⊜□ ⊸≠@░ "Look at that!"
+["kooL"│"ta"│"!taht"]
+```
+
+OK, now we just need to reconstruct the old string.
+We can reduce via the template string `$"_ _"`
+
+```uiua
+    /$"_ _"▽ ⊙⍚⇌ ⟜⊜□ ⊸≠@░ "Look at that!"
+"kooL ta !taht"
+```
+
+However, wouldn't it be cool to use `under` somehow?
+Well, we know that we want to **split apart a string**(transformation),
+**reverse each split**(mutation) and then **join it again**(undo transformation).
+
+I can not emphasise this pattern enough.
+
+Let's fill that in.
+What you might try to do is
+
+```uiua
+    ⍜(⊜□⊸≠@░|⍚⇌) "dad gave mom a racecar"
+Error: No inverse found
+```
+
+This doesn't work. If this happens we should try to simplify and move functionality
+out of the transformation body. Let's try only with `partition box`.
+
+```uiua
+    ⍜(⊜□|⍚⇌) ⊸≠@░ "he gave mom a racecar"
+"eh evag mom a racecar"
+```
+
+Nice! Everything as it should be.
+
+**Aside.**
+
+What is the difference between the reversal of `partition box` when
+coming from `un` or when surfacing out of `under`?
+
+```uiua
+    °⊜□ ⌵ ⊜□ ⊸≠@ "hello world"
+"HELLOWORLD"
+[1 1 1 1 1 2 2 2 2 2]
+```
+
+Here, `un partition box` results in two arguments
+
+```uiua
+    ⍜⊜□⌵ ⊸≠@  "hello world"
+"HELLO WORLD"
+```
+
+but `under` only returns the altered string.
+I wondered about this and would like to recommend the wonderful Uiua Discord.
+I asked in the \#learning channel and according to Uiua's author:
+
+> ° has signature guarantees while ⍜ does not. ⍜ tends to
+> return however many arguments is useful.
 
 ### Exercise 1
 
