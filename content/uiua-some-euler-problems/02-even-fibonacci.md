@@ -220,7 +220,7 @@ Let's manually prop up some `X` calls and simulate what gets collected.
 [8 13 8 5 3 2 1 1]
 ```
 
-OK, that explains it.
+OK, the iterator is at the front.
 The snapshot, if running as the do loop, would have collected `[1 1 2 3 5 8]`
 at this point while having the arguments `8 13`.
 
