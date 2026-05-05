@@ -4,7 +4,7 @@ date = 2026-04-28
 weight = 1
 [extra]
 doclink = "https://projecteuler.net/problem=1"
-toc = true
+toc = false
 
 [taxonomies]
 categories = ["uiua-euler"]
