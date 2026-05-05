@@ -284,7 +284,7 @@ choice since it keeps all arguments after the outputs.
 [(a+b) a b]
 ```
 
-Now we should be able to set `X = below add` and do something similar to th
+Now we should be able to set `X = below add` and do something similar to the
 do loop above. Let's try getting all Fibonacci numbers below 200.
 
 ```uiua
