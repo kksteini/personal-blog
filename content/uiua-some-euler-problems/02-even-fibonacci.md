@@ -88,7 +88,7 @@ incoming argument is less or equal to 1
 >will be returning a single element, given a number, so the signature is `|1.1`
 >or simply `|1`.
 
-Let's call this function recursive function `BFH` and use it to generate a
+Let's call this recursive function `BFH` and use it to generate a
 range of Fibonacci numbers. I'll be saving this file as `p2-bad.ua` and
 running `uiua` natively.
 
