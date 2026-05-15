@@ -69,7 +69,7 @@ See [function calls in appendix](@/uiua-some-euler-problems/02-even-fibonacci.md
 
 Let's try our hand at recursion in Uiua.
 Looking at the recursive definition first,
-we can achieve by forking function calls and adding them,
+we can fork function calls and add them,
 something like: `add fork(fibo sub 2|fibo sub 1)`
 
 On the whole we want to return `1` for base cases,
