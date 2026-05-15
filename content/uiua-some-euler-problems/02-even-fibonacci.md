@@ -4,7 +4,7 @@ date = 2026-05-04
 weight = 2
 [extra]
 doclink = "https://projecteuler.net/problem=2"
-toc = false
+toc = true
 
 [taxonomies]
 categories = ["uiua-euler"]
@@ -19,32 +19,49 @@ $$1, 2, 3, 5, 8, 13, 21, 34, 55, 89, \dots$$
 By considering the terms in the Fibonacci sequence whose values do not exceed
 four million, find the sum of the even-valued terms.
 
-## Foundations and research before you begin
+> Short aside. I prefer the Fibonacci sequence as
+> $F_0=1$ and $F_1=1.$ Since we're asked to consider only the even terms and cap
+> by magnitude, this won't matter. You can simply redefine these as $1$ and $2$
+> if you prefer.
+
+## Foundations and research before we begin
 
 ### Recursion and tree explosion
 
-The Fibonacci sequence, you can think of as being the base cases
+The Fibonacci sequence, you *can* think of as being the base cases
 $$F_0 = 1$$
 $$F_1 = 1$$
 
-and then a recursive definition
+and then the recursive definition
 
 $$F_k = F_{k-1} + F_{k-2}$$
 
-Let's visualize the recursion tree of this definition. If we start at, say,
-$F_4$, then $F_4 = F_3 + F_2$, but since $F_3$ and $F_2$ aren't base case we
-have to keep going with each of them,
+---
+Let's analyze the recursive definition.
+We'll start with $F_4$ as an example.
+The recursive definition yields
+$$F_4 = F_3 + F_2$$
+
+Since $F_3$ and $F_2$ aren't base cases we
+have to continue
 $$F_3 = F_2 + F_1$$
 $$F_2 = F_1 + F_0$$
-and so on. Let's draw this as a tree:
+
+We keep going until all terms have been reduced to the base cases.
+Since each term consists of two lower terms we'll visualize them as a binary tree.
+For each node we drill down $F_{k-1}$ to the left and $F_{k-2}$ to the right.
+Please enjoy and respect my *art*:
 
 <div style="text-align: center">
   <img alt="Tree Explosion" src="/images/euler-fibo-tree-explosion.png" style="max-width: 100%; max-height: 400px;"/>
 </div>
 
-If we would start from $F_5$ then this entire $F_4$ tree is just the left node
-of $F_5$ while the right node is $F_3$. This will quickly **explode**
-into a lot of recursive lookups.
+That's a lot of nodes for just $F_4$.
+If we would start from $F_5$ then this entire $F_4$ tree is **just** the left node
+from $F_5$ while the right node is $F_3$. Larger terms will quickly **explode**
+into a **big** hecking tree and computing higher and higher
+terms will rapidly become unfeasible.
+See [function calls in appendix](@/uiua-some-euler-problems/02-even-fibonacci.md#function-calls)
 
 ## Towards a solution
 
@@ -52,12 +69,12 @@ into a lot of recursive lookups.
 
 Let's try our hand at recursion in Uiua.
 Looking at the recursive definition first,
-we may want to fork function calls and add them,
+we can achieve by forking function calls and adding them,
 something like: `add fork(fibo sub 2|fibo sub 1)`
 
 On the whole we want to return `1` for base cases,
 but for $F_k$ where $k > 1$ we use the recursive fork addition.
-To decide this, we can use a `switch` statement that checks whether the
+To manage this, we can use a `switch` statement that checks whether the
 incoming argument is less or equal to 1
 
 ```uiua
@@ -67,12 +84,13 @@ incoming argument is less or equal to 1
 )⊸≤1                   #Is less or equal to 1?
 ```
 
-*Since we are creating a recursive function, we need to specify its signature. We
-will be returning a single element, given a number, so the signature is `|1.1`
-or simply `|1`.*
+>Since we are creating a recursive function, we need to specify its signature. We
+>will be returning a single element, given a number, so the signature is `|1.1`
+>or simply `|1`.
 
-Let's call this function `BFH` and use it to generate a range of Fibonacci numbers.
-I'll be saving this file as `p2-bad.ua` and run `uiua` natively.
+Let's call this function recursive function `BFH` and use it to generate a
+range of Fibonacci numbers. I'll be saving this file as `p2-bad.ua` and
+running `uiua` natively.
 
 ```uiua
 # file: p2-bad.ua
@@ -86,14 +104,12 @@ BF 30
 ```
 
 The reason I'm not doing this in the pad is because the recursion tree explodes
-in size and would hit the recursion limit. If running natively, you can override
+in size and hits the recursion limit. If running natively, you can override
 this limit.
 
 ```bash
 time UIUA_RECURSION_LIMIT=1000 uiua run p2-bad.ua
-[1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 
-987 1597 2584 4181 6765 10946 17711 28657 
-46368 75025 121393 196418 317811 514229 832040]
+[1 1 2 3 5 8 13 21 34 55 89 ... and so on]
 uiua run p2-bad.ua  4,97s
 ```
 
@@ -104,10 +120,10 @@ That's slow.
 
 Notice that whenever we calculate a term for Fibonacci it relies on
 the outcomes of the numbers in the sequence before it.
-$F_9 = F_8 + F_7$. Since we are generating a range, we have already calculated
-$F_8$ and $F_7$ before. Wouldn't it speed things up considerably if we
-could save the result of the previous function calls?
-This is exactly what the `memo` modifier does.
+$F_9 = F_8 + F_7$. In the range context, we would've already calculated
+$F_8$ and $F_7$ before $F_9$. Wouldn't it speed things up considerably if we
+could cache the result of the previous function calls?
+This is exactly what the `memo` modifier does. See [memo docs](https://uiua.org/docs/memo)
 
 ```uiua
 # Better Fibonacci Helper
@@ -120,9 +136,7 @@ BF 30
 
 After memo-izing the recursive call, this program finishes in less than
 10 milliseconds. A far cry from 5 seconds.
-You can even run it in the [pad](https://uiua.org/pad?src=0_19_0-dev_3__eJxTVnBKLSlJLVJwy0zKz0tMTs5U8EjNKUgt4nJy81B41DZBocZQITc1N1-DS0Hh0Yo1GtqPupo1QHK6RjVgylCzxlDzUdeOR51LDLk0uZzcwLoedS50cvN41L4QJGBswAUAdpwk5Q==)
-since the memo prevents the subsequent calls to the recursive Fibonacci
-function from digging down and causing a recursion limit error.
+You can even run it in the [pad](https://uiua.org/pad?src=0_19_0-dev_3__eJxTVnBKLSlJLVJwy0zKz0tMTs5U8EjNKUgt4nJy81B41DZBocZQITc1N1-DS0Hh0Yo1GtqPupo1QHK6RjVgylCzxlDzUdeOR51LDLk0uZzcwLoedS50cvN41L4QJGBswAUAdpwk5Q==).
 
 However, if you change `BF = BFH range` to `BF = BFH rev range` you
 will end up having a recursion limit error since going backwards doesn't calculate
@@ -130,13 +144,16 @@ the lower Fibonacci numbers first.
 
 ### How do you do `do`?
 
-What we need to do now, is to gather Fibonacci numbers until they exceed the
-$4000000$ threshold, later we will drop the odd ones and sum'em up.
+What we need to do now is to gather sequential Fibonacci numbers until they
+exceed the $4000000$ threshold. Later we will drop the odd ones and sum up
+the even ones.
 
 The basics of `do` is `do(do_this|while_condition)`.
 
-How should we iterate then? Maybe we could use a function that forks an iterator
-(adds 1) and then outputs the k-th term of Fibonacci. With our memoized `BFH` function
+How should we iterate then?
+One thing we could do is to take in one number, k, and do two things to it.
+First, we calculate the k-th Fibonacci term and then we increment k by 1.
+With our memoized `BFH` function
 above, we could define this iterative body as `X = fork add,1 BFH`.
 
 ```uiua
@@ -165,9 +182,9 @@ X 20
 So, we end up with
 
 ```plain
-X n
-### n-th fibonacci number
-### n + 1
+X k
+### k-th fibonacci number
+### k + 1
 ```
 
 How will this interact with the `do` body?
@@ -182,7 +199,9 @@ According to the [do documentation](https://www.uiua.org/docs/do)
 We will be overproducing on elements so the extra output should be
 collected into an array.
 
-Let's try setting this up. Let's consider all Fibonacci numbers less than 10.
+Let's try setting this up. Let's get all Fibonacci numbers less than 10.
+We set the loop function to `X` the condition to `<10` and
+pass the iterator `0` as an argument to the `do` function.
 
 ```uiua
     ⍢(X|<10) 0
@@ -190,8 +209,10 @@ Let's try setting this up. Let's consider all Fibonacci numbers less than 10.
 ```
 
 Huh, that's not quite right.
-It looks like it is collecting Fibonacci numbers but
-way beyond 10. Let's try debugging for clues, what does
+It looks like it is collecting 10 Fibonacci numbers instead
+of Fibonacci numbers less than 10. This implies that the condition body is acting
+on the iterator instead of the Fibonacci numbers.
+Let's try debugging for clues anyway, what does
 the condition see?
 
 ```uiua
@@ -208,11 +229,10 @@ the condition see?
 [1 2 3 5 8]
 ```
 
-Ah, the condition body is just getting the iterator whereas we want it
-to receive the Fibonacci number. Our `X` function gives back both
-but we seem to be hitting the iterator as the first argument.
+Yes, the condition body is acting on the iterator whereas we want it
+to act on the Fibonacci number.
 
-Let's manually prop up some `X` calls and simulate what gets collected.
+Let's manually prop up some `X` calls to simulate what gets collected.
 
 ```uiua
 # Snapshot of 7 runs
@@ -220,14 +240,19 @@ Let's manually prop up some `X` calls and simulate what gets collected.
 [8 13 8 5 3 2 1 1]
 ```
 
-OK, the iterator is at the front.
-The snapshot, if running as the do loop, would have collected `[1 1 2 3 5 8]`
-at this point while having the arguments `8 13`.
+Sequential calls of `X` does indeed leave behind a trail of Fibonacci numbers but
+at its front is the iterator.
+
+> Why is the snapshot reversed?
+>
+> To show the snapshot we have to chain X calls. This is processed from
+> right to left. When overproducing in loops, it is **collected** into an array
+> instead, resulting in an array that runs left to right.
 
 So, for the condition body we'll just `pop` the iterator
 out of the way and then consume the Fibonacci number with our
-condition check. That should be okay because once again the
-[do documentation](https://www.uiua.org/docs/do) states
+condition check. That should be okay because the
+[do documentation](https://www.uiua.org/docs/do) says
 
 >If the condition function consumes its only arguments to evaluate
 > the condition, then those arguments will be implicitly copied.
@@ -239,11 +264,11 @@ Error: Missing argument 2
 
 Ah, but of course. The condition function is the first thing to run.
 We're supplying only one argument. We need another one.
-We should just put the horse before the cart (or whatever the English saying is)
+We should just put the horse before the cart
 and *pretend* that this has run once. With `X 0` or `1 1`.
 
 ```uiua
-    ⍢(X|<10◌) X 0 
+    ⍢(X|<10◌) X 0
 [1 1 2 3 5 8]
 ```
 
@@ -262,42 +287,77 @@ Great!
 
 ### An iterative solution
 
-What we observe from the `do` loop is that at each iteration, something is
-pushed off and collected. We can observe that any $F_k = F_{k-1} + F_{k-2}$.
-We would want to construct an array such that one iteration of some function `X`
-is
+What we observe from the `do` loop is that at each iteration, if we overproduce
+on output then  something is *pushed off and collected*.
+This is not the official way to think about it but it certainly helps me
+understand. Here's an annotated version of the loop snapshot from the previous section
 
 ```plain
-[X a b]
-[(a+b) a b]
+# Snapshot of 7 runs
+    [X X X X X X X 0]
+
+# At the start of the 8th run
+ 8 is consumed, replaced by 9 21
+ |
+ | 13 joins the pushed off elements
+ | |
+ V V
+[8 13 8 5 3 2 1 1]
+
+# After the 8th run
+Arguments to next X
+  | 
+ / \  Collected so far
+ | |         |
+ | |        / \
+ | |       /   \
+ | |      |     |
+ | |     / \   / \
+ | |    |   |  |  |
+ | |   / \ / \ | / \
+ | |   | | | | | | |
+ V V   V V V V V V V
+[9 21 13 8 5 3 2 1 1]
+
 ```
 
-`add` is a really good candidate here but we need something that preserves the arguments.
-Both `by` and `on` will do something with either the first or last argument.
-So will `with` and `off`.
-Luckily, there is `above` and `below` that operate on **all** arguments.
-Reading the documentation for both it looks like `below` is the correct
-choice since it keeps all arguments after the outputs.
+Can we make a non recursive `X` such that it pushes off elements as it goes along?
+Such a function would look and behave something like this:
+
+```plain
+[X a b]      <-Takes 2 inputs : a b
+[(a+b) a b]  <-Gives 3 outputs: (a+b) a b
+```
+
+Of course, `add` is our main function of choice but we need something that preserves
+the arguments. Both `by` and `on` will do something with either the first or
+last argument. So will `with` and `off` for that matter.
+Searching for more modifiers we find that `above` and `below`
+operate on **all** arguments.
+Since `below` keeps all arguments after the outputs it is the correct choice.
+See [below docs](https://uiua.org/docs/below)
 
 ```plain
 [below add a b]
 [(a+b) a b]
 ```
 
-Now we should be able to set `X = below add` and do something similar to the
-do loop above. Let's try getting all Fibonacci numbers below 200.
+So, we set `X = below add` and do something similar to the
+`do` loop above. Let's try getting all Fibonacci numbers below 200.
 
 ```uiua
+    X ← ◡+
+
     ⍢(X|<200) 1 1
 [1 1 2 3 5 8 13 21 34 55 89]
 ```
 
-Oh, but this is off by one. $55+89=144$ is surely missing.
-If we stop and think about it a little, what would it take for `144` to be
-pushed off and collected?
-This is when the condition loop has the arguments `233 144`.
-The condition body needs to skip the `233` and evaluate `<144`.
-Just like before, we pop an argument off.
+Hmm, this is off by one. $55+89=144$ is missing.
+Let's stop and think about it a little. What would it take for `144` to be
+pushed off and collected? Well, when we have the arguments `233 144` the
+loop would stop at that point, evaluating `233 < 200` as false, and `144`
+isn't *pushed off*. So, we just `pop` off the first argument in the condition
+body like we did in the previous section.
 
 ```uiua
     ⍢(X|<200◌) 1 1
@@ -306,17 +366,18 @@ Just like before, we pop an argument off.
 
 ## Solution
 
-From what we learned from either the iterative solution, or the recursive one,
-we can simply use whichever `X` we fancy to generate all Fibonacci numbers
-below the threshold.
+Pick your favourite `X`, iterative or recursive.
+We'll use it to generate all Fibonacci numbers below the threshold.
 
-Since we want to target only even Fibonacci numbers we ought to start with
-a dear old friend `by mod 2`
+*For brevity I'll use threshold 200 until the end.*
+
+We should start with `by mod 2` since we want to target only even
+Fibonacci numbers.
 
 ```uiua
     ⊸◿2 ⍢(X|<200◌) 1 1
 [1 1 2 3 5 8 13 21 34 55 89 144]
-[1 1 0 1 1 0 1 1 0 1 1 0]
+[1 1 0 1 1 0 1  1  0  1  1  0]
 ```
 
 We only want to `keep` the even ones, therefore we can flip the
@@ -325,19 +386,53 @@ mask array with `not`.
 ```uiua
     ¬ ⊸◿2 ⍢(X|<200◌) 1 1
 [1 1 2 3 5 8 13 21 34 55 89 144]
-[0 0 1 0 0 1 0 0 1 0 0 1]
+[0 0 1 0 0 1 0  0  1  0  0  1]
 ```
 
-then `keep`
+then `keep` those
 
 ```uiua
     ▽ ¬ ⊸◿2 ⍢(X|<200◌) 1 1
 [2 8 34 144]
 ```
 
-and finally we sum it up with `reduce add`
+and finally we sum them up with `reduce add`
 
 ```uiua
     /+ ▽ ¬ ⊸◿2 ⍢(X|<4000000⋅) ∩1
 4613732
 ```
+
+## Appendix
+
+### Function calls
+
+I wanted to plot the amount of function calls for a naive implementation so I
+wrote a little script. It calculates the n-th Fibonacci term and keeps track
+of how many function calls it makes. It outputs how many function calls
+are made for each of the first 15 terms.
+
+```ruby
+def fibo n
+  $GLOBAL_CALLS += 1
+  return 1 if n <= 1
+  fibo(n-1) + fibo(n-2)
+end
+
+(1..15).each do |n|
+  $GLOBAL_CALLS = 0
+  fibo n
+  puts $GLOBAL_CALLS
+end
+```
+
+This spits out
+$$1\ 3\ 5\ 9\ 15\ 25\ 41\ 67 \.\.\.and\ so\ on$$
+
+The fourth term here is 9 which agrees with our binary tree drawing for $F_4$
+which has that many nodes.
+
+We can plot these with a chart plotter. Crikey, that's an exponential one.
+<div style="text-align: center">
+  <img alt="Tree Explosion" src="/images/euler-fibo-chart-explosion.png" style="max-width: 100%; max-height: 400px;"/>
+</div>

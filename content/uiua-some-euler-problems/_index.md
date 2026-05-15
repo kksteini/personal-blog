@@ -4,4 +4,5 @@ description = "Wowee, if you have gone through the Uiua challenges, why not try 
 sort_by = "weight"
 template = "section.html"
 weight = 100
+page_template = "euler-page.html"
 +++
