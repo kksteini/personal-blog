@@ -4,14 +4,14 @@ date = 2026-05-18
 weight = 3
 [extra]
 doclink = "https://projecteuler.net/problem=3"
-toc = false
+toc = true
 
 [taxonomies]
 categories = ["uiua-euler"]
-tags = ["uiua", "euler", "prime factor"]
+tags = ["uiua", "euler", "prime factor", "prime numbers"]
 +++
 
-*This is a first draft and I've published it. Wowee reckless*.
+*This is the second draft and I've published it. Wowee reckless*.
 
 ## Problem
 
@@ -20,14 +20,24 @@ What is the largest prime factor of the number $600851475143$?
 
 ## Solving with proper divisors
 
+In this section we will:
+
+* -get proper divisors
+* -use the proper divisors of the proper divisors to filter for prime factors
+* -get the largest prime factor
+
+>Later in this document we will
+>look at other means of acquiring primes.
+
 ### Modulus as means to proper divisors
 
 *[Previous modulus basics](@/uiua-some-euler-problems/01-multiples-of-3-or-5.md#modulo)*
 
-Proper divisors of $N$ we define to be any $K < N$ such that $mod\ K$ is $0$;
+We define proper divisors of $N$ to be any $K < N$ such that $mod\ K$ is $0$;
 that is to say, $K$ divides $N$.
 
-Let's determine this with Uiua and get familiar with pervasiveness at the same time.
+Let's determine this with Uiua
+[pervasively](https://www.uiua.org/tutorial/Arrays#pervasion).
 What we've seen before is something like `mod X Y` where $X$ and $Y$ are
 scalars (integers). If the result is $0$ then $X$ divides $Y$ cleanly.
 
@@ -44,8 +54,7 @@ How can we gather the numbers in $X$ which cleanly divide $Y$?
 
 Look at [the off documentation](https://uiua.org/docs/off).
 When we calculate the modulus we would like to keep the $X$ array,
-the first argument to `mod`. Then we ask the question `eq 0` to the
-modulus for us to `keep`.
+the first argument to `mod`.
 
 ```uiua
     ⤚◿ [1 2 3 4 5 6 7 8 9 10] 60
@@ -53,16 +62,7 @@ modulus for us to `keep`.
 [0 0 0 0 0 0 4 4 6 0]
 ```
 
-then eq 0
-
-```uiua
-    =0⤚◿ [1 2 3 4 5 6 7 8 9 10] 60
-[1 2 3 4 5 6 7 8 9 10]
-[1 1 1 1 1 1 0 0 0 1]
-
-```
-
-and finally keep
+We then filter for clean division with `eq 0` and `keep`.
 
 ```uiua
     ▽=0⤚◿ [1 2 3 4 5 6 7 8 9 10] 60
@@ -72,7 +72,7 @@ and finally keep
 Checking the range 1 to 10 feels quite arbitrary.
 It might be more useful to get all divisors.
 Given 60, we want a range of useful numbers to test.
-Well, why not 0-59?
+Perhaps 0-59?
 
 ```uiua
     ⊸⇡ 60
@@ -93,7 +93,7 @@ divide 60.
 
 By doing this, we have found all positive factors of 60 less than itself, or
 proper divisors. Let's make this a function and test
-some numbers
+some numbers.
 
 ```uiua
     PD ← ▽ = 0 ⤚◿ ⊸⇡
@@ -110,9 +110,11 @@ some numbers
 
 > BTW, there is a more Uiua way to compute proper divisors.
 > See *[alternate proper divisors](@/uiua-some-euler-problems/03-largest-prime-factor.md#alternate-proper-divisors)*
-Nice. $60$ is as before, highly composite.
-We tested $57$ and it is divisible by $1$, $3$, and $19$.
-Most interesting is $59$. The only divisor found is $1$.
+
+Nice. $60$ is as before, chock full of factors.
+We tested $57$ and it is divisible by $1$, $3$ and $19$.
+Most interesting though is $59$. The only divisor found is $1$.
+Prime time.
 
 ### Proper divisors as means to primality
 
@@ -125,7 +127,7 @@ When we tested $59$ for proper divisors we only got
 back $1$. We know that $1$ divides every number and
 that every number divides itself.
 Since `PD N` excludes N we can use it as a prime
-checker. It is exactly where $1$ is the only
+checker. It is exactly when $1$ is the only
 proper divisor or `=1 len PD N`. Let's get all primes
 below 50. We'll start by applying our primality check
 to the range 0-49.
@@ -146,7 +148,7 @@ $1$s. I recommend reading
 ```
 
 Yup, that's a list of primes.
-Let's declare a prime checking function
+Let's declare a prime checking function.
 
 ```uiua
 IsPrime ← =1 ⧻ PD
@@ -160,29 +162,29 @@ IsPrime ← =1 ⧻ PD
 Recall the example given by the problem description.
 The prime factors of $13195$ are $5, 7, 13$ and $29$.
 
-We can use `PD` twice to get and filter factors by primality. First, the
-proper divisors
+We use `PD` twice (IsPrime uses it) to get the prime factors. First, the
+proper divisors.
 
 ```uiua
     PD 13195
 [1 5 7 13 29 35 65 91 145 203 377 455 1015 1885 2639]
 ```
 
-Then, we filter on those who are prime
+Then, we filter for those who are prime
 
 ```uiua
     ▽ ⊸≡IsPrime PD 13195
 [5 7 13 29]
 ```
 
-Now, solving the problem is simply getting the largest one
+Now, solving the problem is simply getting the largest one.
 
 ```uiua
     /↥ ▽ ⊸≡IsPrime PD 13195
 29
 ```
 
-Great. Now lets try it on the real deal
+Great. Now lets try it on the real deal.
 
 ```uiua
     /↥ ▽ ⊸≡IsPrime PD 600851475143
@@ -191,7 +193,7 @@ Error: Array of 600851475143 8-byte elements would be too large (4806811.801 MB)
 ```
 
 Oh. That's not good.
-We're trying too hard. Maybe we can reduce the search space somehow?
+We're trying too hard!
 
 ### Reducing the search space
 
@@ -214,12 +216,12 @@ $$ 4 * 15$$
 $$ 5 * 12$$
 $$ 6 * 10$$
 
-> I don't have a mathematical proof for this pair-wise relationship
+> I don't have a mathematical proof for this pairwise relationship
 > and so it might be a good exercise to convince
 > yourself of this being true.
 
 These pairs result in us being able to get at larger factors with
-dividing 60 by the smaller ones. Let's reduce the range of PD by half and test this
+dividing 60 by the smaller ones. Let's reduce the range of PD by half and test this.
 
 ```uiua
     PDH ← ▽ =0 ⤚◿ ⇡ ⌈⊸÷2
@@ -276,22 +278,22 @@ $$5 * 5$$
 
 That last pair is the square.
 If we look back at the pairs of $60$, we notice that $6$
-is as far as we would've like to go.
+is as far as we would've liked to go.
 
 ```uiua
     ÷ [1 2 3 4 5 6] 60
 [60 30 20 15 12 10]
 ```
 
-So, is it the case for any number that the square is where we want to stop?
-The square root of $60$ is roughly $~7.75$.
+So, is it the case for any number that the square root is where we want to stop?
+The square root of $60$ is roughly $7.75$.
 Since we don't want to go over this number we can floor it to $7$.
-If we would've checked only up to 7, then yes, 6 would've been the last divisor
+If we check only up to 7, then yes, 6 would be the last divisor
 to show up for the range up to 7.
 
 Let's then create a function, `PDS` that gets half of the proper divisors by
 limiting the range to the square root. We will start the range from 1 so that
-it is inclusive
+it is inclusive.
 
 ```uiua
 PDS ← ▽ =0 ⤚◿ ⇡₁ ⌊ ⊸√
@@ -312,19 +314,18 @@ PDS ← ▽ =0 ⤚◿ ⇡₁ ⌊ ⊸√
 [25 5]
 ```
 
-We now have a way to get at all the factors for a number without consuming the
-whole range up to that number.
-Let's try again with $13195$
+We now have a way to get at all the factors for a number without needing
+the whole range up to that number.
+Let's try again with $13195$.
 
-We start with getting the `PDS` of $13195$
+We start with getting the `PDS` of $13195$.
 
 ```uiua
     PDS 13195
 [1 5 7 13 29 35 65 91]
 ```
 
-The second part would be dividing that range with $13195$.
-That is just
+The second part is acquired by dividing $13195$ with those factors.
 
 ```uiua
     ÷ ⊸PDS 13195
@@ -332,7 +333,7 @@ That is just
 ```
 
 The original range is consumed but we can preserve it with either `off` or `on`.
-Let's use `off`
+Let's use `off`.
 
 ```uiua
     ⤚÷ ⊸PDS 13195
@@ -341,7 +342,7 @@ Let's use `off`
 ```
 
 Notice how $13195$ itself is in there. We'll `drop` it.
-Good thing we used `off` so that it is part of the first argument
+Good thing we used `off` so that it is part of the first argument.
 
 ```uiua
     ↘₁ ⤚÷ ⊸PDS 13195
@@ -377,8 +378,8 @@ for the big guns?
 Error: Array of 8462696833 8-byte elements would be too large (67701.575 MB)
 ```
 
-Darn. So the square of $600851475143$ is too big?
-Well, no. Calling `PDS` on it works.
+Darn. So the square root of $600851475143$ is too big?
+Well, no. Calling `PDS` on it works
 
 ```uiua
     PDS 600851475143
@@ -393,7 +394,7 @@ and so does
 ```
 
 Hang on. Our error message had to do with $8462696833$ which is one of our factors.
-Well of course! We are still using the full range primality check. Let's rewrite
+Well... of course! We are still using the full range primality check. Let's rewrite
 our previous `IsPrime` such that it uses `PDS` instead of `PD`.
 
 ```uiua
@@ -419,15 +420,15 @@ The solution is therefore
 
 ### The documentation is a gold mine
 
-Were you, a more experience Uiua user, screaming internally for a
-certain something the whole previous section?
+Were you, a more experienced Uiua user, screaming internally for a
+certain something this whole previous section?
 If not, I would like you to visit [the uiua idioms](https://www.uiua.org/docs/idioms).
 It's right there, the prime factorization of a number.
 
 ### A beautiful built-in
 
 What we did by getting all the proper divisors and then filtering on the
-primes is equivalent to doing a prime factorization of a number and then
+primes is the equivalent to doing a prime factorization of a number and
 removing the duplicates.
 
 Since we care only about the largest prime factor, we simply
@@ -438,10 +439,14 @@ prime factorize
 [71 839 1471 6857]
 ```
 
-and then take the largest one
+and then take the largest one.
 
 ```uiua
-    /↥ °/× 600851475143
+    /↥°/× 600851475143
+6857
+
+# Or since they are ordered
+    ⊣°/× 600851475143
 6857
 ```
 
@@ -470,3 +475,162 @@ to
     ⊚=0◿⊸⇡60
 [1 2 3 4 5 6 10 12 15 20 30]
 ```
+
+### Prime number checks
+
+#### Length check
+
+Now that we know about `un reduce mul` we have some options for
+checking whether a number is prime.
+
+What happens when `un reduce mul` is called on a prime?
+
+```uiua
+    °/× 19
+[19]
+    °/× 21
+[3 7]
+    °/× 23
+[23]
+    °/× 29
+[29]
+```
+
+It seems that `un reduce mul` returns an array that contains $N$ and only $N$
+when $N$ is prime.
+
+Therefore, a prime check might be to check the length
+
+```uiua
+    IsPrime ← =1 ⧻ °/×
+```
+
+Let's get all primes under $100$. We can use `where` for this
+after applying `IsPrime` to a range
+
+```uiua
+    ⊚ ≡IsPrime⇡₁100
+[1 2 4 6 10 12 16 18 22 28 30 36 40 42 46 52 58 60 66 70 72 78 82 88 96]
+
+```
+
+Oh, yeah. The range starts on one. We need to account for that with `+1`
+
+```uiua
+    +₁⊚ ≡IsPrime⇡₁100
+[2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97]
+```
+
+#### Pervasion
+
+Is `un reduce mul` pervasive on a range?
+It wouldn't make sense because the lengths vary.
+Let's confirm this anyway. What happens when we apply
+it to the range $1-10$?
+
+```uiua
+    °/× ⇡₁10
+╭─
+╷ 1 1 1 1 1 1 1 2 1 1
+  1 1 1 2 1 2 1 2 3 2
+  1 2 3 2 5 3 7 2 3 5
+                      ╯
+```
+
+Oh, hold on a second. It does produce results.
+Over this range, the largest collection of factors comes from $8$
+which has prime factors $[2\ 2\ 2]$.
+All other elements are padded with $1s.$
+That does make sense since multiplying by $1$ doesn't change the result.
+$1 * 2 * 5$ is just as much $10$ as $2 * 5.$
+
+Well now, if a prime is entered, the last element of that column is the same
+as the number which generated it.
+
+```uiua
+    °/× [7 9 11]
+╭─
+╷ 1 3  1
+  7 3 11
+         ╯
+```
+
+So if we get the last element of each
+
+```uiua
+    ⊣ °/× [7 9 11]
+[7 3 11]
+```
+
+and preserve the original range for comparison
+
+```uiua
+    ⊣ ⊸°/× [7 9 11]
+[7 9 11]
+[7 3 11]
+```
+
+then primes is where these arrays are equal.
+
+```uiua
+    ▽ ⊸= ⊣ ⊸°/× [7 9 11]
+[7 11]
+```
+
+---
+
+We can then define.
+
+```uiua
+    IsPrimePervasive ← = ⊣ ⊸°/×
+```
+
+Let's get all primes under $10$
+
+```uiua
+    +₁ ⊚ IsPrimePervasive⇡₁10
+[1 2 3 5 7]
+```
+
+Oh darn. $1$ is not a prime number.
+We can correct for this or just filter out the 1.
+I'll cobble together something quick.
+An idea might be to keep the array of elements
+we checked against, and filter out the 1.
+
+```uiua
+    IsPrimePervasive′ ← =⊙(≠1) ⊸=⊣ ⊸°/×
+    +₁ ⊚ IsPrimePervasive′ ⇡₁10
+[2 3 5 7]
+```
+
+#### Difference in performance
+
+Here is a very **very** informal rule.
+
+$$If\ it's\ rows,\ then\ it's\ slows!$$
+
+Whenever you have an issue with performance you might want to see
+if you can rewrite things to be pervasive.
+
+> The alias perf resolves to ⊙◌⍜now.
+> You can wrap your code in perf to see
+> the time it takes to run
+
+Let's benchmark the prime checks on half a million elements.
+
+```uiua
+    ⊙◌⍜now(+₁ ⊚ ≡IsPrime⇡₁500000)
+0.40340209007263184
+    ⊙◌⍜now(+₁ ⊚ IsPrimePervasive⇡₂500000)
+0.03809237480163574
+    ⊙◌⍜now(+₁ ⊚ IsPrimePervasive′⇡₁500000)
+0.036719322204589844
+```
+
+The pervasive versions are about 10x faster than
+the prime checker that needs rows.
+Interestingly the more complicated prime pervasive version, that accounts for $1$,
+measures to be the fastest.
+Even though we added more checks to it
+the speed difference is less than random variance.

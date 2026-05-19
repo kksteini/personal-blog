@@ -621,6 +621,13 @@
       "settings": {
         "foreground": "#cc6be9"
       }
+    },
+    {
+      "name": "Noadic function",
+      "scope": "noadic-function",
+      "settings": {
+        "foreground": "#ed5e6a"
+      }
     }
   ],
   "type": "dark"
