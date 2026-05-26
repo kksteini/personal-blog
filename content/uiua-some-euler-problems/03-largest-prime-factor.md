@@ -11,8 +11,6 @@ categories = ["uiua-euler"]
 tags = ["uiua", "euler", "prime factor", "prime numbers"]
 +++
 
-*This is the second draft and I've published it. Wowee reckless*.
-
 ## Problem
 
 The prime factors of $13195$ are $5, 7, 13$ and $29$.
@@ -412,8 +410,39 @@ our previous `IsPrime` such that it uses `PDS` instead of `PD`.
 The solution is therefore
 
 ```uiua
+    PDS     ← ▽=0⤚◿⇡₁⌊⊸√
+    IsPrime ← =1⧻PDS
     /↥ ▽ ⊸≡IsPrime⊂ ↘₁ ⤚÷ ⊸PDS 600851475143
 6857
+```
+
+#### Further reduction
+
+Hang on. Why are we even checking if all factors could be prime?
+The `div by PDS` dance is unnecessary, is it not?
+If we derive the latter half of factors by **dividing** the number with any of
+the factors from `PDS` then a prime can only appear in the following two ways:
+
+1) We divide a prime number by 1
+2) The square root of the number is prime
+
+```uiua
+    ↘₁⊂⤚÷⊸PDS 59  #N is prime 
+    ↘₁⊂⤚÷⊸PDS 361 #sqrt of N is prime
+[1]
+[19 1 19]
+```
+
+This means we only have to consider up to the `sqrt` of N.
+We reduce the solution further down to
+
+```uiua
+    PDS     ← ▽=0⤚◿⇡₁⌊⊸√
+    IsPrime ← =1⧻PDS
+    /↥ ▽⊸≡IsPrime PDS 600851475143
+    /↥ ▽⊸≡IsPrime PDS 13195
+6857
+29
 ```
 
 ## Solving the Uiua way
