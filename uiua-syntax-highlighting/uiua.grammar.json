@@ -4,6 +4,10 @@
   "scopeName": "uiualang",
   "patterns": [
     {
+      "name": "red-bullshit",
+      "match": "GauntletHelper!|Gauntlet!|LargestPalindrome"
+    },
+    {
       "name": "comment",
       "match": "#.*$"
     },

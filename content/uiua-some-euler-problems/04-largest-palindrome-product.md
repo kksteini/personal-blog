@@ -176,7 +176,7 @@ For now, let's store this whole computation so that we can more easily compare l
 0.000001430511474609375
 ```
 
-Ah. The binding precomputes the value and stores it in LargestPalindrome.
+That's too fast? Ah, yes. The binding precomputes the value and stores it in LargestPalindrome.
 We can prevent this by wrapping our binding definition in parentheses
 
 ```uiua
@@ -185,7 +185,7 @@ We can prevent this by wrapping our binding definition in parentheses
 0.22612762451171875
 ```
 
-now the function is run again once LargestPalindrome is invoked.
+now the function is run when LargestPalindrome is invoked.
 
 ## Finding some built-ins
 
@@ -240,17 +240,22 @@ largest product palindrome
 ### Is it faster?
 
 Let's compare the performance between the original and
-our checkpoint. If we run them a 100 times, how do they compare?
+our checkpoint.
+I've created a macro that runs a function 100 times and shows
+the average runtime. See appendix for
+
+See [gauntlet in appendix](@/uiua-some-euler-problems/04-largest-palindrome-product.md#the-gauntlet)
+If we run them a 100 times, how do they compare?
 
 ```uiua
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome′))
-0.22674261093139647
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome))
-0.22857486724853515
+    Gauntlet!LargestPalindrome′
+0.2342543911933899
+    Gauntlet!LargestPalindrome
+0.23686788558959962
 ```
 
 Well. The average of running 100 `perf` tests on each differs by ~0.002 seconds.
-This is therefore not significant and might flip based on random variations.
+This is likely not significant and might flip based on random variations.
 
 It is more beautiful though.
 
@@ -290,22 +295,19 @@ any better
 and the average of 100 `perf`s comes down to
 
 ```uiua
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome″))
-0.20901081800460816
+    Gauntlet!LargestPalindrome″
+0.1886356520652771
 ```
 
 Let's run all three again just to make sure.
 
 ```uiua
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome″))
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome″))
-0.20956369161605834
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome'))
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome′))
-0.24050842046737672
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome))
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome))
-0.24187369585037233
+    Gauntlet!LargestPalindrome
+0.23670884132385253
+    Gauntlet!LargestPalindrome′
+0.23418128490447998
+    Gauntlet!LargestPalindrome″
+0.18808703899383544
 ```
 
 Well. It seem like our latest iteration is quicker, but again. Not by that much.
@@ -374,11 +376,11 @@ binding this and doing the gauntlet of a 100 runs
 
 ```uiua
     LargestPalindrome‴ ← (/↥▽ ⊸≡(≍⊸⇌°⋕)◴/×⍉ ⧅≥2⇡1000)
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome‴))
-0.16928070068359374
+    Gauntlet!LargestPalindrome‴
+0.17056868791580201
 ```
 
-Awesome. Fastest yet.
+Nice. Somewhat faster.
 
 ### Knowing how to read
 
@@ -401,14 +403,14 @@ Let's quickly redefine all functions and run the 100 round gauntlet on all of th
     LargestPalindrome″ ← (/↥▽⊸≡(≍ ⊸⇌ °⋕)◴♭˙⊞×+100⇡900)
     LargestPalindrome‴ ← (/↥▽ ⊸≡(≍⊸⇌°⋕)◴/×⍉ ⧅≥2+100⇡900)
 
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome))
-0.20428441047668458
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome′))
-0.20008643865585327
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome″))
-0.15994307041168213
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome‴))
-0.15108409404754639
+    Gauntlet!LargestPalindrome
+0.20527817964553832
+    Gauntlet!LargestPalindrome′
+0.20321281433105468
+    Gauntlet!LargestPalindrome″
+0.16061073541641235
+    Gauntlet!LargestPalindrome‴
+0.15284034490585327
 ```
 
 An improvement, but only so much.
@@ -456,11 +458,11 @@ Let's bind this, evaluate the result and then do the performance gauntlet
 
 ```uiua
     LargestPalindrome‴″ ← (⊣⍢(Dobody|¬Docondition⊣) ⍆ ◴ /× ⍉ ⧅≥ 2 + 100 ⇡ 900)
-    ÷₁₀₀ /+ ⍥₁₀₀(⊙◌⍜now(LargestPalindrome‴″))
-0.00…0247955322265625
+    Gauntlet!LargestPalindrome‴″
+0.00…013113021850585939
 ```
 
-Uh... that is faster. Though the number is weird.
+Uh... that is faster. Suspiciously so.
 Let's sanity check then that this is correct and that it is this fast
 
 ```uiua
@@ -470,8 +472,8 @@ Let's sanity check then that this is correct and that it is this fast
 0.00000286102294921875
 ```
 
-Oh, the binding must be computing the result and storing it.
-No way this would be that fast.
+Oh, the binding might be computing the result and storing it despite the
+parentheses. Let's run this one manually and see if it is different.
 
 ```uiua
     ⊙◌⍜now(⊣⍢(Dobody|¬Docondition⊣)⍆◴/×⍉⧅≥2+100⇡900)
@@ -481,8 +483,8 @@ No way this would be that fast.
 0.02297837257385254
 ```
 
-I have no idea why it's binding the result in this case but whatever.
-It's still much faster than our previous attempts.
+That seems more like it.
+Not quite 2 microseconds but it's still much faster than our previous attempts.
 At 23 milliseconds I think it's time to stop, except, there is one thing.
 Take a look at the [Uiua optimizations documentation](https://www.uiua.org/docs/optimizations).
 
@@ -520,3 +522,23 @@ Yeah, likely. Right now I can't think of anything.
 This here might be an open slot for you to submit into.
 I would be very happy to showcase a significantly faster
 solution. Don't be a stranger, [eulerproblems@anub.is](eulerproblems@anub.is)
+
+## Appendix
+
+### The Gauntlet
+
+I wanted something that runs a 100 performance checks and
+calculates the average. This macro is what I came up with.
+
+```uiua
+# Binding helper to make sure function isn't precomputed
+    GauntletHelper! = (perf(^))
+    GauntletHelper! ← (⊙◌⍜now(^))
+
+# Run a 100 times and acquire the average runtime
+    Gauntlet! = div,100 /add repeat,100(GauntletHelper!^)
+    Gauntlet! ← ÷₁₀₀ /+ ⍥₁₀₀(GauntletHelper!^)
+
+    Gauntlet!LargestPalindrome
+0.23597447633743285
+```

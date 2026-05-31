@@ -20,6 +20,7 @@
         {% for subsection_path in root.subsections %}
             {% set sub = get_section(path=subsection_path) %}
             {% if sub.pages | length == 0 %}{% continue %}{% endif %}
+            {% if sub.extra.hide_from_homepage %}{% continue %}{% endif %}
             <article class="series-card">
                 <header>
                     <h2><a href="{{ sub.permalink | safe }}">{{ sub.title }}</a></h2>

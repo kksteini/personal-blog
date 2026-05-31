@@ -23,7 +23,9 @@ extra_themes = ["other_highlights/themes/github-dark.json"]
 [extra]
 radion_menu = [
   { url = "$BASE_URL", name = "Home" },
-  { url = "$BASE_URL/uiua-documentation-challenges", name = "Uiua Challenges" },
+  { url = "$BASE_URL/uiua-documentation-challenges", name = "Challenges" },
+  { url = "$BASE_URL/uiua-some-euler-problems", name = "Euler Problems" },
+  { url = "$BASE_URL/misc/ai-disclosure/", name = "AI" },
   #    { url = "$BASE_URL/skruv", name = "RÚV Fréttir" },
 ]
 codeblock = true

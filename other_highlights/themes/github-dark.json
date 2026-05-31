@@ -588,6 +588,20 @@
       }
     },
     {
+      "name": "Bullshit",
+      "scope": "red-bullshit",
+      "settings": {
+        "foreground": "#f08050"
+      }
+    },
+    {
+      "name": "YellowBullshit",
+      "scope": "yellow-bullshit",
+      "settings": {
+        "foreground": "#f0d090"
+      }
+    },
+    {
       "name": "Subscripted",
       "scope": "subscripted",
       "settings": {

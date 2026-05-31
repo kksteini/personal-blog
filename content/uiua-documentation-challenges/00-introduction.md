@@ -89,3 +89,21 @@ Go to the next chapter.
 On the top of every page I link to the relevant Uiua documentation.
 Read that first, try the challenges. Then come back
 to check your understanding, if necessary.
+
+## On Uiua Syntax highlighting
+
+Uiua is very cool and will syntax highlight macros and bound functions
+differently depending on their context.
+
+Monadic functions are yellow, function modifiers are yellow
+and dyadic are blue, literals are red.
+
+> I'm colour blind, these might be green, purple and orange.
+> ¯\_(ツ)_/¯
+
+I am using Zola to generate this site and I've chosen to sacrifice
+bound function and macro accuracy in favour of having an easier time writing
+code.
+
+Zola utilizes Giallo for syntax highlighting which, as of writing, does not
+support Uiua so I've clobbered together [this horror](https://github.com/kksteini/personal-blog/blob/main/uiua-syntax-highlighting/uiua.grammar.json).
