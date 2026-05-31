@@ -67,9 +67,6 @@ and then fixed it myself if I agree.
 For comparison and fairness I've opted to not review this
 document for grammar mistakes and typos.
 
-Sometimes they have been AI proofread, though most often rejected if not
-a grammar mistake or a typo.
-
 *For a little while, a series heading had an AI generated description
 after the Zola refactor which slipped my notice.
 I replaced it with my own writing when I wrote
