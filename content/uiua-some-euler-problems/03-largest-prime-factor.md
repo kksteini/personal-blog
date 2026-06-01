@@ -439,14 +439,12 @@ We reduce the solution further down to
 
 ## Solving the Uiua way
 
-### The documentation is a gold mine
+### Check the idioms
 
 Were you, a more experienced Uiua user, screaming internally for a
 certain something this whole previous section?
 If not, I would like you to visit [the uiua idioms](https://www.uiua.org/docs/idioms).
 It's right there, the prime factorization of a number.
-
-### A beautiful built-in
 
 What we did by getting all the proper divisors and then filtering on the
 primes is the equivalent to doing a prime factorization of a number and
