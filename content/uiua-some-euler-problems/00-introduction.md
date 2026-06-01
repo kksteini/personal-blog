@@ -22,7 +22,25 @@ I don't really know math and this whole thing is here to trick you into
 disagreeing with me and then helping me learn by sending in better answers
 at [<eulerproblems@anub.is>](eulerproblems@anub.is). I welcome discussion of course.
 
-## What should I do?
+## Who is it for?
+
+I have two goals in mind for these posts.
+
+- Teach Uiua
+- Teach problem solving and incremental approaches
+
+Every post builds a foundation for solving these problems
+and depending on your familiarity with maths and Uiua, these
+might feel slow.
+
+The target audience is myself some 6 months ago, at which time
+
+- I know very little
+- I need slow, methodical and careful explanations
+- I need simple before I understand complicated
+- I don't have a strong mathematical foundation
+
+## What should you do?
 
 I will be linking to the problems at the top of each section. I urge you to try
 for yourself and check back here for hints if you get stuck. I will also
@@ -30,9 +48,9 @@ aim to have further reading, if applicable, for these problems.
 
 The guidelines you should adhere to are:
 
-* Have fun
-* Learn something new
-* Forgive yourself (math is hard)
+- Have fun
+- Learn something new
+- Forgive yourself (math is hard)
 
 ## On the code
 

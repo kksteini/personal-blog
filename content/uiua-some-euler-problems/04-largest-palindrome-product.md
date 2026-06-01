@@ -167,6 +167,7 @@ I'd argue that this is fast enough, but let's try some other implementations
 and compare them.
 
 For now, let's store this whole computation so that we can more easily compare later.
+Let's also drop `IsPalindromic` and use its contents, since that is visually shorter.
 
 ```uiua
     LargestPalindrome ← /↥▽⊸≡(=⊸⍜°⋕⇌)◴♭≡(×⇡1000)⇡1000
@@ -190,6 +191,8 @@ now the function is run when LargestPalindrome is invoked.
 ## Finding some built-ins
 
 Often we can get better results by finding specialty built-ins.
+They are optimized for their specific tasks after all.
+
 Recall what we did earlier to multiply all elements with one another
 from two equal ranges.
 
@@ -242,9 +245,8 @@ largest product palindrome
 Let's compare the performance between the original and
 our checkpoint.
 I've created a macro that runs a function 100 times and shows
-the average runtime. See appendix for
-
-See [gauntlet in appendix](@/uiua-some-euler-problems/04-largest-palindrome-product.md#the-gauntlet)
+the average runtime.
+See [gauntlet in appendix](@/uiua-some-euler-problems/04-largest-palindrome-product.md#the-gauntlet).
 If we run them a 100 times, how do they compare?
 
 ```uiua
@@ -254,7 +256,7 @@ If we run them a 100 times, how do they compare?
 0.23686788558959962
 ```
 
-Well. The average of running 100 `perf` tests on each differs by ~0.002 seconds.
+Well. The average differs by ~0.002 seconds.
 This is likely not significant and might flip based on random variations.
 
 It is more beautiful though.
@@ -273,7 +275,7 @@ some unnecessary calculations.
 ### Lossy transformation
 
 Isn't `under` an overkill for the palindromic check?
-We don't have to transform back from a string.
+We don't have to transform back to a number.
 Lets just transform the number and see if the resulting string
 is palindromic.
 
@@ -299,6 +301,7 @@ and the average of 100 `perf`s comes down to
 0.1886356520652771
 ```
 
+That's faster.
 Let's run all three again just to make sure.
 
 ```uiua
@@ -310,7 +313,7 @@ Let's run all three again just to make sure.
 0.18808703899383544
 ```
 
-Well. It seem like our latest iteration is quicker, but again. Not by that much.
+An improvement for sure.
 
 ### A different paradigm
 

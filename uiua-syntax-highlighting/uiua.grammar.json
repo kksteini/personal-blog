@@ -5,7 +5,11 @@
   "patterns": [
     {
       "name": "red-bullshit",
-      "match": "GauntletHelper!|Gauntlet!|LargestPalindrome"
+      "match": "LargestPalindrome"
+    },
+    {
+      "name": "yellow-bullshit",
+      "match": "GauntletHelper|Gauntlet"
     },
     {
       "name": "comment",

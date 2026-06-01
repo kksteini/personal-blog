@@ -31,8 +31,8 @@ In this section we will:
 
 *[Previous modulus basics](@/uiua-some-euler-problems/01-multiples-of-3-or-5.md#modulo)*
 
-We define proper divisors of $N$ to be any $K < N$ such that $mod\ K$ is $0$;
-that is to say, $K$ divides $N$.
+We define proper divisors of $N$ to be any $K$ where $1 \leq K < N$
+such that $mod\ K$ is $0$; that is to say, a positive $K$ which divides $N$.
 
 Let's determine this with Uiua
 [pervasively](https://www.uiua.org/tutorial/Arrays#pervasion).
@@ -86,9 +86,6 @@ divide 60.
 [1 2 3 4 5 6 10 12 15 20 30]
 ```
 
-> 60 has a lot of factors. It is a so-called highly composite number.
-> See: [Highly Composite Number on Wikipedia](https://en.wikipedia.org/wiki/Highly_composite_number)
-
 By doing this, we have found all positive factors of 60 less than itself, or
 proper divisors. Let's make this a function and test
 some numbers.
@@ -115,11 +112,6 @@ Most interesting though is $59$. The only divisor found is $1$.
 Prime time.
 
 ### Proper divisors as means to primality
-
-> A prime number is a number that is only divisible by
-> 1 and itself
->
-> -Albert Einstein (possibly misattributed)
 
 When we tested $59$ for proper divisors we only got
 back $1$. We know that $1$ divides every number and

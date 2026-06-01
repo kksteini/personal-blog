@@ -366,8 +366,22 @@ body like we did in the previous section.
 
 ## Solution
 
-Pick your favourite `X`, iterative or recursive.
-We'll use it to generate all Fibonacci numbers below the threshold.
+Pick your favourite `X`, iterative
+
+```uiua
+    X ← ◡+
+```
+
+or recursive
+
+```uiua
+BFH ← |1 memo(
+  ⨬(+⊃(BFH -2|BFH -1)|1)⊸≤1
+)
+X ← ⊃+₁ BFH
+```
+
+We'll use `X` to generate all Fibonacci numbers below the threshold.
 
 *For brevity I'll use threshold 200 until the end.*
 
