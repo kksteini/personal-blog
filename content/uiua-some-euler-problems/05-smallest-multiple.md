@@ -21,28 +21,29 @@ is **evenly divisible** by all of the numbers from $1$ to $20$?
 
 ### The Fundamental theorem of arithmetic
 
+Prime factors of a number are tightly linked to its divisibility.
 Please take a skim of the [Fundamental theorem of arithmetic](https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic)
-on Wikipedia.
+on Wikipedia to see why. The article says the following:
 
 > Every integer greater than 1 is either prime or can be represented uniquely as
 > a product of prime numbers.
 
 #### Uiua prime factorization
 
-The Wikipedia articles gives this example.
+The Wikipedia article gives this example
 
 $$ 1200 = 2^4 \times 3^1 \times 5^2 $$
 
 In a previous chapter we discussed [un reduce mul](@/uiua-some-euler-problems/03-largest-prime-factor.md#check-the-idioms).
-What happens when we apply it to 1200?
+Applying it to $1200$ is likewise prime factorizing it.
 
 ```uiua
     °/× 1200
 [2 2 2 2 3 5 5]
 ```
 
-Yup. Just like the Wikipedia example.
-Different representations but they are equivalent.
+This agrees with the Wiki article.
+These are different representations, sure, but they are equivalent.
 
 ## Towards a solution
 
@@ -58,14 +59,22 @@ Now, $18$ can be represented as a product of its prime factors:
 $$ N = K \times 2 \times 3 \times 3$$
 
 So, **if we spot the prime factors of $18$** in any prime factorization
-of some number, then we know already that it is divisible by $18.$
+of some number, then we know that it is divisible by $18.$
 We can consider the remainder after we divide, or take away $[2\ 3\ 3]$, to be the
-candidate $K.$ Let's take an example.
+candidate $K$.
 
-$$ Suppose\ prime\ factors\ of\ K \times 18 = [2\ 2\ 3\ 3\ 3] $$
+$$ Suppose\ prime\ factors\ of\ some\ N\ are\ [2\ 2\ 3\ 3\ 3] $$
+$$ We\ spot\ the\ prime\ factors\ of\ 18:\ [2\ 3\ 3] $$
 $$ Isolating\ 18 → [18\ 2\ 3] $$
-$$ Dividing\ by\ 18 → [1\ 2\ 3] $$
+$$ Dividing\ by,\ or\ removing\ 18 → [1\ 2\ 3] $$
+
+We can stop here and assert divisibility by $18$.
+We can also keep going on to show that $N$ is of the
+form $K \times 18.$
+
+$$ [2\ 2\ 3\ 3\ 3] \xrightarrow{\text{Removing factors of 18}} [1\ 2\ 3] $$
 $$ therefore\ K=1 \times 2 \times 3 = 6 $$
+$$ N = 6 \times 18 $$
 
 **Likewise we can tell the opposite.** If a number does not include the entirety
 of the prime factors of $18$ it is not cleanly divisible by it.
@@ -77,7 +86,7 @@ Take $1200$ again.
 [2 2 2 2 3 5 5]
 ```
 
-Since there is only one $3$ in there, we can already see that $1200$ is
+Since there is only one factor of $3$ in there, we can already see that $1200$ is
 not cleanly divisible by $18.$
 
 $$ \frac{1200}{18} = 66.666...$$
@@ -150,8 +159,8 @@ Therefore, the smallest number divisible by both $18$ and $12$ is
 
 Another way of thinking about this problem:
 
-* *The smallest number divisible, by all of a set of other numbers, is the
-product of the maximum count of all prime factors of those numbers*
+* *The smallest number divisible by a collection of numbers, is the
+product of the maximal count of each prime factor over the collection*
 
 A hecking mouthful. Let's test it out.
 
