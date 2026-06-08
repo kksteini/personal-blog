@@ -533,7 +533,7 @@ after applying `IsPrime` to a range
 
 ```
 
-Oh, yeah. The range starts on one. We need to account for that with `+1`
+Oh, yeah. Where is zero indexed. We need to account for that with `+1`
 
 ```uiua
     +₁⊚ ≡IsPrime⇡₁100
