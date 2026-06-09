@@ -21,11 +21,11 @@
     },
     {
       "name": "monadic-modifier",
-      "match": "memo|[⧅⤚⊞⍚˜⋅˙⊙⊸°≡⟜⤙∩◡⊜\\\\]"
+      "match": "memo|[⧅⤚⊞⍚⧈˜⋅˙⊙⊸°≡⟜⤙∩◡⊜\\\\]"
     },
     {
       "name": "monadic-pervasive",
-      "match": "[¬⌵⌊⌈]"
+      "match": "[¬⌵⌊⌈ₑ]"
     },
     {
       "name": "monadic-function",
