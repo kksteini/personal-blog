@@ -93,7 +93,7 @@ state the window size. *I like subscripts*.
 ## Towards a solution
 
 We know that we want to look at 13 digits at a time.
-This should be possibly for us to do with windows, using `stencil`.
+This should be possible for us to do with windows, using `stencil`.
 We just need to acquire a digit array.
 
 ### Digits from base 10

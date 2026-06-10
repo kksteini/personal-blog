@@ -417,6 +417,71 @@ and finally we sum them up with `reduce add`
 4613732
 ```
 
+## Extra credit
+
+Do you notice any patterns about what numbers are even for the Fibonacci sequence?
+Turns out every third number is.
+There is a formula, or a relationship we can use to generate them.
+
+Look at the first 4 even numbers in the sequence
+
+```uiua
+   [2 8 34 144]
+```
+
+What are their ratios?
+
+> I'll use stencil for the ratios.
+> You can look at chapter eight for a short discussion on `stencil`
+> or simply go to the [docs](https://uiua.org/docs/stencil).
+
+```uiua
+    ⧈÷ [2 8 34 144]
+[4 4.25 4.235294117647059]
+```
+
+Seems to be four and a little something.
+
+$$ 2 * 4 = 8$$
+$$ 8 * 4 = 32$$
+
+Well, $32$ is $2$ away from the next even Fibonacci number, $34.$
+
+$$ 34 * 4 = 136$$
+
+And here, $136$ is $8$ away from the next even Fibonacci number. It seems
+awfully suspicious.
+
+Is it possible that the even numbers keep following this pattern?
+
+Let's define a new recursive relationship, let's call it G,
+and use it to predict the even numbers.
+
+$$ G_1 = 2,\ G_2 = 8 $$
+$$ G_k = 4 \times G_{k-1} + G_{k-2}$$
+
+We can modify our iterative solution, run it under 4 million and compare with the
+`mod` filtered results.
+
+```uiua
+X ← ◡(+×₄)
+    ⍢(X|<4000000◌) 8 2
+[2 8 34 144 610 2584 10946 46368 196418 832040 3524578]
+
+    Y ← ◡+
+    ▽ ¬⊸◿ 2⍢(Y|<4000000◌) 1 1
+[2 8 34 144 610 2584 10946 46368 196418 832040 3524578]
+
+```
+
+Yup. That's the same.
+So an alternative solution is
+
+```uiua
+    /+⍢(◡(+×₄)|<4000000◌) 8 2
+4613732
+```
+
 ## Appendix
 
 ### Function calls
