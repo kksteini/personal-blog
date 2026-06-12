@@ -24,7 +24,8 @@ greatest product. What is the value of this product?
 ### Windows
 
 In many programming languages, there is an operation that gives you an
-enumerator over an array or a string. Look at the following examples and
+enumerator over multiple elements of an array or a string.
+Look at the following examples and
 see if you can spot how this is useful to this problem.
 
 #### Ruby
