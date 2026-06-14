@@ -14,10 +14,11 @@ tags = ["uiua", "euler"]
 ## What is this?
 
 I'm going to go through some of the Project Euler problems, out of the first 100.
-I'm going to be solving them with Uiua and occasionally I might throw in a Ruby
-or Rust solution.
+I'm going to be solving them with Uiua.
+The target is to have a solution that runs in under a minute, though I will sometimes
+optimize further even if we reach that.
 
-Keep in mind that I'm not an expert.
+**Keep in mind that I'm not an expert.**
 I don't really know math and this whole thing is here to trick you into
 disagreeing with me and then helping me learn by sending in better answers
 at [<eulerproblems@anub.is>](eulerproblems@anub.is). I welcome discussion of course.
@@ -33,7 +34,8 @@ Every post builds a foundation for solving these problems
 and depending on your familiarity with maths and Uiua, these
 might feel slow.
 
-The target audience is myself some 6 months ago, at which time
+The target audience is myself some 6 months ago before I started this series.
+My self assessment at that time was:
 
 - I know very little
 - I need slow, methodical and careful explanations
