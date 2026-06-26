@@ -52,7 +52,7 @@ These are different representations, sure, but they are equivalent.
 Let's take the number $18$ as an example.
 Its prime factors are $[2\ 3\ 3].$
 For any other number, $N$, to be divisible by $18$ it needs to
-representable as $N = K \times 18$ where $K$ is a whole number.
+be representable as $N = K \times 18$ where $K$ is a whole number.
 
 Now, $18$ can be represented as a product of its prime factors:
 
@@ -131,7 +131,7 @@ will still give back the original number.
 
 ### Connecting numbers on prime factors
 
-Do we now have a good intuition for how to answer a question on the form:
+Do we now have a good intuition for how to answer a question of the form:
 
 * *What is the smallest number divisible by both $K$ and $T$?*
 

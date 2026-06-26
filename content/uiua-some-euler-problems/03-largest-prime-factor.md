@@ -174,7 +174,7 @@ Now, solving the problem is simply getting the largest one.
 29
 ```
 
-Great. Now lets try it on the real deal.
+Great. Now let's try it on the real deal.
 
 ```uiua
     /↥ ▽ ⊸≡IsPrime PD 600851475143
@@ -391,7 +391,7 @@ our previous `IsPrime` such that it uses `PDS` instead of `PD`.
     IsPrime ← =1 ⧻ PDS
 ```
 
-> This is fine since our primality check insists that there is only
+> This is fine since our primality check insists that there are only
 > two factors, 1 and the number itself. PDS only gives back half of the
 > factors whereas PD would exclude the number itself only.
 > For a prime number, in both cases only [1] is returned.
@@ -533,7 +533,7 @@ after applying `IsPrime` to a range
 
 ```
 
-Oh, yeah. Where is zero indexed. We need to account for that with `+1`
+Oh, yeah, `where` is zero indexed. We need to account for that with `+1`
 
 ```uiua
     +₁⊚ ≡IsPrime⇡₁100
@@ -651,5 +651,5 @@ The pervasive versions are about 10x faster than
 the prime checker that needs rows.
 Interestingly the more complicated prime pervasive version, that accounts for $1$,
 measures to be the fastest.
-Even though we added more checks to it
+Even though we added more checks to it,
 the speed difference is less than random variance.

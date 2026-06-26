@@ -178,7 +178,7 @@ Let's also drop `IsPalindromic` and use its contents, since that is visually sho
 ```
 
 That's too fast? Ah, yes. The binding precomputes the value and stores it in LargestPalindrome.
-We can prevent this by wrapping our binding definition in parentheses
+We can prevent this by wrapping our binding definition in parentheses.
 
 ```uiua
     LargestPalindrome ← (/↥▽⊸≡(=⊸⍜°⋕⇌)◴♭≡(×⇡1000)⇡1000)
@@ -186,7 +186,7 @@ We can prevent this by wrapping our binding definition in parentheses
 0.22612762451171875
 ```
 
-now the function is run when LargestPalindrome is invoked.
+Now the function is run when LargestPalindrome is invoked.
 
 ## Finding some built-ins
 
@@ -276,7 +276,7 @@ some unnecessary calculations.
 
 Isn't `under` an overkill for the palindromic check?
 We don't have to transform back to a number.
-Lets just transform the number and see if the resulting string
+Let's just transform the number and see if the resulting string
 is palindromic.
 
 ```uiua
@@ -287,7 +287,7 @@ is palindromic.
 [1 1 0 1]
 ```
 
-Now we can try injecting this into our previous implementation and see if its
+Now we can try injecting this into our previous implementation and see if it's
 any better
 
 ```uiua
@@ -397,7 +397,7 @@ But surely that can't be that bad?
 500500
 ```
 
-Oh. Well, it reduces the search space roughly 20 percent. What does this do?
+Oh. Well, it reduces the search space by roughly 20 percent. What does this do?
 Let's quickly redefine all functions and run the 100 round gauntlet on all of them
 
 ```uiua

@@ -165,8 +165,9 @@ It's easy to see here that the biggest product of three numbers, down in a row,
 is $7 \times 11 \times 15 = 1155.$
 How do we arrive at that with Uiua?
 
-Well, let's try rotating our 2D array by multiples of 0, 1, and 2 on the downwards
-direction, the vector $[-1\ 0]$. We don't want to allow wrapping so let's also rotate with `fill 0`.
+Well, let's try rotating our 2D array by multiples of 0, 1, and 2 in the downwards
+direction, the vector $[-1\ 0]$. We don't want to allow wrapping so
+let's also rotate with `fill 0`.
 
 ```uiua
     ≡⌟⬚0↻ [0_0 ¯1_0 ¯2_0] M
@@ -362,7 +363,7 @@ Though, I suppose it is cleaner to just `deshape` it.
 
 ### Parsing
 
-You can copy-paste the problem array into the Uiua
+You can copy-paste the problem array into
 [the Uiua pad](https://uiua.org/pad?src=0_19_0-dev_4__eJxVVLutJFUQ9V8Ux8BYvPp_PBLYKAgBaUNAQjg4OHj4GMRAKC8SdOot08uoNXP7zu1TVefTAPAZ7z__hk9vuM93kIEYzLANH2hCBCH87oQEJCGNHqRBDSnoxipkXhixvHb5nDZGoYNslGCaOyHYQThqEUPULJRB5IUxSgxXtCMTvdCALdbRSoBqpGMGLhDnYXV4ofKFkYYWbMKcNUqgijBWtUANq4rCjYtWeHN2L6y-MMzYhN7_qaxajlmEYu9sBs_EkWSDKrizlXlmsUA0y5SQFXabrBRBTt05SA_BJmACT5J05L4w3EjZ6NUITlQNFVhRpq98LLtpYRM63C_evjCqedyEo4uRcDXebnKoDfhyIYe3ShjqGLBv-AjKkUMfVFGdXaLuCdvDawvj1IvqBNkqR9uDoZyVouyZStBFMkxIDKcPbpaSG_owqAHXj7Y9rJdOPsyOx1NHkw0L-T_NjdoRb3k4C_v0ocWJJemJLRZ2pVIfA85wWDkLU-S4pheTyH58WucioY896ZJZBoSowcub3yWcOoceyjjIJy-67Hb0dLn-o8-kc_za2akucM20yXGaiXi0ZYaM0s0HZUldtNjKNsPnxwT1L6bJHda0VNUzy3mwhillXM8cbWfYs3U1F5n0De3sjGMyxt_2EVepnQa0JMWqpG-DYDpnsCKVfsEpo_7-9EGHLlsJ5RMu9MqHl8o4Vy3Gvjp-Eh0s6wX9HwY7SJZhthQrDHufl2LvLTKkla-nc2OeahnPLMowMVJKWj-kq6OV2XcClPI9RupPed0j6T9t33_58_3X3__5-_2vP37Ajz99ue3v3-7n89u_tDH3Pw==)
 and create a multiline string with ctrl+4.
 

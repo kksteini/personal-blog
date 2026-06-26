@@ -10,6 +10,8 @@ taxonomies = [
   { name = "tags", feed = true },
 ]
 
+build_search_index = true
+
 [markdown]
 insert_anchor_links = "heading"
 external_links_target_blank = true
@@ -19,6 +21,9 @@ style = "inline"
 theme = "github-dark-with-uiua"
 extra_grammars = ["uiua-syntax-highlighting/uiua.grammar.json"]
 extra_themes = ["other_highlights/themes/github-dark.json"]
+
+[search]
+index_format = "elasticlunr_json"
 
 [extra]
 radion_menu = [
@@ -31,3 +36,4 @@ radion_menu = [
 codeblock = true
 latex = true
 theme = "dark"
+enable_search = true

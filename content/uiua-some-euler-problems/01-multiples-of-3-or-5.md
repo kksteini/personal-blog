@@ -107,7 +107,7 @@ We'll check a range of numbers and take their 3 and 5 modulo.
 According to the **key insight**, we want to find all numbers whose
 3 or 5 modulo results in 0, meaning that they are a multiple of either.
 
-Let's create a range, starting at 1 (`mod 0 X` is dividing with 0)
+Let's create a range, starting at 1 (`mod 0 X` is dividing by 0)
 and ending at 9, like the problem example.
 
 ```uiua

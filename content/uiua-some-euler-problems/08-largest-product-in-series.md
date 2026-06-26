@@ -195,7 +195,7 @@ Isn't this the same shape as an array?
 Usually, when we operate on a straightforward array in Uiua, we know to
 use either a pervasive function or `rows` if we want something to apply
 to each element.
-Lets try `rows parse` on the string.
+Let's try `rows parse` on the string.
 
 ```uiua
     ≡⋕ "7281965729"
@@ -219,7 +219,7 @@ Now we can apply the same set of jargon to the 1000-digit number.
 
 ### Extra credit - Getting digits pervasively
 
-*Thanks to Tyz for the feedback.*.
+*Thanks to Tyz for the feedback.*
 
 Here it is again. Oh boy.
 
