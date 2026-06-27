@@ -19,8 +19,8 @@ The triangle numbers, $1,3,6,10,...$, are called that because they represent
 a specific kind of triangle.
 
 Imagine you're stacking, or ordering, balls into a 2D triangle.
-Start with triangle of size $1.$
-You can make ever larger triangles by repeating the following
+Start with a triangle of size $1.$
+You can make ever larger triangles by repeating the following procedure.
 
 * -Add rows beneath your triangle
 * * +It's still a triangle.
@@ -69,13 +69,13 @@ We can define a function, $X$, such that it acts on two numbers.
 Its first argument is the addition iterator. It'll start at $1.$
 The second argument is the cumulative sum. That'll start at $0.$
 
-We create two new arguments with fork:
+We create two new arguments with `fork`:
 
-* -`add,1`, which acted on the first argument, the iterator
-* -`add` which added the iterator and the cumulative sum
+* -`add,1`, which creates a new first argument, the iterator
+* -`add` which creates a new second argument, the cumulative sum
 
 This way, repeatedly calling `X` on itself will advance the iterator
-while the second argument becomes the next triangle number.
+and create the next triangle number.
 
 Let's see it in action.
 
@@ -99,10 +99,10 @@ Yup. We see the first four triangle numbers, $1,3,6,10$, in there.
 
 ### A sad brute force
 
-I solved it. Here's the program.
+Here's a program.
 It uses the [proper divisor check](@/uiua-some-euler-problems/03-largest-prime-factor.md#alternate-proper-divisors)
 as seen in chapter 3.
-Then it's the good ol' do loop
+Then a good ol' do loop
 
 ```uiua
     Cond ← >500⧻⊚=0◿⊸⇡
@@ -113,7 +113,7 @@ Then it's the good ol' do loop
 76576500
 ```
 
-This ran out of memory in the pad.
+This one ran out of memory in the pad.
 
 It took around 20 minutes to crunch this in the repl on my laptop.
 That is toooooooo slow.
@@ -188,15 +188,14 @@ are sorted.
 [2 1 1]
 ```
 
-We can throw away the factors, since we only care about the exponents.
-We can do that with `dip pop`.
+We can throw away the factors, with `dip pop`, since we only care about the exponents.
 
 ```uiua
     ⊙◌°▽ °/× 60
 [2 1 1]
 ```
 
-Now, the product formula was $(a_i + 1)$ so we simply `add,1` to the exponents.
+Now, the product formula was $(a_i + 1)$ so we must `add,1` to the list of exponents.
 
 ```uiua
     +₁⊙◌°▽ °/× 60
