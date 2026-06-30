@@ -11,6 +11,9 @@ categories = ["uiua-euler"]
 tags = ["uiua", "euler", "prime-numbers"]
 +++
 
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD013 -->
+
 ## Problem
 
 In the $20 \times 20$ grid below, four numbers along a diagonal line have been

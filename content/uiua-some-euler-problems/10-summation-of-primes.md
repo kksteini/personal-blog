@@ -182,7 +182,7 @@ We expand the range to encompass the *under 2 million* condition.
 
 That's our answer!
 
-#### Speed?
+### Speed?
 
 This runs under our 1 minute target.
 

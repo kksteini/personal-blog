@@ -11,6 +11,9 @@ categories = ["uiua-euler"]
 tags = ["uiua", "euler"]
 +++
 
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD013 -->
+
 ## Problem
 
 The four adjacent digits in the $1000$-digit number that have the greatest product are $9 \times 9 \times 8 \times 9 = 5832$.

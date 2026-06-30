@@ -10,6 +10,8 @@ toc = true
 categories = ["uiua-euler"]
 tags = ["uiua", "euler", "fibonacci"]
 +++
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD013 -->
 
 ## Problem
 
