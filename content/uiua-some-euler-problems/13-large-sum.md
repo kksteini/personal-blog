@@ -128,7 +128,7 @@ This has the consequence of rounding integers once they get too large.
 At around $2^{53}, or $9007199254740992$ things start breaking down.
 
 Let's try all 1s but with one digit more than that.
-We'll enter that into the Uiua repl
+We'll enter that into the Uiua repl.
 
 ```uiua
     11111111111111111 # our input
@@ -240,14 +240,14 @@ That also means we'd like to bring them back.
 #### Addition
 
 We can't just mush together two arrays though.
-Plain arrays overflow
+Plain arrays overflow.
 
 ```uiua
     + [1 2 3 4] [3 4 5 6]
 [4 6 8 10]
 ```
 
-We need some magic method, `BigAdd`, that does the following
+We need some magic method, `BigAdd`, that corrects the overflow.
 
 ```uiua
     BigAdd [1 2 3 4] [3 4 5 6]
@@ -276,7 +276,6 @@ We'll rotate the overflow by one so that the next digit is correctly incremented
 [0 0 1 0]
 
 # And if added
-    add ↻1 ⊸>9 [4 6 8 10]
     + ↻1 ⊸>9 [4 6 8 10]
 [4 6 9 10]
 ```
@@ -398,13 +397,13 @@ What does $999 + 1$ result in now?
 ```
 
 Huh. If we pass that to `ToString` we get back `"001"`.
-It seems like the $10$s overflow was correctly run multiple times
+It seems like the $10$s overflow correction was run multiple times
 but the last calculation rotated the $1$ such that it wrapped around.
 This makes sense though. Since the result should be 4 digits long
-but the longest array supplied is 3, it's simply missing.
+but the longest array supplied is 3. We're simply missing a digit.
 
-What if we just append a $0$, `both(join 0)`, to the input arguments so that overflows have
-an empty significant digit to go to?
+What if we just append a $0$, `both(join 0)`, to the input arguments so that
+overflows have an empty significant digit to go to?
 If we're just adding together two numbers, at a time, the worst case
 is all $9$s, for both arguments, which still just requires one extra space.
 
@@ -429,15 +428,14 @@ Let's test $1 + 999$, $999 + 1$ and $1234+3456$ again.
 
 Oh, something went wrong. Let's work through our `BigAdd` a step at a time.
 
-```
-
 ```uiua
     ∩(⊂0) FromString "1" FromString "999"
 [0 9 9 9]
 [0 1]
 ```
 
-Oh, we gotta keep our significant digits straight. Let's use `backward join` and try again.
+Oh, we gotta keep our significant digits straight. Let's use `backward join`
+and try again.
 
 ```uiua
     BigAdd ← RemZer⍢(+ + ⊃(↻¯1|×¯10)⊸>9|AddNotFin) ⬚0 + ∩(˜⊂0)
@@ -495,8 +493,8 @@ Then reduce them via `BigAdd` and converting back to string.
 "5537376230390876637302048746832985971773659831892672"
 ```
 
-That's is indeed the exact result. You can simply copy the first 10 or follow it up
-with `take,10` and `parse`.
+That's indeed the exact result. You can simply copy the first 10 digits or follow
+it up with `take,10` and `parse`.
 
 ```uiua
     ⋕ ↙₁₀ ToString /BigAdd ≡FromString⊜∘ ⊸≠ @\n Input
@@ -506,7 +504,7 @@ with `take,10` and `parse`.
 #### Performance?
 
 This does some shuffling so it might get slow with increasing input sizes.
-However, only a hundred 50-digit numbers is a breeze
+However, only a hundred 50-digit numbers is a breeze.
 
 ```uiua
     ⊙◌⍜now(⋕ ↙₁₀ ToString /BigAdd ≡FromString⊜∘ ⊸≠ @\n Input)
