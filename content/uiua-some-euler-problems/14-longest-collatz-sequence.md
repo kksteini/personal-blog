@@ -15,8 +15,8 @@ tags = ["uiua", "euler", "bigint"]
 
 The following iterative sequence is defined for the set of positive integers:
 
-* $n \to n/2$ ($n$ is even)
-* $n \to 3n + 1$ ($n$ is odd)
+$$n \to n/2\ (n\ is\ even)$$
+$$n \to 3n + 1\ (n\ is\ odd)$$
 
 Using the rule above and starting with $13$, we generate the following sequence:
 $$13 \to 40 \to 20 \to 10 \to 5 \to 16 \to 8 \to 4 \to 2 \to 1.$$
