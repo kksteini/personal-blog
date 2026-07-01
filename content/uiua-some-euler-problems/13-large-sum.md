@@ -3,7 +3,7 @@ title = "13 - Large Sum"
 date = 2026-06-30
 weight = 13
 [extra]
-doclink = "<https://projecteuler.net/problem=13>"
+doclink = "https://projecteuler.net/problem=13"
 toc = true
 
 [taxonomies]
