@@ -35,18 +35,18 @@ Which starting number, under one million, produces the longest chain?
 ## Solving with brute force
 
 This seems straightforward enough to define in Uiua.
-To get the next Collatz number, we'll call it `NC`, we need to check
+To get the next Collatz number, `NC`, we need to check
 whether it is odd or even. For odd numbers, we perform `add,1 mul,3` and
 `div,2` for even.
 
 ```uiua
     NC ← ⨬(+₁×₃|÷₂)=0⊸◿2
-    repeat,10 by NC 13
 ```
 
 And if we try capturing the demo sequence given in the problem?
 
 ```uiua
+    repeat,10 by NC 13
     ⍥₁₀⊸NC 13
 [13 40 20 10 5 16 8 4 2 1]
 ```
@@ -64,7 +64,8 @@ What if we just collect the next terms until the do-condition is 1?
 [13 40 20 10 5 16 8 4 2]
 ```
 
-Well, since it terminates at $1$, we might as well just add it when the loop ends.
+Well, since it terminates at $1$, we might as well just add it, `bw join 1`,
+when the loop ends.
 
 ```uiua
     ˜⊂1⍢(⊸NC|≠1) 13
@@ -75,16 +76,19 @@ We can now define a function, Collatz Sequence, like so.
 
 ```uiua
     CS ← ˜⊂1⍢(⊸NC|≠1)
+
+    CS 13
+[13 40 20 10 5 16 8 4 2 1]
 ```
 
-Let's find the longest one out of the first 10
+Let's find the longest sequence out of the first 10.
 
 ```uiua
     ≡(⧻CS)⇡₁10
 [1 2 8 3 6 9 17 4 20 7]
 ```
 
-Whoah, starting at 9 is pretty good. Let's see it.
+Whoah, 9 is pretty good. Let's see it.
 
 ```uiua
     CS 9
@@ -93,8 +97,8 @@ Whoah, starting at 9 is pretty good. Let's see it.
 
 ---
 
-Let's find the longest sequence then. Let's start with the first 10 as a test.
-We already know that the $9$ produces the longest one.
+Let's find the longest sequence then. We start with the first 10 as a test,
+since we already know that $9$ produces the longest one.
 
 We'll start by getting the longest one.
 
@@ -104,7 +108,7 @@ We'll start by getting the longest one.
 20
 ```
 
-Let's get its index by using `where eq`
+Let's get its index by using `where eq`.
 
 ```uiua
     ⊚=⊸/↥ ≡(⧻CS) ⇡₁10
@@ -129,8 +133,7 @@ Now, let's run it over the range of numbers from $1$ to $999 999.$
 837799
 ```
 
-Hoo boi. It gets there but it takes a while.
-5 minutes, to be exact.
+Oh boy. It gets there but it takes a while.
 
 ```uiua
     ⊙◌⍜now(+₁⊢⊚=⊸/↥ ≡(⧻CS) ⇡₁999999)
@@ -143,7 +146,7 @@ That's not good enough.
 
 Every single sequence is going to collapse down to $1$ eventually.
 There are probably a lot of funnels that many sequences have in common.
-Hell, if any sequence lands on a power of $2$, it will slide all the way down
+F.x, if any sequence lands on a power of $2$, it will slide all the way down
 to $1$ from that.
 This means that it might be a good idea to avoid repeat calculations.
 What if we could cache them somehow?
@@ -201,8 +204,7 @@ Let's run the memoized one on the full range now.
 
 ```uiua
     +₁⊢⊚=⊸/↥ ≡(⧻GCL) ⇡₁999999
-Error: Recursion limit reached. You can try setting UIUA_RECURSION_LIMIT to a higher value. The current limit is 100.
-  in GCL ┬×50
+Error: Recursion limit reached. 
 ```
 
 Darn. Well, let's set that environment variable to something ridiculous and try
@@ -228,13 +230,13 @@ I invoked `UIUA_RECURSION_LIMIT=1000 uiua repl` with the following results.
 #### I wanna run it in the pad goddamn it
 
 The best I can come up with is a hybrid solution that
-goes as far as it can down the recursion but always
-has the old `CS` as backup when it hits the recursion
+recurses as far down as possible before erroring but
+has the old `CS` as backup when it hits the
 limit. This is done by introducing `try`.
 
-I timed one run with `perf` and then ran it without it to verify the results.
+I timed one run with `perf` and then ran the program without it to verify the results.
 This runs in 49 seconds in the pad on my laptop while producing the correct answer.
-So it is faster than the pure brute force method
+It is faster than the pure brute force method
 while also not relying on a ridiculous recursion limit.
 
 ```uiua
@@ -243,7 +245,7 @@ CS ← ˜⊂1⍢(⊸NC|≠1)
 GCL ← |1 memo!(
   ⊸=1                    # Is it 1?
   ⨬(⍣(+₁ GCL NC|⧻ CS NC) # return 1+GCL NC if not finished
-    # Fall back on CS if recursion limit
+    # Fall back on CS if recursion limit is hit
   | 1 # return 1 if previous NC was 1
   )
 )

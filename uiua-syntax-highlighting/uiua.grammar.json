@@ -29,7 +29,7 @@
     },
     {
       "name": "monadic-function",
-      "match": "[⧻√⇌⇡⍆♭◴△¤□⊢⊣⊚⍉⋕]"
+      "match": "[⧻√⇌⇡⍆♭◴△¤□⊢⊣⊚⍉⋕]|&s"
     },
     {
       "name": "iterating-modifier",
@@ -49,7 +49,8 @@
     },
     {
       "name": "bound-function",
-      "match": "IsPrimePervasive|FromString|ToString|AddNotFin|BigAdd|RemZer|Input|IsPrime|PDS|PD|AD|PDH|[MBFGH]"
+      "comment": "This is ridiculous and I know it. But I'm lazy and bad.",
+      "match": "IsPrimePervasive|FromString|ToString|AddNotFin|BigAdd|RemZer|Input|IsPrime|GNL|PDS|PD|AD|PDH|NC|CS|GCL|GetGridWays|PickMiddle|[MBFGH]"
     },
     {
       "name": "literal",
