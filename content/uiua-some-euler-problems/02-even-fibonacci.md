@@ -242,7 +242,7 @@ Let's manually prop up some `X` calls to simulate what gets collected.
 [8 13 8 5 3 2 1 1]
 ```
 
-Sequential calls of `X` does indeed leave behind a trail of Fibonacci numbers but
+Sequential calls of `X` do indeed leave behind a trail of Fibonacci numbers but
 at its front is the iterator.
 
 > Why is the snapshot reversed?

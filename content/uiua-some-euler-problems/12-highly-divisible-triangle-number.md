@@ -148,7 +148,7 @@ mathematically like so.
 $$2^2 \times 3^1 \times 5^1 = 60$$
 
 For each prime factor $p_i$, that is $2,3$ and $5$, we take note of their
-exponents $a_i\$ in $p_i^{a_i}$, that is $2,1$ and $1.$
+exponents $a_i$ in $p_i^{a_i}$, that is $2,1$ and $1.$
 We also see that the count of prime factors is $r=3.$
 
 Therefore, with $i=1$, $r=3$ and $a_1=2,\ a_2=1,\ a_3=1$ we get the

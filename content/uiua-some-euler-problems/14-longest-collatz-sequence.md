@@ -8,7 +8,7 @@ toc = true
 
 [taxonomies]
 categories = ["uiua-euler"]
-tags = ["uiua", "euler", "bigint"]
+tags = ["uiua", "euler"]
 +++
 
 ## Problem
@@ -207,8 +207,7 @@ Let's run the memoized one on the full range now.
 Error: Recursion limit reached. 
 ```
 
-Darn. Well, let's set that environment variable to something ridiculous and try
-again. We get it down to 10 seconds.
+Darn. Won't be doing this in the pad then.
 I invoked `UIUA_RECURSION_LIMIT=1000 uiua repl` with the following results.
 
 ```uiua
@@ -226,6 +225,9 @@ I invoked `UIUA_RECURSION_LIMIT=1000 uiua repl` with the following results.
     +₁⊢⊚=⊸/↥ ≡(GCL) ⇡₁999999
 837799
 ```
+
+We've got it down to 10 seconds.
+Since that's below the 60 second goal, I'll declare this a success.
 
 #### I wanna run it in the pad goddamn it
 

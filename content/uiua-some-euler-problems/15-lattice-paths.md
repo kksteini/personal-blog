@@ -33,7 +33,7 @@ Each node can either split into two paths, or go along an edge.
 If a node has all previous paths connected, we'll add the values of those paths
 together and set the node value to that.
 
-See the following image for the iterative steps for a $2x2$ grid.
+See the following image for the iterative steps for a $2 \times 2$ grid.
 
 <img alt="The 6 paths" src="/images/euler-path-to-pascal.png" style="max-width: 100%; height: auto; display: block; margin: auto;"/>
 
@@ -83,7 +83,7 @@ If you think back on Pascal's triangle, the numbers we are deriving for grid
 traversal are appearing every other line.
 
 >I think we can argue that you can do one thing and one thing only for a
->$0 \times 0$ grid, namely nothing.*
+>$0 \times 0$ grid, namely *nothing.*
 
 $$0 \times 0 = \ middle\ element\ of\ A$$
 $$1 \times 1 = \ middle\ element\ of\ C$$

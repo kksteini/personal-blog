@@ -125,7 +125,7 @@ sum of the following one-hundred $50$-digit numbers.
 
 Uiua uses the double precision floating point standard of IEEE 754.
 This has the consequence of rounding integers once they get too large.
-At around $2^{53}, or $9007199254740992$ things start breaking down.
+At around $2^{53}$, or $9007199254740992$ things start breaking down.
 
 Let's try all 1s but with one digit more than that.
 We'll enter that into the Uiua repl.
@@ -399,7 +399,7 @@ What does $999 + 1$ result in now?
 Huh. If we pass that to `ToString` we get back `"001"`.
 It seems like the $10$s overflow correction was run multiple times
 but the last calculation rotated the $1$ such that it wrapped around.
-This makes sense though. Since the result should be 4 digits long
+This makes sense though. The result should be 4 digits long
 but the longest array supplied is 3. We're simply missing a digit.
 
 What if we just append a $0$, `both(join 0)`, to the input arguments so that
