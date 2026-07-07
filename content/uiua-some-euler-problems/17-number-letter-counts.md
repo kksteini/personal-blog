@@ -1,7 +1,7 @@
 +++
 title = "17 - Number Letter Counts"
 date = 2026-07-03
-weight = 16
+weight = 17
 [extra]
 doclink = "https://projecteuler.net/problem=17"
 toc = true
