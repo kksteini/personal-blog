@@ -153,6 +153,7 @@ Does it produce the same results for A-G as we've calculated by hand?
 Let's run it for 0-7 iterations and see what it produces.
 
 > `&s` prints to stdout
+>
 > `repeat` needs `bw` because the range is to be supplied as the repeat amount
 > whereas `1` is the initial input to `GNL`
 

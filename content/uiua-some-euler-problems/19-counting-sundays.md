@@ -51,12 +51,12 @@ puts sundays
 ```
 
 I can only imagine this is as easy in python.
-Well... We just have to do it.
+Well... We just have to do it..
 
 ## The hard way in
 
 What if we just go for it? What if we just don't use a library?
-What if I put a sob emoji right here? 😭
+What if we put a sob emoji right here? 😭
 
 ### Encoding days
 
@@ -82,13 +82,13 @@ What if we consider a year at a time?
 The information we would need, for counting how many Sundays are in a year,
 is whether the year is a leap year and on what day the year starts.
 
-Our function signature might be something like
+Our function signature might be something like:
 
 ```plain
 F is_leap start_day 
 ```
 
-And we would want a list of calculations for some selected years to apply it to:
+We would want a list of calculations for some selected years to apply it to:
 
 ```plan
 # List of [is_leap start_day]
@@ -125,7 +125,7 @@ We know that $2$ is the starting day of $1901.$
 How can we get the sequential years?
 
 Let's say we want to find the starting day of $1902.$
-A straightforward way would be to take `mod,7` of `add 365 2`, that is to say
+A straightforward way would be to take `mod,7` of `add 365 2`, that is to say,
 the number of days in $1901$ added to its starting day.
 
 So, we'll create yet another array. This one represents how many days
@@ -195,7 +195,7 @@ get the list we want for `F`.
 This is a lot to process so let's bind it to a variable.
 
 ```uiua
-    LeapAndStart ← ≡˜⊂◿7 \+ ↘¯1⊂2⊸+ ˜↯ 365⊸⧻ =0 ◿4⇡₁₉₀₁1909
+LeapAndStart ← ≡˜⊂◿7 \+ ↘¯1⊂2⊸+ ˜↯ 365⊸⧻ =0 ◿4⇡₁₉₀₁1909
 ```
 
 #### Calculating a year at a time
@@ -224,8 +224,8 @@ We'll `bw join` the $2$ at the front and drop the last month.
 [2 31 29 31 30 31 30 31 31 30 31 30]
 ```
 
-Since we defined Sunday to be $0$ we next have to `scan add`
-and `mod 7` before counting up them zeroes with `len where eq 0`
+Since we defined Sunday to be $0$, we just have to `scan add`
+and `mod 7` before counting up them zeroes with `len where eq 0`.
 
 ```uiua
     ◿₇ \+ ↘¯1˜⊂ ⨬(MonthDays|LeapMonthDays) 1 2
@@ -235,15 +235,16 @@ and `mod 7` before counting up them zeroes with `len where eq 0`
 And counting them:
 
 ```uiua
-    ⧻ ⊚ = 0 ◿₇ \+ ↘¯1˜⊂ ⨬(MonthDays|LeapMonthDays) 1 2
+    ⧻⊚ =0 ◿₇ \+ ↘¯1˜⊂ ⨬(MonthDays|LeapMonthDays) 1 2
 1
 ```
 
 So, any leap year that starts on Tuesday should have one Sunday at the first of
 some month.
-Well, 2008 starts on a Tuesday and only June of that year starts on a Sunday 1st.
+Well, 2008 is a leap year that  starts on a Tuesday
+and only June of that year starts on a Sunday 1st.
 
-This is our candidate `F` then.
+We have a candidate for `F` then.
 
 ```uiua
     F ← ⧻ ⊚=0◿₇ \+ ↘¯1˜⊂ ⨬(MonthDays|LeapMonthDays)
@@ -259,6 +260,11 @@ How many Sundays fell on the first between 1901 and 1909?
 16
 ```
 
+Let's further verify `F` by selecting an interesting year, like 1903. If we
+pick up a calendar and skim through, we can verify
+if it has 3 premium Sundays as promised.
+It does indeed have three premium Sundays: February, March and November 1st.
+
 ## Solution
 
 ### Without datetime
@@ -270,12 +276,13 @@ Recall what we derived:
     LeapAndStart ← ≡˜⊂◿7 \+ ↘¯1⊂2⊸+ ˜↯ 365⊸⧻ =0 ◿4⇡₁₉₀₁2000
 ```
 
-The solution is
+Putting those together, we feed the leap year and start days from `LeapAndStart`
+into `F`. This gives us a list of years and how many premium Sundays they have.
+We then take the sum of the results.
 
 ```uiua
     /+ ≡(F°⊟) LeapAndStart
 171
-
 ```
 
 #### How fast?
@@ -306,9 +313,10 @@ going in vs coming out for dates from before the epoch (1970-1-1).
 
 #### Quickstep by Quickstep
 
-The `un datetime` is usable and we can use that exclusively for this problem.
-Start by creating a row of dates that datetime would understand.
-Create a row of dates that datetime would understand.
+While raw `datetime` is problematic for this range,
+`un datetime` is usable for our range of years and we can use that
+exclusively for this problem. Let's start by creating a row of dates
+that `un datetime` understands.
 Make those dates be the first of each month.
 
 ```uiua
@@ -325,22 +333,22 @@ Make those dates be the first of each month.
 ... and so on
 ```
 
-Convert them all to datetime representations
+Convert them all to datetime representations:
 
 ```uiua
     °datetime
 [¯2177452800 ¯2174774400 ¯2172355200 ¯2169676800 ... and so on
 ```
 
-Normalize for Sundays by subtracting a Sunday from before the range, for example,
-31st of December 1899.
+Normalize for Sundays by subtracting a specific Sunday from before the range,
+for example, 31st of December 1899.
 
 ```uiua
     - °datetime 1899_12_31
 [31622400 34300800 36720000 39398400 41990400 ... and so on
 ```
 
-Every single day is some multiple of $24 \times 60 \ times 60 = 86400\ seconds$
+Every single day is some multiple of $24 \times 60 \times 60 = 86400\ seconds$
 so dividing our range by that will give us the number of days since 1899-12-31.
 
 ```uiua
@@ -348,11 +356,12 @@ so dividing our range by that will give us the number of days since 1899-12-31.
 [366 397 425 456 486 517 547 578 609 639 670 ... and so on
 ```
 
-Since this represents *days elapsed since a certain Sunday*, another Sunday will
-pop out as a $0$ once we `mod,7`. After that, we simply add the up.
+Since this represents *days elapsed since that certain Sunday*, other Sundays will
+pop out as a $0$ once we `mod,7`. After that, we simply add the zeroes up.
 
-With these core components to the problem, it should be no surprise now that
-the solution is:
+> To run this program in the repl, you have to copy all of it and paste all of
+> it at once.
+> Otherwise the individual lines will validate with no context in between.
 
 ```uiua
     1

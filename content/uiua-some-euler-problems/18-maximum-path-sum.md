@@ -211,7 +211,7 @@ Followed by the final addition step.
 ```
 
 We simply take the largest value produced, the first value, and
-what we get is $23.
+what we get is $23.$
 
 #### Programming it in Uiua
 
