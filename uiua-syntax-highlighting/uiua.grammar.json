@@ -50,7 +50,7 @@
     {
       "name": "bound-function",
       "comment": "This is ridiculous and I know it. But I'm lazy and bad.",
-      "match": "Scale|Factorial|AddNotFin|SBI|Add|RawInput|IsPrimePervasive|FromString|ToString|AddNotFin|BigAdd|RemZer|Input|IsPrime|GNL|PDS|PD|AD|PDH|NC|CS|GCL|GetGridWays|MonthDays|LeapAndStart|LeapMonthDays|PickMiddle|[MBFGH]"
+      "match": "IsAmicableCandidate|IsAmicable|IsOwnAmicable|Scale|Factorial|AddNotFin|SBI|Add|RawInput|IsPrimePervasive|FromString|ToString|AddNotFin|BigAdd|RemZer|Input|IsPrime|GNL|PDS|PD|AD|PDH|NC|CS|GCL|GetGridWays|MonthDays|LeapAndStart|LeapMonthDays|PickMiddle|[MBFGH]"
     },
     {
       "name": "literal",
