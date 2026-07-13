@@ -4,6 +4,7 @@ date = 2026-05-27
 weight = 4
 [extra]
 doclink = "https://projecteuler.net/problem=4"
+pad = "https://uiua.org/pad?src=0_19_0-dev_4__eJxtkLFKJEEQhvN-il8mOdG5nRWTPTCYZTE6UdAX6Jku3eZ6usfqbkQwdWVXF0xEU5XjEsELDIzXN-knOcY9xMCwfuqv-vgybDuGoiC18fBEP0QGaWP1Xfte1FHm3jWUUzTEecuuMtT4XrGZG8lH5EPeSqOt4m6pZadiHXpCZNj7iFGPqf4lRq52VumgnUWaXCNN50iz13RxhcXfdHnTlUbsWhjpA8hQQzbgkF0DySxPxchVTp0uu5O7xXO_a5TGIFp9HAnl-hCt1OwhMpzoMIZ1YGpJBo_hetmlY2JCiZUtDCGt-hRJqzBELS0qQkXhhMiiXxT5YDAQJR_FDscfuJ1ogm7Nf475NP05T9PfG2v9okgX94Oi6Kg-lqQxCON3NpHBOw7d2LwrVlCkYmt0LQOByUcTvNh3HEj91D7sHu4tffrlr9uXNJ_03m7xBY0QafaY5g_flpLOFk-fdKfZ4yq-uiv-AaFhvoI="
 toc = true
 
 [taxonomies]

@@ -30,7 +30,7 @@ RemZer     ← ⨬(∘|↘¯1)=0⊸⊣
 BigAdd     ← RemZer⍢(+ + ⊃(↻¯1|×¯10)⊸>9|AddNotFin) ⬚0 + ∩(˜⊂0)
 ```
 
-In the introductory for [chapter 16](@/uiua-some-euler-problems/16-power-digit-sum.md#naive-bigint),
+In the introduction for [chapter 16](@/uiua-some-euler-problems/16-power-digit-sum.md#naive-bigint),
 for example, you can read about the derivation of the functions above.
 
 I think it's time to store this in a module and build on it.
@@ -191,7 +191,7 @@ puts (1..1000).reduce(:*).to_s.chars.map(&:to_i).sum
 
 The module file, along with the solution, so far.
 
-In the [pad.](https://uiua.org/pad?src=0_19_0-dev_4__eJzFVDtPG0EQ7u9XjI4UfgizM3t33kUKEkghoogLjjRBCBl8Qif5Qcy5QHKREMmBi5FSGBkimrykRLLkJgVSOqfkX8wvie4RGwNJnCpb3O3dfPt93-zO7By4fm2_6q34e2v1wOBel3sv-Oybu7JmAKw2GzU3aPr1PeDOW-CT9_zmjF93DYCNRhqAOLTwwNzeNpPQcqVSagSrfj0NceczLGkDYN2rPfOaEI2Y7ssgw8fnbe6cj4aYfSg4vOLwY8IQo1Jgso5PP2TykAcOX2W48300xPaP_miIIsvh1ZJuj2WzwIN3IkIef81cX3J4JLKGATAH7m656gEswvL646dPHpU2XAgO973FJPtkXmrVdrxmDF_3glazfrAIabzWqgb-ftX3KgsHEVMFdg5hjE_I44yXK5XrS-4ME9XV8m7QaPrl6j_qRkZThPe8Va5C0EjVIJdO5hFyUCgUIAcSckCQAyxEB_dLMtno8IL73Wj_OLyY56OXwOFVbLe9BAjc72ZhE7cM7vWS05_UQeAdBAbA9QWffgI-OYVNBAK5Be7KWuFGeZiS0BwDR4M_QZHkBBoBTTJj0Limoo-oBu6sNO_5NU2l0EYSOn5KrchBW2pLEdrFoiQ1q9ItmuitFUlLkJYW2voeIyjIQrIUkpJ6KsfRYCZv-D-8xcZQTI0Zfeip8fejmaCmqN24b-5aRjQhujVu1ol2HEVCO3bRtqRVlE5RoSTHkrPzko2KJGqSAi0kqdFSJLUJJIu31BybbFK2VkioUdjKkY4UylK_36dJ40lxo5-MhfytMAph_ATdls4U)
+In the [pad](https://uiua.org/pad?src=0_19_0-dev_4__eJzFVDtPG0EQ7u9XjI4UfgizM3t33kUKEkghoogLjjRBCBl8Qif5Qcy5QHKREMmBi5FSGBkimrykRLLkJgVSOqfkX8wvie4RGwNJnCpb3O3dfPt93-zO7By4fm2_6q34e2v1wOBel3sv-Oybu7JmAKw2GzU3aPr1PeDOW-CT9_zmjF93DYCNRhqAOLTwwNzeNpPQcqVSagSrfj0NceczLGkDYN2rPfOaEI2Y7ssgw8fnbe6cj4aYfSg4vOLwY8IQo1Jgso5PP2TykAcOX2W48300xPaP_miIIsvh1ZJuj2WzwIN3IkIef81cX3J4JLKGATAH7m656gEswvL646dPHpU2XAgO973FJPtkXmrVdrxmDF_3glazfrAIabzWqgb-ftX3KgsHEVMFdg5hjE_I44yXK5XrS-4ME9XV8m7QaPrl6j_qRkZThPe8Va5C0EjVIJdO5hFyUCgUIAcSckCQAyxEB_dLMtno8IL73Wj_OLyY56OXwOFVbLe9BAjc72ZhE7cM7vWS05_UQeAdBAbA9QWffgI-OYVNBAK5Be7KWuFGeZiS0BwDR4M_QZHkBBoBTTJj0Limoo-oBu6sNO_5NU2l0EYSOn5KrchBW2pLEdrFoiQ1q9ItmuitFUlLkJYW2voeIyjIQrIUkpJ6KsfRYCZv-D-8xcZQTI0Zfeip8fejmaCmqN24b-5aRjQhujVu1ol2HEVCO3bRtqRVlE5RoSTHkrPzko2KJGqSAi0kqdFSJLUJJIu31BybbFK2VkioUdjKkY4UylK_36dJ40lxo5-MhfytMAph_ATdls4U).
 > Note. The module syntax may have changed between 0.18 and 0.19
 
 ```uiua

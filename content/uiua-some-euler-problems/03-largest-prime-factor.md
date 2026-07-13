@@ -5,6 +5,7 @@ weight = 3
 [extra]
 doclink = "https://projecteuler.net/problem=3"
 toc = true
+pad = "https://uiua.org/pad?src=0_19_0-dev_4__eJxlzrFLw0AUx_H9_ooHWXQ4k9BWRcikCG4B9Q94TV7bgyQX73IRRx2qBgenFjsp1t0xSxH0P3l_iVw3cXrw4_HhG8CpNpBTg6qwYImORABYufGesqFTDqXVJUlyBRlZGz0uqLRhNJAFminZRtZGlSQnmDXahEKc2dQPKZkWrWoJeP4MCXcvO_z4Gu8Cd33C3bu_35_hz1KIAFKjazKQq1ZZbSy0CgHBXjk0qprCxFVZo3Ql0pPzLceLTRLxesXLL75_47tbfuq46_lh5bVjLDJXYEM5lNTMdC5Cnn_wYsNd_6_Ok_tRdDiKhwejeDjwwMWM4FI5hGu8Eb51G_r37RfmQHpI"
 
 [taxonomies]
 categories = ["uiua-euler"]

@@ -21,7 +21,7 @@
     },
     {
       "name": "monadic-modifier",
-      "match": "memo|[⧅⤚⊞⍚⧈˜⋅˙⊙⊸°≡⟜⤙∩◡⊜\\\\]"
+      "match": "memo|[⧅⤚⊞⍚⧈◇˜⋅˙⊙⊸°≡⟜⤙∩◡⊜\\\\]"
     },
     {
       "name": "monadic-pervasive",

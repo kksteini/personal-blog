@@ -181,7 +181,7 @@ Let's cobble something together in Python, quick!!!
 ['Hello', 'Possmosis-Jone', 'Scream Loud Day']
 ```
 
-#### Obligatory 'not a python-expert' section
+#### Obligatory 'not a Python-expert' section
 
 *I'm sure we could do better with Python, this might break.
 I could use a parsing library, work backwards from a `f"..."` template string

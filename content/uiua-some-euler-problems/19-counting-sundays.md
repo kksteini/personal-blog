@@ -35,7 +35,7 @@ How many Sundays fell on the first of the month during the twentieth century
 ## The easy way out
 
 A part of me wants to skip this problem for Uiua,
-I know how easy this is in something like ruby.
+I know how easy this is in something like Ruby.
 
 ```ruby
 require 'date'
@@ -90,7 +90,7 @@ F is_leap start_day
 
 We would want a list of calculations for some selected years to apply it to:
 
-```plan
+```plain
 # List of [is_leap start_day]
 [
   [0 2]
@@ -241,7 +241,7 @@ And counting them:
 
 So, any leap year that starts on Tuesday should have one Sunday at the first of
 some month.
-Well, 2008 is a leap year that  starts on a Tuesday
+Well, 2008 is a leap year that starts on a Tuesday
 and only June of that year starts on a Sunday 1st.
 
 We have a candidate for `F` then.

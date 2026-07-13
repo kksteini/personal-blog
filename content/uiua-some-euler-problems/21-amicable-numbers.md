@@ -3,7 +3,7 @@ title = "21 - Amicable Numbers"
 date = 2026-07-10
 weight = 21
 [extra]
-doclink = "https://projecteuler.net/problem=20"
+doclink = "https://projecteuler.net/problem=21"
 toc = true
 
 [taxonomies]
@@ -89,7 +89,7 @@ bind it to `IsAmicable`.
 
 We have numbers to crunch, so let's get to it.
 We will supply our `IsAmicable` function with all elements of the range
-$1-10000$ and then asking `where` it is `eq 1`.
+$1-10000$ and then ask `where` it is `eq 1`.
 
 ```uiua
     ⊚ =1 ≡IsAmicable⇡10000
@@ -158,7 +158,7 @@ This is well under our hard limit of $60$ seconds, but surely we can do better.
 
 ### Better crunch
 
-We already had some problems, with proper divisors, that we solved in [chapter 3](http://127.0.0.1:1111/uiua-some-euler-problems/03-largest-prime-factor/#reducing-the-search-space).
+We already had some problems, with proper divisors, that we solved in [chapter 3](@/uiua-some-euler-problems/03-largest-prime-factor.md#reducing-the-search-space).
 
 We showed that we could reduce the search space, for complementary divisors, by
 searching up to the square root of the range in question.

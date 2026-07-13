@@ -20,8 +20,13 @@
         <h1 itemprop="headline">{{ page.title | safe }}</h1>
         <data class="muted">{{ post_macros::meta(page=page) }}</data>
         {% if page.extra.doclink %}
-        <p class="doclink">
-            Problem link: <a href="{{ page.extra.doclink }}" target="_blank" rel="noopener noreferrer">{{ page.extra.doclink }}</a>
+        <p class="pad-link">
+            <a href="{{ page.extra.doclink }}" target="_blank" rel="noopener noreferrer">Problem statement on Project Euler's Website</a>
+        </p>
+        {% endif %}
+        {% if page.extra.pad %}
+        <p class="pad-link">
+            <a href="{{ page.extra.pad }}" target="_blank" rel="noopener noreferrer">Solution in the Uiua pad</a>
         </p>
         {% endif %}
     </header>
