@@ -28,8 +28,8 @@ What is the total of all the name scores in the file?
 
 ## Parsing
 
-If you copy the contents of the file and prepend it with a `$` in the pad, or
-repl, you will get a string that looks something like this:
+If you copy the contents of the file and prepend it with a `$`
+it will be interpreted as a string looks something like this:
 
 ```uiua
 $"MARY","PATRICIA","LINDA","BARBARA", ...
@@ -41,14 +41,15 @@ We are not going to be applying a score to the double quotes, so let's remove th
     $"MARY","PATRICIA","LINDA","BARBARA", ...
     ▽ ⊸≠@"
 
-    "MARY,PATRICIA,LINDA,BARBARA,..."
+"MARY,PATRICIA,LINDA,BARBARA,..."
 ```
 
-Then, we can finally just `pbbn@,` to get an array of names.
+Then, let's split the string by comma, `@,` with the `pbbn` alias to
+get an array of boxed names.
 
 ```uiua
     $"MARY","PATRICIA","LINDA","BARBARA", ...
-    ▽ ⊸≠@"
+    ▽⊸≠@"
     ⊜□⊸≠@,
 
 ["MARY"│"PATRICIA"│"LINDA"│"BARBARA"|...]
@@ -63,12 +64,14 @@ Let's sort and store the array in a variable `Input`.
 
 ## Calculating a name
 
-We can subtract a character from a string to get their differences.
-Fortunately, the uppercase letters, have a sequential value.
+We can subtract a character from a string to get the
+string's character differences to it. Since the characters are in sequence,
+in the ASCII table, this is sufficient and no shuffling is needed.
+
 We need a corrective character to subtract from a name, to get
 their distances from it. `A` should be $1$ away, `B` should be $2$ and so on.
 
-Let's find this character. We'll subtract $1$ from `A`.
+Let's find this character. We'll subtract $1$ from `A` in order to do so.
 
 ```uiua
     -1 @A
@@ -76,11 +79,16 @@ Let's find this character. We'll subtract $1$ from `A`.
 ```
 
 OK, great. Then subtracting `@@` from a name should give us the alphabetical
-value. We want $3 + 15 + 12 + 9 +14 = 53.$
+value. For COLIN, as an example, we want $3 + 15 + 12 + 9 +14 = 53.$
 
 ```uiua
     - @@ "COLIN"
 [3 15 12 9 14]
+```
+
+Then the alphabetical calculation is the summing up the character values.
+
+```uiua
     /+ -@@ "COLIN"
 53
 ```
@@ -119,10 +127,10 @@ Let's create a range, starting at $1$, as long as the list of values.
 ```uiua
     ⇡₁ ⊸⧻ ≡◇F Input
 [49 35 19 30 40 ...]
-[1  2  3  4  5 ...]
+[1  2  3  4  5  ...]
 ```
 
-We can multiply these arrays together and then reduce them for the final answer.
+We multiply these arrays together and then reduce them for the final answer.
 
 ```uiua
     /+ × ⇡₁ ⊸⧻ ≡◇F Input

@@ -5,6 +5,7 @@ weight = 17
 [extra]
 doclink = "https://projecteuler.net/problem=17"
 toc = true
+pad = "https://uiua.org/pad?src=0_19_0-dev_4__eJxdkT1Lw1AUhvfzK17o0hCliW2VDgpCBTcdsolD21xtQW8gH-KQQVO0elFwq0NBahEXwVVwa0f_xfklcmJTqxku5OZ93ufk3hKaveNeHFETfP2AAwIcVFFFnYAaaqgSUEcdNTokKsFTOkJZnXdOEl8hVkpHFnlLrIN1rM8Z6djI33PWdVbdBu0swqKR-upcU-jmqm20E93pIjhCO-hFiANQCa1OjEAj7iqE6kyFkfLRbkVqxXWoBNnoBVoYSejktK1C2tZ-tN8KY8gj9tmQs_5siOkb396zeQY_jSq2rOVNzvr8-mnRbqL9UM1BgewcG2DLZfPBN4-YDb9GbMZogs1zwSKHPaX0P2Oe3WEzEQ3fTyR9yWY8fV9LHYvyaygQIfK8VE9IDv1PW_7Nk5Lfgj2tvG6QRC3t_4Rcl6hi8-24XLHZZJxdsemXi7NIl_8vLeZNF2OkhdTiwR2bFxk2u7DAgzFnl41GY1lINn0DKIPbCA=="
 
 [taxonomies]
 categories = ["uiua-euler"]
@@ -46,7 +47,8 @@ in the `TeenPart` pipeline.
 
 ## Solution
 
-[Play around with the following in the pad.](https://uiua.org/pad?src=0_19_0-dev_4__eJxdkT1Lw1AUhvfzK17o0hCliW2VDgpCBTcdsolD21xtQW8gH-KQQVO0elFwq0NBahEXwVVwa0f_xfklcmJTqxku5OZ93ufk3hKaveNeHFETfP2AAwIcVFFFnYAaaqgSUEcdNTokKsFTOkJZnXdOEl8hVkpHFnlLrIN1rM8Z6djI33PWdVbdBu0swqKR-upcU-jmqm20E93pIjhCO-hFiANQCa1OjEAj7iqE6kyFkfLRbkVqxXWoBNnoBVoYSejktK1C2tZ-tN8KY8gj9tmQs_5siOkb396zeQY_jSq2rOVNzvr8-mnRbqL9UM1BgewcG2DLZfPBN4-YDb9GbMZogs1zwSKHPaX0P2Oe3WEzEQ3fTyR9yWY8fV9LHYvyaygQIfK8VE9IDv1PW_7Nk5Lfgj2tvG6QRC3t_4Rcl6hi8-24XLHZZJxdsemXi7NIl_8vLeZNF2OkhdTiwR2bFxk2u7DAgzFnl41GY1lINn0DKIPbCA==)
+You can take a look at the solution in the pad at the top of this article.
+Otherwise, here's a fun read.
 
 ```uiua
 D ← [
