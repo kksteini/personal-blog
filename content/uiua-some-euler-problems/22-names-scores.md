@@ -29,7 +29,7 @@ What is the total of all the name scores in the file?
 ## Parsing
 
 If you copy the contents of the file and prepend it with a `$`
-it will be interpreted as a string looks something like this:
+it is interpreted as a string that looks something like this:
 
 ```uiua
 $"MARY","PATRICIA","LINDA","BARBARA", ...
@@ -44,8 +44,8 @@ We are not going to be applying a score to the double quotes, so let's remove th
 "MARY,PATRICIA,LINDA,BARBARA,..."
 ```
 
-Then, let's split the string by comma, `@,` with the `pbbn` alias to
-get an array of boxed names.
+Then, let's split the string by comma, `@,` with the `pbbn`
+[alias](https://www.uiua.org/docs/idioms#aliases) to get an array of boxed names.
 
 ```uiua
     $"MARY","PATRICIA","LINDA","BARBARA", ...
@@ -69,7 +69,8 @@ string's character differences to it. Since the characters are in sequence,
 in the ASCII table, this is sufficient and no shuffling is needed.
 
 We need a corrective character to subtract from a name, to get
-their distances from it. `A` should be $1$ away, `B` should be $2$ and so on.
+the name's characters' distances from it.
+`A` should be $1$ away, `B` should be $2$ and so on.
 
 Let's find this character. We'll subtract $1$ from `A` in order to do so.
 
@@ -78,7 +79,7 @@ Let's find this character. We'll subtract $1$ from `A` in order to do so.
 @@
 ```
 
-OK, great. Then subtracting `@@` from a name should give us the alphabetical
+OK, great. Then subtracting `@@` should give us the alphabetical
 value. For COLIN, as an example, we want $3 + 15 + 12 + 9 +14 = 53.$
 
 ```uiua
@@ -86,7 +87,7 @@ value. For COLIN, as an example, we want $3 + 15 + 12 + 9 +14 = 53.$
 [3 15 12 9 14]
 ```
 
-Then the alphabetical calculation is the summing up the character values.
+Then the alphabetical calculation is the summing up of the character values.
 
 ```uiua
     /+ -@@ "COLIN"
@@ -95,7 +96,7 @@ Then the alphabetical calculation is the summing up the character values.
 
 Let's store this as function `F`.
 
-```
+```uiua
     F ← /+ -@@
     F "BARBARA"
 43
@@ -111,8 +112,8 @@ We can do the following.
 [49 35 19 30 ...]
 ```
 
-We can also use the `content` modifier which unboxes arguments before they are
-passed to a function.
+We can clean that up by using the `content` modifier which unboxes arguments before
+they are passed to a function, replacing `un box`.
 
 ```uiua
     ≡◇F Input
@@ -122,7 +123,7 @@ passed to a function.
 ## Solution
 
 We need to apply increasing multipliers to the sorted alphabetical values.
-Let's create a range, starting at $1$, as long as the list of values.
+Let's create the range of multipliers, starting at $1$, as long as the list of values.
 
 ```uiua
     ⇡₁ ⊸⧻ ≡◇F Input
