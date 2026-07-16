@@ -25,7 +25,7 @@ See if you know these concepts before moving on
 ### Modulo
 
 Modulo is a standard operation in most programming languages.
-It allows you to ask *what is the remainder when I divide a number with
+It allows you to ask *what is the remainder when I divide a number by
 another number?*
 
 In Uiua, writing `mod a b` will ask the question *what is the remainder of b when

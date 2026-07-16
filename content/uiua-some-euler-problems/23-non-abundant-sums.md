@@ -3,7 +3,7 @@ title = "23 - Non-Abundant Sums"
 date = 2026-07-13
 weight = 23
 [extra]
-doclink = "https://projecteuler.net/problem=22"
+doclink = "https://projecteuler.net/problem=23"
 pad="https://uiua.org/pad?src=0_19_0-dev_4__eJxlUU1rE0EYvs-veGBBEqr5qoIUPRTiIZcamvgDdpNJd2B3ZpnZsAS8NGDaLAo9NRK8BCN6yLGglyLUo__i_SXy7jbVxD3Nzvt8vuPh5HX_1RH6oXIIVeoQy9jYCSIV85_SSEOJxB8KD-WXhWoQwrcS2qRIrHRSp1uglUmESuxPAlmtPVD6obRyZKx8zCArC3aaGQTW14NQuh0ou91PoBxcZDJpj9A8hJMDo4cOI2MRy11S4fyXNfJdyqxG7emz_3jCQ99OMIpUkih9hpTbpwZN-HoIO9aab5XGxIxtocwMBmUqijCwvgu3e6mJjjstGR19yiFodoWGEN12rzjS9S1eNkDrJS1-gi5WND0Hvc9B-Q-6XIpuGyVu9pGm57S4oXxK6-Wv7wzotntCdNxxMNZDX6dlXUa_qB8UY7EdnYzjQFpXSuVLmq_-odHFqvW82Tzk5m_0wMQxvxk3iJSWDoGMTLYtXzaz5sz6MYR3rF0mban7bVPhpbP38m5D81WlTrMvoMscezme7F9UOQTKFN7bh2lvHN9nvr4tNjJfM6YFWtyAPsxA81X9APT1Hc3XaO2rlmm4MO42vz9xELZhofzzjonwqth7KeE9Ssp24g-5vSSM"
 toc = true
 
@@ -86,7 +86,7 @@ candidates and compare with a [known source (OEIS-A005101)](https://oeis.org/A00
 [12 18 20 24 30 36 40 42 48 54 56 60]
 ```
 
-Yup. Our list of numbers agree with the OEIS.
+Yup. Our numbers agree with the OEIS.
 
 ## Solution
 
@@ -96,14 +96,17 @@ Yup. Our list of numbers agree with the OEIS.
 >
 > It will run into memory issues in the pad.
 
-One way we might solve this is to generate a list of abundant numbers, generate
-all their combinations of size $2$ and add them up. With that
+One way we might solve this is to generate a list of abundant numbers, then generate
+all their combinations of size $2$ and add them together. Those would be
+our abundant sums.
+
+We could then identify which numbers from $0$ to the upper bound are missing from
+those abundant sums.
 
 We are given an upper bound of $28123$ and we know that the smallest abundant number
 is $12.$
 
 Therefore, we can generate abundant numbers up to $28123-12=28111$ for this test.
-After summing them up, we need to cap them at $28123$ as well.
 
 ---
 Let's generate the abundant numbers and store them.
@@ -112,7 +115,7 @@ Let's generate the abundant numbers and store them.
 AbundantNumbers ← ⊚≡IsAbundant ⇡28111
 ```
 
-What we can do next, is to use [tuples](https://uiua.org/docs/tuples)
+Next, we'll use [tuples](https://uiua.org/docs/tuples)
 to generate combinations of abundant numbers for us to sum.
 We must use `le` (or `ge`) for the operator since we want
 to include combinations like $12+12.$
@@ -175,7 +178,7 @@ below the given threshold.
 ```
 
 Great. Now let's create a range of all numbers from $0-28123$
-and check whether they are a member of the abundant numbers.
+and check whether they are a member of the abundant sums.
 
 ```uiua
     memberof ⇡ 28123 ▽ ⊸≤ 28123 ◴ ⍆ ≡/+ ⧅≤ 2 AbundantNumbers
@@ -229,14 +232,14 @@ Half a second!
 
 We can adapt the solution above to something that skirts around the memory issue.
 Trying to create a great amount of combinations, with tuples, is not the way.
-What we could do instead, is to generate the range $0-28123$, and then calculate
+What we could do instead is to generate the range $0-28123$, and then calculate
 the boolean flags in place.
 
-We can then, for each number $r$ in the range $0-28123$, calculate $c = r_n - a_n$,
+We can then, for each number $r$ in the range $0-28123$, calculate $c = r - a_n$,
 for all $a_n$ in the `AbundantNumbers`.
-After we've done that we can check if our candidate $c$ is a member of `AbuntandNumbers`.
-If they do, then it means that $r$ is the sum of some $a_n$ and some $c$, both
-of which are abundant numbers.
+After we've done that we can check if our candidate $c$ is a member of `AbundantNumbers`.
+If that's the case, then it means that $r$ is the sum
+of some $a_n$ and some $c$, both of which are abundant numbers.
 
 ```uiua
     ≡(/↥ ∊AbundantNumbers -AbundantNumbers) ⇡28123
