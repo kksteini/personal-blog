@@ -197,17 +197,16 @@ that's backwards. Let's fix it with `bw`.
 Great. Now, let's keep those numbers that are **not** members.
 That will be our unreachable-by-abundant-sums numbers.
 
-```
+```uiua
     where not ˜∊ ⇡ 28123 ▽ ⊸≤ 28123 ◴ ⍆ ≡/+ ⧅≤ 2 AbundantNumbers
     ⊚ ¬ ˜∊ ⇡ 28123 ▽ ⊸≤ 28123 ◴ ⍆ ≡/+ ⧅≤ 2 AbundantNumbers
 [0  1  2  3  4  5  6  7  8  9  10 11 
  12 13 14 15 16 17 18 19 20 21 22 23 
  25 26 27 28 29 31 ...]
-
 ```
 
-Great. It makes sense to see all numbers below 24 since the lowest reachable should be the
-sum of $12 + 12$, followed by $30$ for $12 + 18.$
+Great. It makes sense to see all numbers below 24 since the lowest reachable
+should be the sum of $12 + 12$, followed by $30$ for $12 + 18.$
 
 This is exactly what we see. Let's sum them up then!
 
@@ -222,7 +221,7 @@ And that's our answer!
 
 Half a second!
 
-```
+```uiua
     perf(/+ ⊚ ¬ ˜∊ ⇡ 28123 ▽ ⊸≤ 28123 ◴ ⍆ ≡/+ ⧅≤ 2 AbundantNumbers)
     ⊙◌⍜now(/+ ⊚ ¬ ˜∊ ⇡ 28123 ▽ ⊸≤ 28123 ◴ ⍆ ≡/+ ⧅≤ 2 AbundantNumbers)
 0.45714712142944336

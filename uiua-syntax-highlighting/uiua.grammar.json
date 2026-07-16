@@ -41,7 +41,7 @@
     },
     {
       "name": "dyadic-function",
-      "match": "[-÷⊥ⁿ×↯⍤⊟⊂⊏↙↘⊡▽↻≍]"
+      "match": "[-∊÷⊥ⁿ×↯⍤⊟⊂⊏↙↘⊡▽↻≍]"
     },
     {
       "name": "dyadic-modifier",
