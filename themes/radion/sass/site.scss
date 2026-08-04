@@ -9,10 +9,61 @@
 @use "parts/latex";
 
 /// Globally defined CSS variables
+///
+/// Color tokens follow a Material-style naming scheme (primary, surface,
+/// surfaceVariant, ...). Values are defined once here for light mode, then
+/// overridden per-token in the .dark selector below. Because these are
+/// custom properties, the nearest ancestor's definition wins, so anything
+/// under body.dark / body.light automatically picks up the right palette.
 :root {
-  --bg-primary: #282828;
-  --accent: #c62c2a;
-  --search-border-color: #ff2e88;
+  --primary: #cc5200;
+  --primary-text: #ffffff;
+  --primary-container: #ffddc2;
+  --secondary: #0059b3;
+  --surface: #ffffff;
+  --surface-text: #14141f;
+  --surface-variant: #e6e6f5;
+  --surface-variant-text: #33334d;
+  --surface-tint: #cc5200;
+  --background: #fafaff;
+  --background-text: #0a0a15;
+  --outline: #4d6fcc;
+  --surface-container: #f0eefa;
+  --surface-container-high: #e3e0f2;
+  --error: #b3001f;
+  --warning: #8a6d00;
+  --info: #0059b3;
+  --bg-primary: #efeef8;
+  --blockquote-bg: var(--surface-variant);
+  --blockquote-bg-nested: var(--surface-container-high);
+  --blockquote-text: var(--surface-variant-text);
+  --accent: var(--primary);
+  --search-border-color: var(--primary);
   --note-bg-dark: #1a1a1a;
   --note-bg-light: #efefef;
+}
+
+.dark {
+  --primary: #ff6600;
+  --primary-text: #000000;
+  --primary-container: #cc5200;
+  --secondary: #0080ff;
+  --surface: #0a0a15;
+  --surface-text: #e6f0ff;
+  --surface-variant: #1a1a33;
+  --surface-variant-text: #cce0ff;
+  --surface-tint: #ff6600;
+  --background: #000008;
+  --background-text: #f0f8ff;
+  --outline: #4d80ff;
+  --surface-container: #151529;
+  --surface-container-high: #212147;
+  --error: #ff3366;
+  --warning: #ffcc00;
+  --info: #0080ff;
+
+  --bg-primary: #151529;
+  --blockquote-bg: #3d3d70;
+  --blockquote-bg-nested: #4a4a86;
+  --blockquote-text: #f5f6ff;
 }

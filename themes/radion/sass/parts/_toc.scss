@@ -7,60 +7,44 @@
   a[href*="://"]::after,
   a[rel*="external"] {
     content: " → ";
-    color: #ff9800;
+    color: var(--secondary);
     font-size: 1rem;
   }
 }
 
 .light .toc-container {
-  background-color: #efefef;
+  background-color: var(--surface-container);
 }
 
 .dark .toc-container {
-  background-color: #1a1a1a;
+  background-color: var(--surface-container);
 }
 
 .toc-title {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #444;
+  color: var(--background-text);
   margin-bottom: 0.5rem;
   cursor: pointer;
-}
-
-.dark .toc-title {
-  color: #ccc;
 }
 
 .toc-list {
   margin-left: 1.5rem;
   padding: 0;
-  color: #ccc;
+  color: var(--background-text);
   font-weight: bold;
-}
-
-.light .toc-list {
-  color: #444;
 }
 
 .toc-list ul {
   margin-left: 1.5rem;
-  color: #ccc;
+  color: var(--background-text);
   font-weight: bold;
-}
-
-.light .toc-list ul {
-  color: #444;
 }
 
 .toc-list ul ul {
   margin-left: 1.5rem;
-  color: #ccc;
+  color: var(--background-text);
   font-weight: bold;
-}
-
-.light .toc-list ul ul {
-  color: #444;
 }
 
 .toc-list li {

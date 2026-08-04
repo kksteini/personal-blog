@@ -143,7 +143,7 @@ body.modal-open {
   height: 80vh;
   max-height: 500px;
   border-radius: 12px;
-  background-color: #2a2a2a;
+  background-color: var(--surface-container-high);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   z-index: 9999;
   overflow: hidden;
@@ -172,7 +172,7 @@ body.modal-open {
 }
 
 .light .search-results {
-  background-color: #ffffff;
+  background-color: var(--surface-container-high);
   border-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -215,7 +215,7 @@ body.modal-open {
 #search-modal:-webkit-autofill:hover,
 #search-modal:-webkit-autofill:focus,
 #search-modal:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #2a2a2a inset !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--surface-container-high) inset !important;
   -webkit-text-fill-color: var(--text-color, #fff) !important;
   transition: background-color 5000s ease-in-out 0s;
 }
@@ -228,7 +228,7 @@ body.modal-open {
 .light #search-modal:-webkit-autofill:hover,
 .light #search-modal:-webkit-autofill:focus,
 .light #search-modal:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--surface-container-high) inset !important;
   -webkit-text-fill-color: #000 !important;
 }
 

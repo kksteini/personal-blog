@@ -25,8 +25,8 @@ What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4,
 
 ## Research
 
-Permutations is what [tuples](https://www.uiua.org/docs/tuples) is for.
-It would be very lucky if `tuples` produces
+Permutations are what [tuples](https://www.uiua.org/docs/tuples) is for.
+It would be very fortunate if `tuples` produces
 permutations lexicographically.
 Let's check.
 

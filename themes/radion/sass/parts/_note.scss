@@ -51,7 +51,7 @@
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    color: #c62c2a;
+    color: var(--secondary);
     transition: transform 0.3s ease;
   }
 
@@ -75,16 +75,16 @@
   line-height: 1.6em;
 
   a {
-    color: #ff2e88;
+    color: var(--primary);
     font-weight: normal;
 
     &:hover {
-      color: #fff;
+      color: var(--surface-text);
     }
   }
 
   .dark strong {
-    color: #fff;
+    color: var(--surface-text);
   }
 }
 

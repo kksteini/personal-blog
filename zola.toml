@@ -35,5 +35,5 @@ radion_menu = [
 ]
 codeblock = true
 latex = true
-theme = "dark"
+theme = "toggle"
 enable_search = true

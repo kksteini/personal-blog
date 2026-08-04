@@ -54,20 +54,20 @@ pre {
 
 a {
   cursor: pointer;
-  color: #ff2e88;
+  color: var(--primary);
   text-decoration: none;
-  border-bottom: 1.5px solid #ff2e88;
+  border-bottom: 1.5px solid var(--primary);
 }
 
 /* Selections colors */
 ::selection {
-  color: white;
-  background: #ce0068;
+  color: var(--primary-text);
+  background: var(--primary);
 }
 
 ::-moz-selection {
-  color: white;
-  background: #ce0068;
+  color: var(--primary-text);
+  background: var(--primary);
 }
 
 /* Zola-generated header anchors
@@ -77,24 +77,24 @@ a.zola-anchor {
 }
 
 a.zola-anchor:hover {
-  border-bottom: 1.5px solid #ff2e88;
+  border-bottom: 1.5px solid var(--primary);
   background-color: transparent !important;
   color: inherit !important;
 }
 
 .light a {
-  color: #000;
+  color: var(--surface-text);
   font-weight: bold;
 }
 
 .light a:hover {
-  background-color: #ce0068;
-  color: #fff
+  background-color: var(--primary);
+  color: var(--primary-text);
 }
 
 .dark a:hover {
-  background-color: #b7005d;
-  color: #fff;
+  background-color: var(--primary-container);
+  color: var(--primary-text);
 }
 
 .grid {
@@ -335,7 +335,7 @@ a.zola-anchor:hover {
 .hack h5:before,
 .hack h6:before {
   display: inline;
-  color: #d64a48;
+  color: var(--secondary);
 }
 
 .hack h2:before {
@@ -438,7 +438,7 @@ a.zola-anchor:hover {
 }
 
 .hack blockquote {
-  border-left: 0.2em solid #ff2e88;
+  border-left: 0.2em solid var(--primary);
   border-top-right-radius: 0.2em;
   border-bottom-right-radius: 0.2em;
   position: relative;
@@ -446,12 +446,12 @@ a.zola-anchor:hover {
   padding-left: 2ch;
   padding-right: 2ch;
   overflow: hidden;
-  color: #E8E6ED;
+  color: var(--blockquote-text);
   box-shadow: inset -3px -3px 5px rgba(0, 0, 0, 0.1);
 
   strong {
-    background: #ff2e88;
-    color: #FFFFFF;
+    background: var(--primary);
+    color: var(--primary-text);
     padding: 0.1em 0.3em;
     border-radius: 0.2em;
   }
@@ -460,7 +460,7 @@ a.zola-anchor:hover {
     font-style: italic;
     font-weight: bold;
     text-decoration: underline;
-    text-decoration-color: #d64a48;
+    text-decoration-color: var(--secondary);
 
     &:before,
     &:after {
@@ -474,16 +474,16 @@ a.zola-anchor:hover {
   }
 
   a:hover {
-    color: #FFFFFF;
+    color: var(--surface-text);
   }
 
   code {
-    background: rgba($color: #3d4253, $alpha: 1)
+    background: var(--surface-container-high);
   }
 }
 
 .light .hack code {
-  background: rgba($color: #d0cfd5, $alpha: 1);
+  background: var(--surface-variant);
   border-radius: 4px;
   padding: 2px 6px;
 }
@@ -494,27 +494,27 @@ a.zola-anchor:hover {
 }
 
 .dark blockquote {
-  background-color: #5E667F;
+  background-color: var(--blockquote-bg);
 
   blockquote {
-    background-color: #555c72;
+    background-color: var(--blockquote-bg-nested);
   }
 }
 
 .light blockquote {
-  background-color: #E8E6ED;
-  color: #4d5367;
+  background-color: var(--blockquote-bg);
+  color: var(--blockquote-text);
 
   a {
-    color: #5E667F;
+    color: var(--secondary);
   }
 
   code {
-    background: #E8E6ED;
+    background: var(--surface-container);
   }
 
   blockquote {
-    background-color: #dcd9df;
+    background-color: var(--blockquote-bg-nested);
   }
 }
 
@@ -664,11 +664,11 @@ table thead {
 }
 
 .light table thead {
-  background-color: #E8E6ED;
+  background-color: var(--surface-variant);
 }
 
 .dark table thead {
-  background-color: #232224;
+  background-color: var(--surface-variant);
 }
 
 code table {
@@ -688,7 +688,7 @@ table tbody td:first-child {
 }
 
 del {
-  text-decoration-color: #d64a48;
+  text-decoration-color: var(--secondary);
   text-decoration-thickness: 3px;
 }
 
@@ -699,16 +699,16 @@ details {
   border-radius: 8px;
 
   summary::marker {
-    color: #d64a48;
+    color: var(--secondary);
   }
 }
 
 .dark details {
-  background-color: #1a1a1a;
+  background-color: var(--surface-container);
 }
 
 .light details {
-  background-color: #efefef;
+  background-color: var(--surface-container);
 }
 
 .form {
@@ -1167,22 +1167,22 @@ select.form-control {
 
 /* Light and dark color schemes */
 .dark {
-  color: #ccc
+  color: var(--background-text);
 }
 
 .light {
-  color: #333;
+  color: var(--background-text);
 }
 
 
 .dark,
 .dark pre {
-  background-color: #000
+  background-color: var(--background);
 }
 
 .light,
 .light pre {
-  background-color: #f6f7f4;
+  background-color: var(--background);
 }
 
 .light .dark pre {
@@ -1191,7 +1191,7 @@ select.form-control {
 }
 
 .light .dark pre code {
-  color: #00bcd4
+  color: var(--secondary);
 }
 
 .dark h1 a,
@@ -1199,31 +1199,31 @@ select.form-control {
 .dark h3 a,
 .dark h4 a,
 .dark h5 a {
-  color: #ccc
+  color: var(--background-text);
 }
 
 .dark code,
 .dark strong {
-  color: #fff
+  color: var(--surface-text);
 }
 
 .dark table {
-  color: #fff;
+  color: var(--background-text);
 }
 
 .light table {
-  color: #000;
+  color: var(--background-text);
 }
 
 .dark table td,
 .dark table th {
-  border-color: #fff;
+  border-color: var(--outline);
 }
 
 .light table td,
 .light table th {
-  color: #000;
-  border-color: #000;
+  color: var(--background-text);
+  border-color: var(--outline);
 }
 
 .dark table tbody td:first-child {

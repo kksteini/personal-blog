@@ -5,11 +5,11 @@
   "patterns": [
     {
       "name": "red-bullshit",
-      "match": "LargestPalindrome"
+      "match": "LargestPalindrome|1e2|1e999"
     },
     {
       "name": "yellow-bullshit",
-      "match": "GauntletHelper|Gauntlet"
+      "match": "GauntletHelper|Gauntlet|LoopBody|LoopCondition"
     },
     {
       "name": "comment",
@@ -54,7 +54,7 @@
     },
     {
       "name": "literal",
-      "match": "[0123456789¯]"
+      "match": "[0123456789¯∞]"
     },
     {
       "name": "subscripted",
