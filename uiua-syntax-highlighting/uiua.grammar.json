@@ -5,7 +5,7 @@
   "patterns": [
     {
       "name": "red-bullshit",
-      "match": "Remstep|OverProduce|TestCandidates|Candidates|LargestPalindrome|1e2|1e999"
+      "match": "RemStep|OverProduce|TestCandidates|Candidates|LargestPalindrome|1e2|1e999"
     },
     {
       "name": "yellow-bullshit",
