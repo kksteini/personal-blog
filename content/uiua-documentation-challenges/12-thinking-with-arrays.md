@@ -130,7 +130,7 @@ are spaces. So let's try `partition id` with the masking array.
 
 ```uiua
     ⊜∘⊸≠@░X
-Error: Cannot join arrays of shapes [1 × 4] and [2]
+"Error: Cannot join arrays of shapes [1 × 4] and [2]"
 ```
 
 Oh, right. You can't make arrays of strings like `"Wowee"_"Varying"_"Lengths"`.
@@ -450,7 +450,7 @@ Let's `under sel mul,0` to zero out all the relevant indices.
 
 ```uiua
     ⍜⊏×₀▽⊸≡(>0/+◿2) ⊸⊚ m
-Error: Cannot undo multi-dimensional selection
+"Error: Cannot undo multi-dimensional selection"
 ```
 
 Whoops. `select` is not the way to get elements by indices.
@@ -701,7 +701,7 @@ What you might try to do is
 
 ```uiua
     ⍜(⊜□⊸≠@░|⍚⇌) "dad gave mom a racecar"
-Error: No inverse found
+"Error: No inverse found"
 ```
 
 This doesn't work. If this happens we should try to simplify and move functionality

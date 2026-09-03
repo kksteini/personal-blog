@@ -41,8 +41,7 @@ Can't we just put `un` in front of what we did with the output we got?
 
 ```uiua
     °⊂ 0 [0 1 2 3]
-Error: Cannot unjoin scalar
-  at 1:2
+"Error: Cannot unjoin scalar"
 ```
 
 Hmm, apparently not as simple as just slapping an `un` on there.
@@ -70,7 +69,7 @@ What happens then if `un(join X)` does not find its pattern?
 
 ```uiua
     °(⊂ 0) [1 2 3]
-Error: 1:3: Pattern match failed: expected 0 but got 1
+"Error: 1:3: Pattern match failed: expected 0 but got 1"
 ```
 
 Ah, so that's the catch. With `un join <array>` we can indiscriminately split an
@@ -84,8 +83,8 @@ In the `un` documentation, f.x., you should see two versions of `un join`.
 
 What you can read from it is this:
 
-* -`unjoin` splits off the first row, returns the first row and the rest
-* -`un(join X)` splits off X, while keeping the rest,
+- -`unjoin` splits off the first row, returns the first row and the rest
+- -`un(join X)` splits off X, while keeping the rest,
   if and only if that pattern is found as [X Y Z]
 
 Now, think back on what happens when `un(join 0)` does when its target array
@@ -183,12 +182,12 @@ Let's cobble something together in Python, quick!!!
 
 #### Obligatory 'not a Python-expert' section
 
-*I'm sure we could do better with Python, this might break.
+_I'm sure we could do better with Python, this might break.
 I could use a parsing library, work backwards from a `f"..."` template string
 or do something clever with regex, but my point is that the contrast is getting
 greater. We can write straightforward un-formatting functions in Uiua that get
-to be non-trivial to do in Python f.x.*
+to be non-trivial to do in Python f.x._
 
-*Feel free to disagree of course, I'm always open to criticism, [uiuachallenges@anub.is](uiuachallenges@anub.is).
+_Feel free to disagree of course, I'm always open to criticism, [uiuachallenges@anub.is](uiuachallenges@anub.is).
 I'm not trying to make a Pythonic straw-man here, I just simply cobbled together
-something with what I'd consider a similar mental effort to the Uiua unformatter.*
+something with what I'd consider a similar mental effort to the Uiua unformatter._

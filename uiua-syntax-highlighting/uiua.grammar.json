@@ -5,11 +5,11 @@
   "patterns": [
     {
       "name": "red-bullshit",
-      "match": "LargestPalindrome|1e2|1e999"
+      "match": "TestCandidates|Candidates|LargestPalindrome|1e2|1e999"
     },
     {
       "name": "yellow-bullshit",
-      "match": "GauntletHelper|Gauntlet|LoopBody|LoopCondition"
+      "match": "PrimeReducer|GauntletHelper|Gauntlet|LoopBody|LoopCondition"
     },
     {
       "name": "comment",
@@ -50,7 +50,7 @@
     {
       "name": "bound-function",
       "comment": "This is ridiculous and I know it. But I'm lazy and bad.",
-      "match": "IsAmicableCandidate|IsAmicable|IsOwnAmicable|Scale|Factorial|AddNotFin|SBI|Add|RawInput|IsPrimePervasive|FromString|ToString|AddNotFin|BigAdd|RemZer|Input|IsPrime|GNL|PDS|PD|AD|PDH|NC|CS|GCL|GetGridWays|MonthDays|LeapAndStart|LeapMonthDays|PickMiddle|[MBFGH]"
+      "match": "IsAmicableCandidate|IsAmicable|IsOwnAmicable|Scale|Factorial|AddNotFin|SBI|Add|RawInput|IsPrimePervasive|FromString|ToString|AddNotFin|BigAdd|RemZer|Input|IsPrime|GNL|PDS|PD|AD|PDH|NC|CS|GCL|GetGridWays|MonthDays|LeapAndStart|LeapMonthDays|PickMiddle|[MABFGH]"
     },
     {
       "name": "literal",

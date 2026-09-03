@@ -81,18 +81,18 @@ two arguments.
 ```
 
 Otherwise, you can supply a function to `stencil` and
-state the window size. *I like subscripts*.
+state the window size. _I like subscripts_.
 
 ```uiua
     st,13id"Shiver me timbers"
     ⧈₁₃∘"Shiver me timbers"
- ╭─                 
-╷ "Shiver me tim"  
-  "hiver me timb"  
-  "iver me timbe"  
-  "ver me timber"  
-  "er me timbers"  
-                  ╯ 
+ ╭─
+╷ "Shiver me tim"
+  "hiver me timb"
+  "iver me timbe"
+  "ver me timber"
+  "er me timbers"
+                  ╯
 ```
 
 ## Towards a solution
@@ -118,7 +118,7 @@ That will give us the number as an array, but in reverse.
 Just to make reading easier, I'll apply `rev`.
 
 ```uiua
-    rev base,10 
+    rev base,10
     ⇌ ⊥₁₀7281965729
 [7 2 8 1 9 6 5 7 2 9]
 ```
@@ -162,8 +162,7 @@ Alright. Let's crunch the 1000 digit number.
 ```uiua
     /↥ ⧈₁₃/× ⇌ ⊥₁₀731..<truncated>..3450
     /↥ ⧈₁₃/× ⇌ ⊥₁₀inf
-Error: Cannot take base of ∞
-  at 1:12
+"Error: Cannot take base of ∞"
 ```
 
 Oh yeah. Our number is too big. It just gets changed into `inf`.
@@ -223,7 +222,7 @@ Now we can apply the same set of jargon to the 1000-digit number.
 
 ### Extra credit - Getting digits pervasively
 
-*Thanks to Tyz for the feedback.*
+_Thanks to Tyz for the feedback._
 
 Here it is again. Oh boy.
 

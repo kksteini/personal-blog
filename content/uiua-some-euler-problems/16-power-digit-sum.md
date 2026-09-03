@@ -103,8 +103,8 @@ We need a method, `BigAdd`, that corrects the overflow.
 
 We'd want to detect overflows, `>9` and then do two things based on that.
 
-* Mark overflow with $1$, rotate and add to the next 10s place.
-* Mark overflow with $1$, subtract 10.
+- Mark overflow with $1$, rotate and add to the next 10s place.
+- Mark overflow with $1$, subtract 10.
 
 Here's a step by step.
 We'll start by identifying overflows.
@@ -158,18 +158,18 @@ What about $1 + 999$?
 
 Hmm. That's strange, though intended. Recall the tutorial.
 
->If one of the arrays has exactly one row,
+> If one of the arrays has exactly one row,
 > that array will be repeated for each row of the other array.
 > This includes scalars.
 >
->Uiua.org | Tutorial on More Array Manipulation
+> Uiua.org | Tutorial on More Array Manipulation
 
 This means that we should expect an error from $999 + 11$ unless the `add`
 function has a fill context.
 
 ```uiua
     + [9 9 9] [1 1]
-Error: Shapes [3] and [2] are not compatible
+"Error: Shapes [3] and [2] are not compatible"
 
     ⬚0+ [9 9 9] [1 1]
 [10 10 9]

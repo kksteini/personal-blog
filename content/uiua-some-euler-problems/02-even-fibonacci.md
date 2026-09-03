@@ -11,6 +11,7 @@ pad = "https://uiua.org/pad?src=0_19_0-dev_4__eJxtjr9KxEAQxvt9ipE0CbmYP1iI2BoCds
 categories = ["uiua-euler"]
 tags = ["uiua", "euler", "fibonacci"]
 +++
+
 <!-- markdownlint-disable MD033 -->
 <!-- markdownlint-disable MD013 -->
 
@@ -31,7 +32,7 @@ four million, find the sum of the even-valued terms.
 
 ### Recursion and tree explosion
 
-The Fibonacci sequence, you *can* think of as being the base cases
+The Fibonacci sequence, you _can_ think of as being the base cases
 $$F_0 = 1$$
 $$F_1 = 1$$
 
@@ -40,6 +41,7 @@ and then the recursive definition
 $$F_k = F_{k-1} + F_{k-2}$$
 
 ---
+
 Let's analyze the recursive definition.
 We'll start with $F_4$ as an example.
 The recursive definition yields
@@ -53,7 +55,7 @@ $$F_2 = F_1 + F_0$$
 We keep going until all terms have been reduced to the base cases.
 Since each term consists of two lower terms we'll visualize them as a binary tree.
 For each node we drill down $F_{k-1}$ to the left and $F_{k-2}$ to the right.
-Please enjoy and respect my *art*:
+Please enjoy and respect my _art_:
 
 <div style="text-align: center">
   <img alt="Tree Explosion" src="/images/euler-fibo-tree-explosion.png" style="max-width: 100%; max-height: 400px;"/>
@@ -87,9 +89,9 @@ incoming argument is less or equal to 1
 )⊸≤1                   #Is less or equal to 1?
 ```
 
->Since we are creating a recursive function, we need to specify its signature. We
->will be returning a single element, given a number, so the signature is `|1.1`
->or simply `|1`.
+> Since we are creating a recursive function, we need to specify its signature. We
+> will be returning a single element, given a number, so the signature is `|1.1`
+> or simply `|1`.
 
 Let's call this recursive function `BFH` and use it to generate a
 range of Fibonacci numbers. I'll be saving this file as `p2-bad.ua` and
@@ -170,15 +172,15 @@ Testing a couple of values of X yields
 
 ```uiua
 X 5
-### 8 
-### 6 
+### 8
+### 6
 
 X 14
-### 610 
-### 15  
+### 610
+### 15
 
 X 20
-### 10946 
+### 10946
 ### 21
 ```
 
@@ -257,18 +259,18 @@ out of the way and then consume the Fibonacci number with our
 condition check. That should be okay because the
 [do documentation](https://www.uiua.org/docs/do) says
 
->If the condition function consumes its only arguments to evaluate
+> If the condition function consumes its only arguments to evaluate
 > the condition, then those arguments will be implicitly copied.
 
 ```uiua
     ⍢(X|<10◌) 0
-Error: Missing argument 2
+"Error: Missing argument 2"
 ```
 
 Ah, but of course. The condition function is the first thing to run.
 We're supplying only one argument. We need another one.
 We should just put the horse before the cart
-and *pretend* that this has run once. With `X 0` or `1 1`.
+and _pretend_ that this has run once. With `X 0` or `1 1`.
 
 ```uiua
     ⍢(X|<10◌) X 0
@@ -280,9 +282,9 @@ Let's try this now, with the 4 million limit
 
 ```uiua
     ⍢(X|<4000000◌) 1 1
-[1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 
-2584 4181 6765 10946 17711 28657 46368 75025 
-121393 196418 317811 514229 832040 1346269 
+[1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597
+2584 4181 6765 10946 17711 28657 46368 75025
+121393 196418 317811 514229 832040 1346269
 2178309 3524578]
 ```
 
@@ -291,7 +293,7 @@ Great!
 ### An iterative solution
 
 What we observe from the `do` loop is that at each iteration, if we overproduce
-on output then  something is *pushed off and collected*.
+on output then something is _pushed off and collected_.
 This is not the official way to think about it but it certainly helps me
 understand. Here's an annotated version of the loop snapshot from the previous section
 
@@ -309,7 +311,7 @@ understand. Here's an annotated version of the loop snapshot from the previous s
 
 # After the 8th run
 Arguments to next X
-  | 
+  |
  / \  Collected so far
  | |         |
  | |        / \
@@ -359,7 +361,7 @@ Hmm, this is off by one. $55+89=144$ is missing.
 Let's stop and think about it a little. What would it take for `144` to be
 pushed off and collected? Well, when we have the arguments `233 144` the
 loop would stop at that point, evaluating `233 < 200` as false, and `144`
-isn't *pushed off*. So, we just `pop` off the first argument in the condition
+isn't _pushed off_. So, we just `pop` off the first argument in the condition
 body like we did in the previous section.
 
 ```uiua
@@ -386,7 +388,7 @@ X ← ⊃+₁ BFH
 
 We'll use `X` to generate all Fibonacci numbers below the threshold.
 
-*For brevity I'll use threshold 200 until the end.*
+_For brevity I'll use threshold 200 until the end._
 
 We should start with `by mod 2` since we want to target only even
 Fibonacci numbers.

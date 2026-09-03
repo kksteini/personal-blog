@@ -159,8 +159,8 @@ the first 15-16 digits while rounding off the rest.
 Since we want the first 10 digits, adding a mere 100 of them might not overflow
 the needed precision. Therefore we should just try adding them.
 
-*There is a lot of input. Therefore let's define the input only once, in the appendix.
-You can copy it from there if you wish. Just know that `Input` refers to that*
+_There is a lot of input. Therefore let's define the input only once, in the appendix.
+You can copy it from there if you wish. Just know that `Input` refers to that_
 
 Splitting a string by a character, and collecting the splits into an either
 boxes or just parsing numbers, is common. So common in fact that there are
@@ -171,7 +171,7 @@ and `pbbn`.
     ppbn@\n Input
     ⊜⋕⊸≠@\n Input
 [
-  37107287533902104000000000000000000000000000000000 
+  37107287533902104000000000000000000000000000000000
   46376937677490010000000000000000000000000000000000
     ...and so on
 ```
@@ -257,8 +257,8 @@ We need some magic method, `BigAdd`, that corrects the overflow.
 
 Well, we'd want to detect overflows, `>9` and then do two things based on that.
 
-* Mark overflow with $1$, rotate and add to the next 10s place.
-* Mark overflow with $1$, subtract 10.
+- Mark overflow with $1$, rotate and add to the next 10s place.
+- Mark overflow with $1$, subtract 10.
 
 Here's a step by step.
 We'll start by identifying overflows.
@@ -312,18 +312,18 @@ What about $1 + 999$?
 
 Hmm. That's strange, though intended. Recall the tutorial.
 
->If one of the arrays has exactly one row,
+> If one of the arrays has exactly one row,
 > that array will be repeated for each row of the other array.
 > This includes scalars.
 >
->Uiua.org | Tutorial on More Array Manipulation
+> Uiua.org | Tutorial on More Array Manipulation
 
 This means that we should expect an error from $999 + 11$ unless the `add`
 function has a fill context.
 
 ```uiua
     + [9 9 9] [1 1]
-Error: Shapes [3] and [2] are not compatible
+"Error: Shapes [3] and [2] are not compatible"
 
     ⬚0+ [9 9 9] [1 1]
 [10 10 9]

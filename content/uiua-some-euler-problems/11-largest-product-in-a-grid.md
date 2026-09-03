@@ -9,7 +9,7 @@ pad = "https://uiua.org/pad?src=0_19_0-dev_4__eJx1VbuO5EQUzf0VR2oCCJqpW-8iQgKtRI
 
 [taxonomies]
 categories = ["uiua-euler"]
-tags = ["uiua", "euler", "prime-numbers"]
+tags = ["uiua", "euler"]
 +++
 
 <!-- markdownlint-disable MD033 -->

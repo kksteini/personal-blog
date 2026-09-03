@@ -134,7 +134,7 @@ will still give back the original number.
 
 Do we now have a good intuition for how to answer a question of the form:
 
-* *What is the smallest number divisible by both $K$ and $T$?*
+- _What is the smallest number divisible by both $K$ and $T$?_
 
 Let's look at a concrete example and ask the same question of $18$ vs $12.$
 Here are their prime factorizations.
@@ -160,8 +160,8 @@ Therefore, the smallest number divisible by both $18$ and $12$ is
 
 Another way of thinking about this problem:
 
-* *The smallest number divisible by a collection of numbers, is the
-product of the maximal count of each prime factor over the collection*
+- _The smallest number divisible by a collection of numbers, is the
+  product of the maximal count of each prime factor over the collection_
 
 A hecking mouthful. Let's test it out.
 
@@ -273,7 +273,7 @@ And now, we apply `un keep` on each row.
 
 ```uiua
     ≡°▽ ⍉ °/× [9 60 14]
-Error: Cannot combine arrays with shapes [2] and [3]
+"Error: Cannot combine arrays with shapes [2] and [3]"
 ```
 
 Oh, yes. There are different amounts of factors between the numbers
@@ -305,7 +305,7 @@ see if we can fix it at the source.
 Looking through the documentation again, we come across this
 statement in [where](https://www.uiua.org/docs/where).
 
->un where (°⊚) will convert indices back into a list of counts
+> un where (°⊚) will convert indices back into a list of counts
 
 This may be a little confusing but let's see how this interacts with
 `un reduce mul`.
@@ -344,7 +344,7 @@ Let's apply `un where` to each row
 
 ```uiua
     ≡°⊚ ⍉ °/× [9 60 14]
-Error: Cannot combine arrays with shapes [4] and [8]
+"Error: Cannot combine arrays with shapes [4] and [8]"
 ```
 
 Same problem as before. We'll fill with 0 so that we extend

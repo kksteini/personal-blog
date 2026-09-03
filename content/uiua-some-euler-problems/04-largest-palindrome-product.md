@@ -28,9 +28,7 @@ backwards and forwards. Let's try `eq by rev` with some tests
 
     ⍤"Oh no!" IsPalindromic 121
     ⍤"Oh no!" ¬ IsPalindromic 321
-Error: Oh no!
-  at 4:1
-4 | ⍤"Oh no!" ¬ IsPalindromic 321
+"Error: Oh no!"
 ```
 
 Hmm. `121` is correctly identified as a palindrome but `IsPalindromic` also
@@ -145,7 +143,7 @@ Now let's consider the ranges 0-999 again and filter to palindromes
 
 ```uiua
     ▽ ⊸≡IsPalindromic ◴ ♭≡(× ⇡1000) ⇡ 1000
-[0 1 2 3 4 <truncated> 906609 886688 861168 888888] 
+[0 1 2 3 4 <truncated> 906609 886688 861168 888888]
 ```
 
 And then getting the largest one
@@ -423,11 +421,11 @@ An improvement, but only so much.
 
 What if
 
-* -we get all combinations
-* -multiply them together
-* -sort and dedup
-* -work our way backwards through the list until we hit a palindrome
-* -return the palindrome
+- -we get all combinations
+- -multiply them together
+- -sort and dedup
+- -work our way backwards through the list until we hit a palindrome
+- -return the palindrome
 
 This should reduce the amount of palindromic checks by a whole lot.
 Let's set up a `do` loop for this.
@@ -442,12 +440,12 @@ largest element is palindromic. We drop it and continue if not, otherwise we sto
 If we now set up a do loop like `do(Dobody|not Docondition last)` then
 what should happen is the following.
 
-* -We check the last element of an array
-* -If it is not palindromic we drop it
-* * +The array shrinks
-* -If it is palindromic we stop
-* * +The last element caused the stop so when we quit,
-this will be the largest palindrome
+- -We check the last element of an array
+- -If it is not palindromic we drop it
+- - +The array shrinks
+- -If it is palindromic we stop
+- - +The last element caused the stop so when we quit,
+    this will be the largest palindrome
 
 We should now have a smaller array where the last element is palindromic.
 We therefore end up with something like
@@ -492,11 +490,11 @@ Not quite 2 microseconds but it's still much faster than our previous attempts.
 At 23 milliseconds I think it's time to stop, except, there is one thing.
 Take a look at the [Uiua optimizations documentation](https://www.uiua.org/docs/optimizations).
 
->Sortedness flags are used to improve the performance of:
+> Sortedness flags are used to improve the performance of:
 >
-> * -\<truncated yada yada\>
+> - -\<truncated yada yada\>
 >
-> * -◴ deduplicate and ⊛ classify
+> - -◴ deduplicate and ⊛ classify
 
 With this in mind, let's swap `sort` and `dedup` to see if we can take
 advantage of it.

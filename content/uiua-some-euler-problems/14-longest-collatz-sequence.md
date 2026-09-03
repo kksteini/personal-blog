@@ -168,7 +168,7 @@ What if we return a number according to this definition?
 ```pseudocode
 def get_collatz_length(n)
     k = get_next_collatz (n)
-    if k == 1 
+    if k == 1
       return 1
     else
       return 1 + get_collatz_length(k)
@@ -205,7 +205,7 @@ Let's run the memoized one on the full range now.
 
 ```uiua
     +₁⊢⊚=⊸/↥ ≡(⧻GCL) ⇡₁999999
-Error: Recursion limit reached. 
+"Error: Recursion limit reached."
 ```
 
 Darn. Won't be doing this in the pad then.

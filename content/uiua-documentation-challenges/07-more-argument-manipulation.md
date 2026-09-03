@@ -51,7 +51,7 @@ Consider two functions, `reduce add` and `reduce back sub`.
 6
 
 # Function boundaries will become second nature once you
-# get familiar enough with Uiua. 
+# get familiar enough with Uiua.
 # You can use parentheses to
 # visualize the boundaries better.
 
@@ -63,7 +63,7 @@ Consider two functions, `reduce add` and `reduce back sub`.
 
 ### Function boundary
 
-I use the term *function boundary* somewhat.
+I use the term _function boundary_ somewhat.
 This is not an official term but I like to use it when I reason about
 functions as inputs.
 
@@ -93,7 +93,7 @@ instead of just highlighting as above. As an example:
 # Add n and then multiply by itself
 # This is two functions
 # Doing this twice would be four functions
-# This is where parentheses represent a function boundary of 
+# This is where parentheses represent a function boundary of
 # two functions
     [fork (self mul add 1) (self mul add 3) 1]
     [⊃(˙× + 1) (˙× + 3) 1]
@@ -113,9 +113,9 @@ some arguments, whereas `id` simply returns whatever argument is next.
 **Let's consider the difference between `dip` and `gap`.**
 
 ```uiua
-# dip (and gap) needs a function 
+# dip (and gap) needs a function
 # and then some arguments
-# 
+#
 # Let's break down `dip add 1 2 3`
 # dip add   1 2 3
 #      |    | | |
@@ -130,11 +130,11 @@ some arguments, whereas `id` simply returns whatever argument is next.
 #   dip skips and 'banks' the first argument, 1
 #   add receives the arguments 2 3
 #   add computes 5
-#   dip puts down the banked 1 
+#   dip puts down the banked 1
 #   then comes the computation, 5.
 # End result, [1 5].
 
-# The difference with gap is that it doesn't 
+# The difference with gap is that it doesn't
 # give back the skipped argument:
     [⋅+ 1 2 3]
 [5]
@@ -161,7 +161,7 @@ OK, but where does `id` come in? Why is it considered a planet?
 #     |          \ /
 #  'func'  next arguments
 
-# 1 'kinda' is a  zero argument function that returns 1. 
+# 1 'kinda' is a  zero argument function that returns 1.
 # Even if 1 takes no arguments,
 # gap skips the next argument in the argument list, 2.
 # Gap 'applies' the function 1.
@@ -189,7 +189,7 @@ OK, but where does `id` come in? Why is it considered a planet?
 #### Planet notation shorthand
 
 ```uiua
-# The formatter is ok with simply g, d, p and i 
+# The formatter is ok with simply g, d, p and i
 # for gap, dip, pop and id.
     dgi 1 2 3
     ⊙⋅∘ 1 2 3
@@ -202,7 +202,7 @@ OK, but where does `id` come in? Why is it considered a planet?
 
 # Though you need more than one
     g 1 2 3
-Error: Unknown identifier `g`
+"Error: Unknown identifier `g`"
 ```
 
 ## Challenge 1
@@ -248,7 +248,7 @@ Let's start by isolating the 4th argument.
 Indeed we can. But what about the first three?
 
 ```uiua
-# Gap skips and discards, but dip does not discard. 
+# Gap skips and discards, but dip does not discard.
 # For the first three we want to keep them all.
 # Thus, keeping 1 2 3 out of 1 2 3 4 should be
 # dip dip id
@@ -259,14 +259,15 @@ Indeed we can. But what about the first three?
 But hang on a minute, we get back `[1 2 3 4]`? Let's call this **confusion 1**.
 
 We do of course correctly get back `[1 2 3 4]`. We keep the first three, but
-there is nothing acting on the last argument 4. The last argument just *plops
-itself* into the list after `dip dip id` finishes targeting and keeping `1 2 3`.
+there is nothing acting on the last argument 4. The last argument just _plops
+itself_ into the list after `dip dip id` finishes targeting and keeping `1 2 3`.
 
 **Dip and id discomfort?**
 
 As a beginner I didn't like reasoning with dips and ids as the result was
 the same as the input. It became clearer once I isolated it with a fork.
 Consider the following from the [fork docs](https://www.uiua.org/docs/fork)
+
 > If the \[forked\] functions take different numbers of arguments,
 > then the number of arguments is the maximum. Functions that take fewer than
 > the maximum will work on the top values.
@@ -275,7 +276,7 @@ Let's examine `dip dip id` with this knowledge in mind
 
 ```uiua
 # We expect 'dip dip id' to work on three arguments
-# Let's use fork 
+# Let's use fork
 # We'll put 'dip dip id' as the first fork function
 # and then use something that takes no arguments:
 #   →just the number 0
@@ -311,6 +312,7 @@ Knowing what we know, let's fork together.
 **What about the idiomatic solution?**
 
 From the [with docs](https://www.uiua.org/docs/with)
+
 > Call a function but keep its last argument before its outputs
 
 I think the documentation examples are pretty good for understanding `with`
@@ -386,7 +388,7 @@ Trying the idiomatic solution without packing comes with problems.
 
 ```uiua
     ⊃++×× 1 2 3
-Error: Missing argument
+"Error: Missing argument"
 ```
 
 Again, there are 4 functions there, not 2.
@@ -412,8 +414,7 @@ However, observe the following:
 
 # Can we just supply three functions to fork?
     ⊃(++)(×+)(××) 1 2 3
-Error: Missing argument 2
-  at 1:1
+"Error: Missing argument 2"
 
 # No. Not at all
 ```
@@ -445,6 +446,7 @@ They can also be singular or none.
 I would recommend reading over the [both docs](https://www.uiua.org/docs/both).
 
 Now, from the doc, consider the following:
+
 > For a function that takes n arguments, ∩ (both) calls the function on the
 > 2 sets of n arguments.
 
@@ -461,6 +463,7 @@ What does this mean?
 ```
 
 Then consider:
+
 > Subscripted ∩ (both) calls its function on N sets of arguments.
 
 ```uiua
@@ -479,11 +482,11 @@ It similarly has a subscript that tells it how many arguments it should collect.
 ```uiua
 # Let's couple 4 and then 3 with input 1 2 3 4
 
-# All four are coupled 
+# All four are coupled
     ⊟₄1 2 3 4
 [1 2 3 4]
 
-# First three are coupled 
+# First three are coupled
     ⊟₃1 2 3 4
 4
 [1 2 3]
@@ -572,7 +575,8 @@ The selection process is the same.
 **What about the idiomatic solution?**
 
 Take a look at the [documentation for backward](https://www.uiua.org/docs/backward).
-> *If the function takes 4 arguments, the second two arguments are swapped.*
+
+> _If the function takes 4 arguments, the second two arguments are swapped._
 
 The example given makes this fairly easy to understand
 
@@ -585,7 +589,7 @@ The example given makes this fairly easy to understand
     ˜⊟₄1 2 3 4
 [1 3 2 4]
 
-# Notice how `both add` takes 4 arguments 
+# Notice how `both add` takes 4 arguments
 # That means we can use the `backward` modifier to swap the arguments
 # The input goes from `A B C D` to `A C B D`
 # and `both add` will consume it in the following way:

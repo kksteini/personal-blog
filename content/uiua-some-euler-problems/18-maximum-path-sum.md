@@ -85,7 +85,7 @@ $ 2 4 6
 $ 8 5 9 3
 ⊜(⊜⋕⊸≠@ )⊸≠@\n
 
-Error: Cannot combine arrays with shapes [1] and [4]
+"Error: Cannot combine arrays with shapes [1] and [4]"
 ```
 
 Of course. Let's set a fill context of $0$ for our outer partition.

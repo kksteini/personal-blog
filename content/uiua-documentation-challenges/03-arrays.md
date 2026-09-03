@@ -19,8 +19,8 @@ See [installation](https://www.uiua.org/install). You can run it locally with
 `uiua repl`.
 
 The repl output shows a more stack like behaviour.
-It grows down. I like to think of it as *whatever is at the bottom is the thing
-that would get used next. The first argument.*
+It grows down. I like to think of it as _whatever is at the bottom is the thing
+that would get used next. The first argument._
 
 ```uiua
     1 2.5 "3" #<- repl input line
@@ -70,7 +70,7 @@ Let's make it clearer with some examples.
 
 # You can think of it like this:
 # We substitute 'by add 1 2' with (3 2)
-# So + 3 ⊸+ 1 2 is equivalent to 
+# So + 3 ⊸+ 1 2 is equivalent to
     + 3 (3 2)
 2
 6
@@ -85,7 +85,7 @@ We can reason about `by add rev` in the same manner
 [9 5 1]
 
 # Acting on that output with add
-# Would be equivalent to 
+# Would be equivalent to
     + 1_5_9 9_5_1
 [10 10 10]
 
@@ -112,17 +112,17 @@ Let's start by taking a look at `reshape`
 ```uiua
     reshape 2_5 9
     ↯ 2_5 9
-╭─           
-╷ 9 9 9 9 9  
+╭─
+╷ 9 9 9 9 9
   9 9 9 9 9
             ╯
 ```
 
 Here we seem to have `reshape x_y fill_value`.
 What we ask for with `reshape 2_5 9` is an array with two rows
-and five columns, all filled with the value 9. *Note: This is technically
+and five columns, all filled with the value 9. _Note: This is technically
 not true but serves as a gentle introduction to reshape. More on reshape
-later*.
+later_.
 
 However, our test input is two arguments, not a `rows_columns` array.
 So let's look at `couple` next. According to the documentation it
@@ -143,8 +143,8 @@ fill value as `0`
 
 ```uiua
     ↯ 0 ⊟ 3 5
-╭─       
-╷ 0×2 ℝ  
+╭─
+╷ 0×2 ℝ
         ╯
 ```
 
@@ -154,10 +154,10 @@ to a function
 
 ```uiua
     ˜↯ 0 3_5
-╭─           
-╷ 0 0 0 0 0  
-  0 0 0 0 0  
-  0 0 0 0 0  
+╭─
+╷ 0 0 0 0 0
+  0 0 0 0 0
+  0 0 0 0 0
             ╯
 ```
 
@@ -179,11 +179,11 @@ or the idiomatic solution
 
 **Why? Short edition**.
 
-*Thank you Tyz for the feedback!*
+_Thank you Tyz for the feedback!_
 
 It may be sufficient for you to understand that
-*1-row leading axis to an array* just means *put the entire thing you have into
-a new array as its first element*.
+_1-row leading axis to an array_ just means _put the entire thing you have into
+a new array as its first element_.
 
 This means there is an alternate solution to the problem that looks like this
 
@@ -192,8 +192,8 @@ This means there is an alternate solution to the problem that looks like this
     [∘]
 ```
 
-*`id` has not been introduced but should be fairly easy to understand in this context.
-`[id]` is equivalent to `f(x) -> [x]`. Then `f(2)` is equivalent to `[id] 2`*
+_`id` has not been introduced but should be fairly easy to understand in this context.
+`[id]` is equivalent to `f(x) -> [x]`. Then `f(2)` is equivalent to `[id] 2`_
 
 **Why? Original wall of text**.
 
@@ -222,7 +222,7 @@ dimensions of an array.
     △ [1_2_3 4_5_6]
 [2 3]
 
-# You can think of the shape [2 1 3] as 
+# You can think of the shape [2 1 3] as
 # two rows of 1x3 two dimensional arrays
     △ [[1_2_3] [4_5_6]]
 [2 1 3]
@@ -236,43 +236,43 @@ try out `un shape` to generate arrays based on the shape you supply.
 For example
 
 ```uiua
-# I want an array of shape [1 4] 
+# I want an array of shape [1 4]
     °△ [1 4]
-╭─         
-╷ 0 1 2 3  
+╭─
+╷ 0 1 2 3
           ╯
 
-# Shouldn't that have been a one dimensional array? 
+# Shouldn't that have been a one dimensional array?
 # What about [4]?
     °△ [4]
 [0 1 2 3]
 
-# Ah I see. 
+# Ah I see.
 # The lines (╭, ╷) on the side denote dimensions
     °△ [2 4]
-╭─         
-╷ 0 1 2 3  
-  4 5 6 7  
+╭─
+╷ 0 1 2 3
+  4 5 6 7
           ╯
 
 # So a 3D matrix has three lines on the side, right?
     °△ [3 2 1]
-╭─        
-╷ 0  2  4  
-╷ 1  3  5  
+╭─
+╷ 0  2  4
+╷ 1  3  5
           ╯
 
 # What about a 7D monster, just because?
     °△ [1 1 1 1 1 1 1]
-╭─   
-╷    
-╷    
-╷    
-╷ 0  
-╷    
-╷    
+╭─
+╷
+╷
+╷
+╷ 0
+╷
+╷
     ╯
-    
+
 ```
 
 Let's talk about what the challenge wants you to do.
@@ -291,8 +291,8 @@ input of `[20 40]`
 # So, we want to reshape it to [1 2]
 # What does that look like?
     ↯ [1 2] [20 40]
-╭─       
-╷ 20 40  
+╭─
+╷ 20 40
         ╯
 # Reshape definitely does that, right?
 # What is the shape after reshaping?
@@ -320,8 +320,8 @@ input of `[20 40]`
 # So the whole solution for this test input
 # is reshape join 1 by shape [20 40]
     ↯ ⊂ 1 ⊸△ [20 40]
-╭─       
-╷ 20 40  
+╭─
+╷ 20 40
         ╯
 ```
 
@@ -425,9 +425,9 @@ Let's use `[1 2 3 4 5]` as an example. We want to end up with
 Let's discuss briefly what `box` and something being boxed means.
 What does boxing solve?
 
-> *□ box creates a box element that contains the array. All boxes, no matter
+> _□ box creates a box element that contains the array. All boxes, no matter
 > the type of shape of their contents, are considered the same type and can be
-> put into arrays together.*
+> put into arrays together._
 >
 > From [Uiua.org/docs/box](https://uiua.org/docs/box)
 
@@ -458,7 +458,7 @@ But then we come to Uiua.
 
 ```uiua
     ["bingo" "buddies"]
-Error: Cannot combine arrays with shapes [5] and [7]
+"Error: Cannot combine arrays with shapes [5] and [7]"
 
 # So strings have shapes
     △ "bingo"

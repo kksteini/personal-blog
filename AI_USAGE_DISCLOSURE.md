@@ -16,7 +16,10 @@ with more caution than otherwise human made content.
 Maybe this sentiment will change in 5-10 years time but that's
 not the point of this document, really.
 
-I am not looking for a debate on this matter, I think the internet
+From my own suspicions, I feel like I'd be dishonest if I did not
+then explain how I used AI for this blog.
+
+I am not looking for a debate on AI, I think the internet
 has more than enough for you if that's what you wish to engage in.
 
 For others, like myself, I include this document to be transparent

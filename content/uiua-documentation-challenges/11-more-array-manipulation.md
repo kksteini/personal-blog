@@ -16,8 +16,8 @@ tags = ["uiua"]
 
 ### Subscripted rows
 
-*The documentation for this chapter is excellent and you should re-read it, especially
-sided rows and operating at different ranks.*
+_The documentation for this chapter is excellent and you should re-read it, especially
+sided rows and operating at different ranks._
 
 Subscripted rows are a way to decide what rank we work with on the row iterator.
 
@@ -145,7 +145,7 @@ And if we add them together, do these shapes work?
 
 ```uiua
     + 1_2_3 [4_5_6 7_8_9]
-Error: Shapes [3] and [2 × 3] are not compatible
+"Error: Shapes [3] and [2 × 3] are not compatible"
 ```
 
 If you read the chapter documentation carefully, and the
@@ -168,14 +168,14 @@ We can see that for pervasive dyadic functions that operate on an argument of
 shape `[A x B]`, you can supply `[1 x B]` such that the single row `B`
 operates on all `A` rows of size `B`.
 
-*Refreshers if you need them:*
+_Refreshers if you need them:_
 
-* [Previous chapter on 'pervasive'](https://www.uiua.org/tutorial/Arrays#pervasion)
-* [Previous chapter on 'monadic/dyadic'](https://www.uiua.org/tutorial/Math%20and%20Comparison#adicity)
-We had issues with adding together shapes `[3]` and `[2 x 3]` but we just
-learned that we should have no problem with adding `[1 x 3]` and `[2 x 3]`.
-What changes then? To change a shape from `[3]` to `[1 3]` we capture that argument
-into an array (or `fix` it)
+- [Previous chapter on 'pervasive'](https://www.uiua.org/tutorial/Arrays#pervasion)
+- [Previous chapter on 'monadic/dyadic'](https://www.uiua.org/tutorial/Math%20and%20Comparison#adicity)
+  We had issues with adding together shapes `[3]` and `[2 x 3]` but we just
+  learned that we should have no problem with adding `[1 x 3]` and `[2 x 3]`.
+  What changes then? To change a shape from `[3]` to `[1 3]` we capture that argument
+  into an array (or `fix` it)
 
 ```uiua
     △ 1_2_3
@@ -227,8 +227,8 @@ I must admit that I found this one hard to understand, and I am not sure
 I fully get it still. I'll start with my solution and then try to build up
 to the intended solution.
 
-*If you don't understand sided rows and ranks, when using subscripts, then I urge
-you to re-read the Uiua documentation and maybe have a peek at the preamble.*
+_If you don't understand sided rows and ranks, when using subscripts, then I urge
+you to re-read the Uiua documentation and maybe have a peek at the preamble._
 
 We are asked to join to each **list** in the second argument.
 The first thing we should know to try in that situation is a
@@ -239,7 +239,7 @@ But, have we solved it according to the specifications? There is an important
 second part to consider. Namely **join the first argument**.
 
 I think this may be considered vague but perhaps we are being asked to join the
-*entire first argument*.
+_entire first argument_.
 
 In the test cases, we have two single elements and a list that need to be joined
 and fixing them doesn't change the equation on how they are joined with other lists.
@@ -343,8 +343,9 @@ What do they look like?
 
 And that does make sense. Think of the following line from the
 [join docs](https://uiua.org/docs/join):
->If the arrays have a rank difference of 2 or more, then the array with the
->smaller rank will be repeated as rows to match the rank of the other.
+
+> If the arrays have a rank difference of 2 or more, then the array with the
+> smaller rank will be repeated as rows to match the rank of the other.
 
 We see that `100_101` is repeated until it can be joined as a 2D array to the
 list of 2D arrays that is `X`.

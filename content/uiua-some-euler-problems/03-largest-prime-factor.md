@@ -9,7 +9,7 @@ pad = "https://uiua.org/pad?src=0_19_0-dev_4__eJxlzrFLw0AUx_H9_ooHWXQ4k9BWRcikCG
 
 [taxonomies]
 categories = ["uiua-euler"]
-tags = ["uiua", "euler", "prime factor", "prime numbers"]
+tags = ["uiua", "euler", "prime-factor", "prime-numbers"]
 +++
 
 ## Problem
@@ -21,16 +21,16 @@ What is the largest prime factor of the number $600851475143$?
 
 In this section we will:
 
-* -get proper divisors
-* -use the proper divisors of the proper divisors to filter for prime factors
-* -get the largest prime factor
+- -get proper divisors
+- -use the proper divisors of the proper divisors to filter for prime factors
+- -get the largest prime factor
 
->Later in this document we will
->look at other means of acquiring primes.
+> Later in this document we will
+> look at other means of acquiring primes.
 
 ### Modulus as means to proper divisors
 
-*[Previous modulus basics](@/uiua-some-euler-problems/01-multiples-of-3-or-5.md#modulo)*
+_[Previous modulus basics](@/uiua-some-euler-problems/01-multiples-of-3-or-5.md#modulo)_
 
 We define proper divisors of $N$ to be any $K$ where $1 \leq K < N$
 such that $mod\ K$ is $0$; that is to say, a positive $K$ which divides $N$.
@@ -105,7 +105,7 @@ some numbers.
 ```
 
 > BTW, there is a more Uiua way to compute proper divisors.
-> See *[alternate proper divisors](@/uiua-some-euler-problems/03-largest-prime-factor.md#alternate-proper-divisors)*
+> See _[alternate proper divisors](@/uiua-some-euler-problems/03-largest-prime-factor.md#alternate-proper-divisors)_
 
 Nice. $60$ is as before, chock full of factors.
 We tested $57$ and it is divisible by $1$, $3$ and $19$.
@@ -179,8 +179,7 @@ Great. Now let's try it on the real deal.
 
 ```uiua
     /↥ ▽ ⊸≡IsPrime PD 600851475143
-Error: Array of 600851475143 8-byte elements would be too large (4806811.801 MB)
-  at 1:16
+"Error: Array of 600851475143 8-byte elements would be too large (4806811.801 MB)"
 ```
 
 Oh. That's not good.
@@ -366,7 +365,7 @@ for the big guns?
 
 ```uiua
     /↥ ▽ ⊸≡IsPrime⊂ ↘₁ ⤚÷ ⊸PDS 600851475143
-Error: Array of 8462696833 8-byte elements would be too large (67701.575 MB)
+"Error: Array of 8462696833 8-byte elements would be too large (67701.575 MB)"
 ```
 
 Darn. So the square root of $600851475143$ is too big?
@@ -416,11 +415,11 @@ The `div by PDS` dance is unnecessary, is it not?
 If we derive the latter half of factors by **dividing** the number with any of
 the factors from `PDS` then a prime can only appear in the following two ways:
 
-1) We divide a prime number by 1
-2) The square root of the number is prime
+1. We divide a prime number by 1
+2. The square root of the number is prime
 
 ```uiua
-    ↘₁⊂⤚÷⊸PDS 59  #N is prime 
+    ↘₁⊂⤚÷⊸PDS 59  #N is prime
     ↘₁⊂⤚÷⊸PDS 361 #sqrt of N is prime
 [1]
 [19 1 19]

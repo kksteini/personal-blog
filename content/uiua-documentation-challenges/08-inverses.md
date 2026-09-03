@@ -130,8 +130,7 @@ and reverse the inputs? Let's try it with [1 2 3 4 5]
 
 ```uiua
     ⍜⊏+ 1_3 100 [1 2 3 4 5]
-Error: Index 1 is out of bounds of length 1
-
+"Error: Index 1 is out of bounds of length 1"
 ```
 
 Ah, because `select 1_3` tries to operate on 100.
