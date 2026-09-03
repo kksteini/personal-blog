@@ -5,11 +5,11 @@
   "patterns": [
     {
       "name": "red-bullshit",
-      "match": "TestCandidates|Candidates|LargestPalindrome|1e2|1e999"
+      "match": "Remstep|OverProduce|TestCandidates|Candidates|LargestPalindrome|1e2|1e999"
     },
     {
       "name": "yellow-bullshit",
-      "match": "PrimeReducer|GauntletHelper|Gauntlet|LoopBody|LoopCondition"
+      "match": "Period|PrimeReducer|GauntletHelper|Gauntlet|LoopBody|LoopCondition"
     },
     {
       "name": "comment",
