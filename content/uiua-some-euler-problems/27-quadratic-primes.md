@@ -601,10 +601,9 @@ and then `first` out the number.
 So, the full solution is:
 
 ```uiua
-IsPrime  ← = ⊣ ⊸°/×
-
+IsPrime      ← = ⊣ ⊸°/× ⍜▽ ⋅4 ⊸< 2
 A            ← -1000 ▽ ⊸◿ 2 ⇡ 2000
-B            ← ▽ ⊸IsPrimeP⇡₂1000
+B            ← ▽ ⊸IsPrime⇡₂1000
 Candidates   ← ♭₂ ⊞⊂ A B
 PrimeReducer ← ⍜⊙⍉▽⤚(IsPrime+ /+ ⍜⊢ × ⊃⊙∘⋅˙×)
 
