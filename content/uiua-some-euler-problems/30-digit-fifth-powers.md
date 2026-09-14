@@ -146,12 +146,14 @@ Then we simply sum them up.
 
 ## Solution
 
-We'll simply adapt our demo program to the new limit and powers of $5$
+We'll adapt our demo program to the new limit and powers of $5$
 
 ```uiua
     /+▽⊸=/+⍉ⁿ5⊸⊥₁₀ ⇡₂354294
 443839
 ```
+
+Awesome!
 
 ### Fast?
 
