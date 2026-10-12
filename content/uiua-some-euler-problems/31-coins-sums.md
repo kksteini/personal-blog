@@ -229,8 +229,8 @@ We need these components
 
 - -An array of coins
 - -An initial array
-- *+Keeps track of sub computations
-- *+Initialized as [1 0 0 0...0]
+- - +Keeps track of sub computations
+- - +Initialized as [1 0 0 0...0]
 - -A sliding matrix maker
 - - -Takes coin value and the length of the initial array
 - - -Creates rows of arrays, arr, where some `arr[k]` and `arr[k-coin_value]`
