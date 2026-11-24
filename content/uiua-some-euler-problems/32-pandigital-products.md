@@ -52,7 +52,7 @@ $$ 9 \times 99999 = 899991 $$
 $$ d_1 \times d_5 = d_6 $$
 
 Some $d_1 \times d_5$ will result in $d_5$ or a $d_6$, bringing the total
-number of digits to $d_11$ or $d_12$.
+number of digits to $d_{11}$ or $d_{12}$.
 
 That's more than $d_9$ so we rule out all candidates $d_x$ where $x>=5.$
 
@@ -70,24 +70,24 @@ out because the highest total is $d_4.$
 $d_1 \times d_2$ has a maximum of $d_3$ from $9 \times 99 = 891$ so that's ruled
 out as well since the total can not exceed $d_6.$
 
-$d_1 \times d_3$ is max $d_4$ via $and the total $d_8$ also falls short.
+$d_1 \times d_3$ is max $d_4$ via $9 \times 999 = 8991$ and the total $d_8$ also falls short.
 
 $d_2 \times d_2$ has a maximum of $d_4$ from $99 \times 99 = 9801$ and that's
 ruled out because we can only get up to $d_8.$
 
 ---
 
-We can have $d_1 \times d_4 = $_4$ for a total of d_9$.
+We can have $d_1 \times d_4 = d_4$ for a total of $d_9$.
 A trivial example is $1 \times 1111 = 2222.$
 We can overshoot with $d_1 \times d_4 = d_5$ with all $9s$ in the multiplication.
 
-We can have $d_2 \times $d_3 = d_4$, for example $11 \times 111 = 1221$.
-We can overshoot with all $9s$ to a total of $d_10.$
+We can have $d_2 \times d_3 = d_4$, for example $11 \times 111 = 1221$.
+We can overshoot with all $9s$ to a total of $d_{10}.$
 
 ---
 
 $d_3 \times d_3$ is impossible since the lowest we can go is
-$111 \times 111 = 12321$ for a total of $d_11.$
+$111 \times 111 = 12321$ for a total of $d_{11}.$
 
 This then also rules out $d_3 \times d_4$ and $d_4 \times d_4.$
 
