@@ -26,14 +26,15 @@ How many different ways can £2 be made using any number of coins?
 
 ## Brute solving in other languages first
 
-_I admit that I don't know a good way to start this problem in Uiua,
-without increasing the recursion limit and using repl only
-so I'm going to solve it in other languages first to get a better feel for it._
+_I admit that I don't know a good way to start this problem in Uiua without faff.
+I'd increase the recursion limit while using the local
+repl only. I feel like it's not satisfying if it can't run in the pad._
 
 ### Ruby + Rust for naive method
 
-I can think of a simple recursive method. We'll consider some coin from
-the set of coins. We'll start with the lowest coin.
+I can think of a simple recursive method.
+At some point in the process, we'll be considering some coin value.
+We'll start the process by considering the lowest coin value.
 
 - -At any time, we can consider higher value coins.
 - -At no point can we drop down the coin value we're considering.

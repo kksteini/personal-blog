@@ -5,7 +5,7 @@
   "patterns": [
     {
       "name": "red-bullshit",
-      "match": "RemStep|OverProduce|TestCandidates|Candidates|LargestPalindrome|1e2|1e999"
+      "match": "Array|Coins|SM|RemStep|OverProduce|TestCandidates|Candidates|LargestPalindrome|1e2|1e999"
     },
     {
       "name": "yellow-bullshit",
@@ -21,7 +21,7 @@
     },
     {
       "name": "monadic-modifier",
-      "match": "memo|[⧅⤚⊞⍚⧈◇˜⋅˙⊙⊸°≡⟜⤙∩◡⊜\\\\]"
+      "match": "memo|[⧅⤚⊞⍚⧈◇˜⋅∧˙⊙⊸°≡⟜⤙∩◡⊜\\\\]"
     },
     {
       "name": "monadic-pervasive",

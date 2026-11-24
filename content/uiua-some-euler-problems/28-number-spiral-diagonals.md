@@ -65,9 +65,7 @@ It seems like a pattern that would fall out of a thing like this.
 Let's sketch this out on paper.
 Do the predicted numbers fall on the diagonals?
 
-<div style="text-align: center">
-  <img alt="Grid paper with an extended number spiral" src="/images/euler-28-spiral.png">
-</div>
+<img alt="Grid paper with an extended number spiral" style="max-width: 100%; height: auto; display: block; margin: auto;" src="/images/euler-28-spiral.png">
 
 Yes! We do indeed get $31,\ 37,\ 43,\ 49,\ 57,\ 65,\ 73,\ and\ 81$ next.
 *I'll forgive you if you can't make that out from my awful handwriting.*

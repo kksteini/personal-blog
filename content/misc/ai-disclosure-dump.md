@@ -6,18 +6,19 @@ date = 2026-06-01
 
 ## My stance
 
-I am not completely against AI as a tool
-but I still strive to use it as little as possible.
+I am not against AI as a tool
+but I still strive to use it as little as possible for this
+blog.
 
-For pedagogical texts and blogs,
+For pedagogical text,
 I feel it is honest and preferable to struggle through words
 and sentences like a horse on a bike. It is more human.
 
 Whenever I read a blog or browse open source
-projects, I check for AGENTS.md, and other tells in the
-.gitignore, and commit messages.
+projects these days, I want them to include AI disclosure, even if
+they don't use it.
 
-I am suspicious of vibe coded projects and approach them
+In the wild, I am suspicious of vibe coded projects and approach them
 with more caution than otherwise human made content.
 Maybe this sentiment will change in 5-10 years time but that's
 not the point of this document, really.
@@ -52,7 +53,7 @@ as my clumsy second language. In some moments of self doubt
 **I've had AI review my text** and asked it something along the lines of
 
 ```plain
-Review this text for grammar mistakes and typos. 
+Review this text for grammar mistakes and typos.
 Do not alter the voice of the author.
 ```
 
@@ -60,10 +61,10 @@ and then fixed it myself if I agree.
 For comparison and fairness I've opted to not review this
 document for grammar mistakes and typos.
 
-*For a little while, a series heading had an AI generated description
+_For a little while, a series heading had an AI generated description
 after the Zola refactor which slipped my notice.
 I replaced it with my own writing when I wrote
-this document.*
+this document._
 
 ## Researching
 
@@ -91,6 +92,7 @@ If I barely make it through with brute-forcing, I can read that guide as
 well as the problem's discussion thread.
 
 Finally, I really like this statement from project Euler's GenAI policy
+
 > But if the genAI gives you the answer, you have gained nothing more than a
 > badge of shame as you submit the answer to a problem you never solved.
 
